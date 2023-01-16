@@ -1,0 +1,40 @@
+version: '3.8'
+
+volumes:
+  data:
+
+services:
+
+  dbt:
+    container_name: sfeirschooldbt
+    image: ghcr.io/dbt-labs/dbt-postgres:1.2.3
+    profiles:
+      - donotstart
+
+  postgres:
+    container_name: sfeirschoolpostgres
+    hostname: postgres
+    image: postgres:15.1-bullseye
+    networks:
+      - sfeir-school-dbt
+    ports:
+      - 5432:5432
+    volumes:
+      - data:/var/lib/postgresql/data
+    env_file:
+      - .env
+
+# docker pull adminer:4.8.1-standalone
+
+  adminer:
+    container_name: sfeirschooladminer
+    hostname: adminer
+    image: adminer:4.8.1-standalone
+    networks:
+      - sfeir-school-dbt
+    ports:
+      - 8080:8080
+
+networks:
+  sfeir-school-dbt:
+    driver: bridge
