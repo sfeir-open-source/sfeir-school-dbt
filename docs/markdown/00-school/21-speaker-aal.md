@@ -1,17 +1,17 @@
 <!-- .slide: class="speaker-slide" -->
 
-# Présentation
+# Who are we ?
 
-![speaker](./assets/images/jf.jpg)
-![badge](./assets/images/gde.png)
+![speaker](./assets/images/speaker/aal.png)
+![first-badge](./assets/images/badges/gcp-data-engineer.png)
 ![company](./assets/images/logo-sfeir-blanc.png)
 
-## Jean-François Garreau
+## Aurélien Allienne
 
-### CTO front
+### Senior Data Architect
 
 <!-- .element: class="icon-rule icon-first" -->
 
-### @jefbinomed
+### @henrimaxime
 
 <!-- .element: class="icon-twitter icon-second" -->
