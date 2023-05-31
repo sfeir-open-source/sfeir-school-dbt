@@ -8,11 +8,17 @@ function schoolSlides() {
 
 function introSlides() {
   return [
-    '00-school/00-title.md',
-    '00-school/10-intro.md',
-    '00-school/21-speaker-aal.md',
-    '00-school/22-speaker-hmd.md',
-    '00-school/30-who-are-you.md'
+    '00-intro/00-title.md',
+    '00-intro/10-intro.md',
+    '00-intro/21-speaker-aal.md',
+    '00-intro/22-speaker-hmd.md',
+    '00-intro/30-who-are-you.md'
+  ];
+}
+function outroSlides() {
+  return [
+    '99-outro/10-questions.md',
+    '99-outro/20-the-end.md'
   ];
 }
 
@@ -20,7 +26,8 @@ function formation() {
   return [
     //
     ...introSlides(), //
-    // ...schoolSlides(), //
+
+    ...outroSlides(), //
   ].map((slidePath) => {
     return {path: slidePath};
   });
