@@ -6,13 +6,13 @@ volumes:
 services:
 
   dbt:
-    container_name: sfeirschooldbt
-    image: ghcr.io/dbt-labs/dbt-postgres:1.2.3
+    container_name: sfeirschool-dbt
+    image: ghcr.io/dbt-labs/dbt-postgres:1.5.1
     profiles:
       - donotstart
 
   postgres:
-    container_name: sfeirschoolpostgres
+    container_name: sfeirschool-postgres
     hostname: postgres
     image: postgres:15.1-bullseye
     networks:
@@ -24,10 +24,8 @@ services:
     env_file:
       - .env
 
-# docker pull adminer:4.8.1-standalone
-
   adminer:
-    container_name: sfeirschooladminer
+    container_name: sfeirschool-adminer
     hostname: adminer
     image: adminer:4.8.1-standalone
     networks:
