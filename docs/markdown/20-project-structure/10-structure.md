@@ -1,17 +1,20 @@
 <!-- .slide -->
 # Folders and files structure
 
-dbt looks for models, seeds, tests, etc. in specific directories by default, and provides a CLI command to build your project skeleton.
+dbt looks for _models_, _macros_ _seeds_, _tests_, etc. in specific directories by default
 
-It will create your project folder, dbt_project.yml file and profile, as well as required directories.
+There is a **CLI** command to build your project skeleton:
 
-All you need to do then is update your profile with credentials.
+- It will create your project folder and subfolders
+- dbt_project.yml file
+- a profile file (if it does not exist)
 
-<br/>
-Tips:<br/>
+<br/><br/>
+Next step: update the profile with adapter settings and credentials.
 
+notes:
 * make sure your don't push your profile on the repo...
-* unless you use environment variables with `env_var()` jinja macro
+* ...unless you use environment variables with `env_var()` jinja macro
 
 
 ##==##
@@ -21,5 +24,9 @@ Tips:<br/>
 ```bash
 # Create a "sfeir_school" project
 
-dbt init sfeir_school
+dbt init sfeir_school_init
 ```
+
+<br/>
+
+![center h-400](./assets/images/docs/markdown/20-project-structure/tree.png)

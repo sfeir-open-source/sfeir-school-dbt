@@ -29,6 +29,7 @@ function installationSlides() {
   return [
     `${directory}/00-title.md`,
     `${directory}/10-installation.md`,
+    `${directory}/20-adapters.md`,
   ];
 }
 
