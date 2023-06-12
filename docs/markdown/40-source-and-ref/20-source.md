@@ -1,16 +1,117 @@
-<!-- .slide -->
+<!-- .slide: class="with-code"-->
 # Sources
 
-Sources are how you declared models outside of your project to use them as source, mainly in the staging part of your project.
+Sources are how you declared models from outside of your project to use them as source, mainly in the staging part of your project.
 
 It's handled by dbt with the `source()` macro, and via a source declaration yaml file.
 
 ##==##
-<!-- .slide -->
-
+<!-- .slide: class="with-code"-->
 # Defining sources
 
+## Simple declaration
+
+`/staging/__sources.yaml`
+```yaml[]
+version: 2
+
+sources:
+  - name: "SAP"
+    project: "ssd-{{ env_var('ENV', 'dev') }}"
+    description: "SAP source"
+    dataset: "sap"
+    tables:
+      - name: "MCMPY"
+      - name: "KMEAN"
+      - name: "ZORGZ"
+```
+
 ##==##
-<!-- .slide -->
+<!-- .slide: class="with-code"-->
+# Defining sources
+
+## Enriching sources
+
+`/staging/__sources.yaml`
+```yaml[]
+sources:
+  - name: "SAP"
+    project: "ssd-{{ env_var('ENV', 'dev') }}"
+    description: "SAP source"
+    dataset: "sap"
+    tables:
+      - name: "MCMPY"
+        columns:
+          - name: "URZEJ"
+            description: "Company ID - Primary key"
+          - name: "FLDSR"
+            description: "Company name"
+          - name: "FLDSR"
+            description: "Enabled yes/no"
+          - name: "FFDSE"
+            description: "Is customer yes/no"
+```
+
+Notes:
+* You don't have to declare sources unless you want to use the "source()" macro
+* You don't need to add columns unless you want to add options on them and generate documentation
+* Column list is not used to generate the model : you still have to create a SQL file with the source name
+
+##==##
+<!-- .slide: class="with-code"-->
+# Source properties
+
+Sources support additionnal properties like:
+
+* tests on columns
+  * generic, singular and custom tests
+* freshness configuration
+  * to trigger warnings and/or errors
+  * with filters and loaded_at column
+* tags
+
+##==##
+<!-- .slide: class="with-code"-->
+# Source identifier
+
+Use the `identifier` property to rename your source table in something more explicit if needed.
+
+`/staging/__sources.yaml`
+```yaml[]
+...
+sources:
+  - name: "SAP"
+    project: "ssd-{{ env_var('ENV', 'dev') }}"
+    description: "SAP source"
+    dataset: "sap"
+    tables:
+      - name: "companies"
+        identifier: "MCMPY"
+        columns:
+          - name: "URZEJ"
+...
+```
+
+Notes:
+* This can be used to reference sharded tables in BigQuery, like "events_*" which is not a valid model name
+
+##==##
+<!-- .slide: class="with-code"-->
 
 # Using source() macro
+
+`/models/companies.sql`
+```sql[]
+SELECT URZEJ AS company_id, FLDSR AS company_name, FLDSR AS is_customer
+FROM {{ source('SAP', 'companies') }}
+WHERE FFDSE = 1
+```
+
+<br/>
+
+`/models/customers.sql`
+```sql[]
+SELECT *
+FROM {{ ref('companies') }}
+WHERE is_customer = 1
+```

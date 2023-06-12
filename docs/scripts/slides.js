@@ -40,7 +40,6 @@ function projectSlides() {
     `${directory}/10-structure.md`,
     `${directory}/20-dbt_project.md`,
     `${directory}/30-profiles.md`,
-    `${directory}/40-packages.md`,
     `${directory}/90-lab.md`
   ];
 }
@@ -78,7 +77,7 @@ function sourceAndRefSlides() {
   return [
     `${directory}/00-title.md`,
     `${directory}/10-ref.md`,
-    `${directory}/10-source.md`
+    `${directory}/20-source.md`
   ];
 }
 

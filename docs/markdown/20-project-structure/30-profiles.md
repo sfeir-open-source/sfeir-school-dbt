@@ -97,3 +97,6 @@ $ dbt run --profile gitlab
 # Specify profile to use
 $ dbt run --profile gitlab
 ```
+
+Notes:
+* dbt does NOT use default profile anymore to avoid unintentionnal usage of credentials / env. 
