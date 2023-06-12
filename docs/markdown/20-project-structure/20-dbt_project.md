@@ -5,6 +5,8 @@
 
 `dbt_project.yml` provides configuration settings and metadata for the project
 
+Project files tell dbt **WHAT** to run.
+
 * Project name and version
 * Directories with models, seeds, macros, etc.
 * Global configuration for models, seeds, tests, etc.

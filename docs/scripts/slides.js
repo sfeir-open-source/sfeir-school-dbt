@@ -39,7 +39,7 @@ function projectSlides() {
     `${directory}/00-title.md`,
     `${directory}/10-structure.md`,
     `${directory}/20-dbt_project.md`,
-    `${directory}/30-profile.md`,
+    `${directory}/30-profiles.md`,
     `${directory}/40-packages.md`,
     `${directory}/90-lab.md`
   ];
