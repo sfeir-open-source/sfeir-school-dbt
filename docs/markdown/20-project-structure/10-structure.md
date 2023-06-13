@@ -21,7 +21,7 @@ notes:
 <!-- .slide class="with-code"-->
 # Initializing the project
 
-```bash
+```bash[]
 # Create a "sfeir_school" project
 
 dbt init sfeir_school_init

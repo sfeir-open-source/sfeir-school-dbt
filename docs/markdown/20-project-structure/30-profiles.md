@@ -21,7 +21,7 @@ Notes:
 <!-- .slide: class="with-code"-->
 # Sample profile file 1/3
 
-```yaml
+```yaml[]
 config:
   partial_parse: false
   use_colors: true
@@ -33,7 +33,7 @@ config:
 <!-- .slide: class="with-code"-->
 # Sample profile file 2/3
 
-```yaml
+```yaml[]
 # Configuration for all authentication methods
 config_global: &config_global
   type: bigquery
@@ -58,7 +58,7 @@ Notes:
 <!-- .slide: class="with-code"-->
 # Sample profile file 3/3
 
-```yaml
+```yaml[]
 # Actual profiles
 gitlab:
   target: dev # Default target name.
@@ -80,7 +80,7 @@ local:
 Default profile name must be set in `dbt_project.yml` file.
 
 `dbt_project.yml`
-```yaml
+```yaml[]
 ...
 name: "sfeir_school_dbt"
 profile: "local"  # dbt will look for this profile if not overridden in command args
@@ -90,7 +90,7 @@ profile: "local"  # dbt will look for this profile if not overridden in command 
 <br>
 
 _Shell command to run dbt with profile "gitlab"_
-```bash
+```bash[]
 # Use default profile
 $ dbt run --profile gitlab
 

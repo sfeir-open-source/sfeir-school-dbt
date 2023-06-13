@@ -5,6 +5,8 @@ Sources are how you declared models from outside of your project to use them as 
 
 It's handled by dbt with the `source()` macro, and via a source declaration yaml file.
 
+Sources are not seeds, they are models in your datalake or in data products of your organization.
+
 ##==##
 <!-- .slide: class="with-code"-->
 # Defining sources
@@ -98,11 +100,14 @@ Notes:
 ##==##
 <!-- .slide: class="with-code"-->
 
-# Using source() macro
+# Using the `source()` macro
 
 `/models/companies.sql`
 ```sql[]
-SELECT URZEJ AS company_id, FLDSR AS company_name, FLDSR AS is_customer
+SELECT
+  URZEJ AS company_id,
+  FLDSR AS company_name,
+  FLDSR AS is_customer
 FROM {{ source('SAP', 'companies') }}
 WHERE FFDSE = 1
 ```

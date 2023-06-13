@@ -19,19 +19,29 @@ seed-paths: ["seeds"]
 macro-paths: ["macros"]
 snapshot-paths: ["snapshots"]
 
-target-path: "target"  # directory which will store compiled SQL files
 clean-targets:         # directories to be removed by `dbt clean`
+  - "logs"
   - "target"
   - "dbt_packages"
 
-
-# Configuring models
-# Full documentation: https://docs.getdbt.com/docs/configuring-models
+vars:
+  sfeir_school_dbt:
+    countries: ['FR', 'DE', 'UK', 'IT', 'DK', 'SW', 'LU', 'BE', 'ES', 'PT', 'JP']
 
 seeds:
-  +schema: 'seeds'
+  +schema: seeds
+  +tags: ["seeds"]
+  sfeir_school_dbt:
+    +full_refresh: true
 
 models:
+  +tags: ["data"]
+  +materialized: view
   sfeir_school_dbt:
-    staging:
-      +schema: 'stg'
+    intermediate:
+      dimensions:
+        +materialized: table
+        +schema: dimensions
+      facts:
+        +materialized: table
+        +schema: facts

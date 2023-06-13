@@ -4,7 +4,7 @@
 Compile SQL and execute against the current target database.
 
 <br/><br/>
-```bash
+```bash[]
 # Compile and run all models against default target, with default profile
 dbt run
 
@@ -19,7 +19,7 @@ dbt run --target prd
 Load data from csv files into your data warehouse.
 
 <br/><br/>
-```bash
+```bash[]
 # Import all seeds in default target
 dbt seed
 
@@ -34,7 +34,7 @@ dbt seed --profile local --target dev
 Runs tests on data / unit-tests
 <br><br>
 
-```bash
+```bash[]
 # Run all tests
 dbt test
 
@@ -52,7 +52,7 @@ dbt test --select tag:unit-test
 Run all Seeds, Models, Snapshots, and tests in DAG order
 
 <br/><br/>
-```bash
+```bash[]
 # Will only build and tests models in the staging directory
 dbt build --select staging --target prd
 ```
@@ -64,7 +64,7 @@ dbt build --select staging --target prd
 Generate or serve the documentation website for your project.
 
 <br/><br/>
-```bash
+```bash[]
 # Generate docs in the "docs" folder
 dbt docs generate
 

@@ -93,7 +93,7 @@ FROM
 <!-- .slide: class="with-code"-->
 # Sample dbt_project.yml model configuration
 
-```yaml
+```yaml[]
 name: dbt_school
 config-version: 2
 ...

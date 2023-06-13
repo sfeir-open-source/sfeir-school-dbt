@@ -54,7 +54,7 @@ dbt config directives accumulate hierarchically:
 
 The "+" sign is used for ambiguous situations:
 
-```yaml
+```yaml[]
 ...
 models:
   sfeir_school_dbt:
@@ -76,7 +76,7 @@ Notes:
 ## Models
 
 `dbt_project.yml`
-```yaml
+```yaml[]
 ...
 models:
   sfeir_school_dbt:
@@ -95,7 +95,7 @@ models:
 ## Seeds
 
 `dbt_project.yml`
-```yaml
+```yaml[]
 ...
 seeds:
   +schema: seeds # Default schema for all seeds including ones in packages
@@ -150,7 +150,7 @@ Notes:
 ## Declaring variables
 
 `dbt_project.yml`
-```yaml
+```yaml[]
 ...
 vars:
   # The `start_date` variable will be accessible in all resources (including packages)
@@ -190,7 +190,7 @@ To use a variable anywhere in your models or macros, use the `{{ var('...') }}` 
 Or more like _nesting-look-a-like_...
 
 `dbt_project.yml`
-```yaml
+```yaml[]
 ...
 vars:
   sfeir_school_dbt:
@@ -217,7 +217,7 @@ You can override values using the `--vars` argument of dbt commands.
 
 Variables at runtime use a `yaml` dictionnary format.
 
-```shell
+```shell[]
 $ dbt run --vars '{"name": "Fonfec", "date": 20180101}'
 $ dbt run --vars '{name: Fonfec, date: 20180101}'
 ```

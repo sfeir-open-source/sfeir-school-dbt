@@ -1,0 +1,12 @@
+version: 2
+
+seeds:
+  - name: seed_companies
+    config:
+      alias: companies
+  - name: seed_countries
+    config:
+      alias: countries
+  - name: seed_customers
+    config:
+      alias: customers

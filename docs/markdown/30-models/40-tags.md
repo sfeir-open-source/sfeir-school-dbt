@@ -30,7 +30,7 @@ Notes:
 # Tagging example
 
 `dbt_project.yml`
-```yaml
+```yaml[]
 ...
 models:
   dbt_school:
@@ -44,7 +44,7 @@ models:
 
 
 `models/staging/__models.yml`
-```yaml
+```yaml[]
 models:
   - name: customers
     config: # Don't forget the "config" block
