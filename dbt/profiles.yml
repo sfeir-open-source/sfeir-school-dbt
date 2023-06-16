@@ -14,3 +14,12 @@ sfeir_school_dbt:
       pass: '{{ env_var("POSTGRES_PASSWORD", "dbt") }}'
       dbname: '{{ env_var("POSTGRES_DB", "dbt") }}'
       schema: '{{ env_var("POSTGRES_SCHEMA", "sfeir_school") }}'
+    cloudsql:
+      type: postgres
+      threads: 8
+      host: '{{ env_var("CLOUDSQL_HOST") }}'
+      port: 5432
+      user: '{{ env_var("CLOUDSQL_USER") }}'
+      pass: '{{ env_var("CLOUDSQL_PASSWORD") }}'
+      dbname: '{{ env_var("CLOUDSQL_DB") }}'
+      schema: '{{ env_var("CLOUDSQL_SCHEMA", "sfeir_school") }}'
