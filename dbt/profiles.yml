@@ -8,8 +8,8 @@ sfeir_school_dbt:
     dev:
       type: postgres
       threads: 8
-      host: '{{ env_var("DBT_POSTGRES_HOST", "localhost") }}'
-      port: '{{ env_var("DBT_POSTGRES_PORT", 5432) }}'
+      host: '{{ env_var("POSTGRES_HOST", "localhost") }}'
+      port: '{{ env_var("POSTGRES_PORT", 5432) }}'
       user: '{{ env_var("POSTGRES_USER", "dbt") }}'
       pass: '{{ env_var("POSTGRES_PASSWORD", "dbt") }}'
       dbname: '{{ env_var("POSTGRES_DB", "dbt") }}'
