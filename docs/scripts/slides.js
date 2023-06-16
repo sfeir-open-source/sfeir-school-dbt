@@ -74,6 +74,23 @@ function seedsSlides() {
   ];
 }
 
+function jinjaSlides() {
+  const directory = '50-jinja-and-macros';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-jinja.md`,
+    `${directory}/20-macros.md`,
+    `${directory}/90-lab.md`,
+  ];
+}
+
+function qualitySlides() {
+  const directory = '60-quality';
+  return [
+    `${directory}/00-title.md`
+  ];
+}
+
 function sourceAndRefSlides() {
   const directory = '40-source-and-ref';
   return [
@@ -95,6 +112,8 @@ function formation() {
     ...modelsSlides(), //
     ...seedsSlides(), //
     ...sourceAndRefSlides(), //
+    ...jinjaSlides(), //
+    ...qualitySlides(), //
 
     ...outroSlides(), //
   ].map((slidePath) => {

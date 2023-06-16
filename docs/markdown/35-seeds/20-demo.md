@@ -1,5 +1,7 @@
 <!-- .slide: class="transition bg-blue"-->
-# Demo: ingest seeds
+# Demo
+
+## Create and import seeds
 
 Notes:
 * Run a simple dbt seed
