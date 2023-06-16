@@ -40,7 +40,7 @@ Data Mesh
 * and then loaded into a target system for analysis.
 
 ##--##
-<!-- .slide:  data-background="var(--black)" -->
+<!-- .slide: data-background="var(--black)" -->
 
 # <u>E</u>xtract <u>L</u>oad <u>T</u>ransform
 

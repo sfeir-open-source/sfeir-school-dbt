@@ -29,7 +29,14 @@ function modernDataStackSlides() {
   return [
     `${directory}/00-title.md`,
     `${directory}/10-architectures.md`,
-    // `${directory}/20-adapters.md`,
+  ];
+}
+
+function dbtSlides() {
+  const directory = '12-dbt';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-dbt.md`,
   ];
 }
 
@@ -123,6 +130,7 @@ function formation() {
     ...introSlides(), //
 
     ...modernDataStackSlides(),//
+    ...dbtSlides(),//
     ...installationSlides(), //
     ...projectSlides(), //
     ...commandsSlides(), //
