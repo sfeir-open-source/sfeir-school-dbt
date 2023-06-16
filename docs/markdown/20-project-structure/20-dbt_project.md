@@ -19,7 +19,7 @@ Notes:
 ##==##
 # Directories
 
-dbt will look for entities in configured directories
+dbt will look for entities in configured directories:
 
 * models
 * macros

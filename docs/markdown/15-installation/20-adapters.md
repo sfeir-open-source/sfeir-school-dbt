@@ -2,10 +2,10 @@
 # Verified adapters
 
 * BigQuery (Google Cloud)
-* AllowDB (Google Cloud)
+* AlloyDB (Google Cloud)
 * Redshift (AWS)
 * Databricks
-* Postgres
+* PostgreSQL
 * Snowflake
 * Spark
 * Starburst/Trino
@@ -30,7 +30,6 @@ Notes:
 * SQL Server & Azure SQL
 * Teradata
 * MySQL
-* etc.
 
 <br/><br/>
 

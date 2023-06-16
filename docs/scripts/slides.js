@@ -24,6 +24,15 @@ function outroSlides() {
   ];
 }
 
+function modernDataStackSlides() {
+  const directory = '10-modern-data-stack';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-architectures.md`,
+    // `${directory}/20-adapters.md`,
+  ];
+}
+
 function installationSlides() {
   const directory = '15-installation';
   return [
@@ -106,6 +115,7 @@ function formation() {
     //
     ...introSlides(), //
 
+    ...modernDataStackSlides(),//
     ...installationSlides(), //
     ...projectSlides(), //
     ...commandsSlides(), //

@@ -1,7 +1,7 @@
 <!-- .slide -->
 # Folders and files structure
 
-dbt looks for _models_, _macros_ _seeds_, _tests_, etc. in specific directories by default
+dbt looks for _models_, _macros_, _seeds_, _tests_, etc. in specific directories by default.
 
 There is a **CLI** command to build your project skeleton:
 

@@ -6,7 +6,7 @@
 
 <h2>Firstname <span>LASTNAME</span></h2>
 
-### DBT trainee
+### dbt trainee
 <!-- .element: class="icon-rule icon-first" -->
 
 Notes:
