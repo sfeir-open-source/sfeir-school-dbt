@@ -3,11 +3,11 @@
 
 For the purpose of this school, we will:
 
-* use Postgres as our database
-* use the latest version of dbt with postgres adapter
+* use PostgreSQL as our database
+* use the latest version of dbt with PostgreSQL adapter
 
 <br/><br/>
-Installation is pretty straigtforward, depending on your OS:
+Installation is pretty straightforwardw, depending on your OS:
 
 ```shell[]
 # MacOS, using brew
