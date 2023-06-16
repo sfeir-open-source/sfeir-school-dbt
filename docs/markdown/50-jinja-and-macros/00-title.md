@@ -1,2 +1,2 @@
 <!-- .slide: class="transition underline"-->
-# Seeds
+# Jinja templating and macros

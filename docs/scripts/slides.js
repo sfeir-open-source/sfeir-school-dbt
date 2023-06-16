@@ -24,6 +24,15 @@ function outroSlides() {
   ];
 }
 
+function modernDataStackSlides() {
+  const directory = '10-modern-data-stack';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-architectures.md`,
+    // `${directory}/20-adapters.md`,
+  ];
+}
+
 function installationSlides() {
   const directory = '15-installation';
   return [
@@ -68,6 +77,25 @@ function modelsSlides() {
 function seedsSlides() {
   const directory = '35-seeds';
   return [
+    `${directory}/00-title.md`,
+    `${directory}/10-seeds.md`,
+    `${directory}/20-demo.md`,
+  ];
+}
+
+function jinjaSlides() {
+  const directory = '50-jinja-and-macros';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-jinja.md`,
+    `${directory}/20-macros.md`,
+    `${directory}/90-lab.md`,
+  ];
+}
+
+function qualitySlides() {
+  const directory = '60-quality';
+  return [
     `${directory}/00-title.md`
   ];
 }
@@ -87,11 +115,15 @@ function formation() {
     //
     ...introSlides(), //
 
+    ...modernDataStackSlides(),//
     ...installationSlides(), //
     ...projectSlides(), //
     ...commandsSlides(), //
     ...modelsSlides(), //
+    ...seedsSlides(), //
     ...sourceAndRefSlides(), //
+    ...jinjaSlides(), //
+    ...qualitySlides(), //
 
     ...outroSlides(), //
   ].map((slidePath) => {
