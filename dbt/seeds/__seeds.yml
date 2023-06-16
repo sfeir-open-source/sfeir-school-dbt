@@ -10,3 +10,12 @@ seeds:
   - name: seed_customers
     config:
       alias: customers
+  - name: seed_categories
+    config:
+      full_refresh: true
+      alias: categories
+      column_types:
+        category_code: varchar(8)
+        category_name: varchar(32)
+        enabled: boolean
+        date_in: timestamp

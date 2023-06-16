@@ -29,10 +29,8 @@ vars:
     countries: ['FR', 'DE', 'UK', 'IT', 'DK', 'SW', 'LU', 'BE', 'ES', 'PT', 'JP']
 
 seeds:
-  +schema: seeds
+  # +schema: seeds
   +tags: ["seeds"]
-  sfeir_school_dbt:
-    +full_refresh: true
 
 models:
   +tags: ["data"]
@@ -41,7 +39,4 @@ models:
     intermediate:
       dimensions:
         +materialized: table
-        +schema: dimensions
-      facts:
-        +materialized: table
-        +schema: facts
+        # +schema: dimensions
