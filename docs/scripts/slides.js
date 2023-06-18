@@ -96,7 +96,11 @@ function jinjaSlides() {
 function qualitySlides() {
   const directory = '60-quality';
   return [
-    `${directory}/00-title.md`
+    `${directory}/00-title.md`,
+    `${directory}/10-always-test.md`,
+    `${directory}/20-generic-tests.md`,
+    `${directory}/30-singular-tests.md`,
+    `${directory}/40-model-tests.md`
   ];
 }
 

@@ -1,3 +1,3 @@
 <!-- .slide: class="transition underline"-->
-# Ensure quality
+# Advanced concepts
 
