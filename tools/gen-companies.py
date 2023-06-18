@@ -19,7 +19,7 @@ for _ in range(500):
     companies.append(company)
 
 # Write the companies to a CSV file
-filename = '../seeds/companies.csv'
+filename = '../dbt/seeds/companies.csv'
 headers = ['company_id', 'company_name', 'company_boss', 'company_country']
 
 with open(filename, 'w', newline='') as csvfile:

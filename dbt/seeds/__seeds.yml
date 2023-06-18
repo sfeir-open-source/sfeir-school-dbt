@@ -19,3 +19,6 @@ seeds:
         category_name: varchar(32)
         enabled: boolean
         date_in: timestamp
+  - name: seed_sales
+    config:
+      alias: sales

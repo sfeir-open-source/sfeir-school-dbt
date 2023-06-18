@@ -13,7 +13,7 @@ for country in list(pycountry.countries):
     countries.append(country)
 
 # Write the countries to a CSV file
-filename = '../seeds/countries.csv'
+filename = '../dbt/seeds/countries.csv'
 headers = ['country_code', 'country_name']
 
 with open(filename, 'w', newline='') as csvfile:

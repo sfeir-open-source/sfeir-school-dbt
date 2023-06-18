@@ -21,7 +21,7 @@ for _ in range(500):
     customers.append(customer)
 
 # Write the customers to a CSV file
-filename = '../seeds/customers.csv'
+filename = '../dbt/seeds/customers.csv'
 headers = ['customer_id', 'customer_gender', 'customer_name', 'customer_country', 'customer_address']
 
 with open(filename, 'w', newline='') as csvfile:
