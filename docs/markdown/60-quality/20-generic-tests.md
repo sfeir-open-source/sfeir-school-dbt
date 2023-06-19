@@ -28,8 +28,76 @@ models:
           - unique
       - name: order_status
         tests:
-          - not_null
+          - not_null:
+              tags: [ 'fail_on_error' ]
           - accepted_values:
+              tags: [ 'warn_on_error' ]
               values: ['COMPLETED', 'CANCELLED', 'PROCESSING', 'WAITING_PAYMENT', 'SHIPPED']
 ```
 
+Notes:
+* You can tag individual tests, and use these tags in dbt test command
+
+##==##
+<!-- .slide: class="with-code"-->
+# Running tests
+
+How to run tests ?
+
+```shell[]
+# Will run all the tests without any filter
+$ dbt test
+
+# Will compile, execute models and run tests afterwards
+$ dbt build
+
+# Will only run tests with tag "fail_on_error"
+$ dbt test --select tag:fail_on_error
+
+# Will only run tests with tag "fail_on_error" AND the model int__sales
+$ dbt test --select tag:fail_on_error,int__sales
+```
+
+##==##
+<!-- .slide: class="with-code"-->
+# Custom generic tests
+
+Custom generic tests are declared in the `/tests/generic` folder.
+
+They require 1 or 2 arguments:
+
+* model: (mandatory) the resource on which the test is run
+* column_name: (optional) the column on which the test is run
+
+`/tests/generic/customer_code.sql`
+```sql[]
+{% test valid_id(model, column_name) %}
+    SELECT
+        {{ column_name }}
+    FROM {{ model }}
+    WHERE {{ column_name }} !~ '^\d{10}$'
+{% endtest %}
+```
+
+Notes:
+* "model" argument can be a model, a source or a snapshot
+* column name is optional if the test does not require a column name
+* the example checks that a field value is always 10 char long, digits only
+
+##==##
+<!-- .slide: class="with-code"-->
+# Using custom generic tests
+
+Like any other generic tests, simply use your custom generic test name:
+
+`models/__models.yml`
+```yaml[]
+models:
+  - name: int__sales
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - valid_id
+              name: "VALID_ORDER_ID"
+```
