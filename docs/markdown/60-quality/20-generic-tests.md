@@ -3,7 +3,7 @@
 
 ## The easiest part
 
-Generic tests are very simple tests you declare in your models configuration files.
+Generic tests are parameterized queries that accepts arguments.
 
 There are four generic tests that are available out of the box:
 
@@ -11,6 +11,11 @@ There are four generic tests that are available out of the box:
 * not_null
 * relationships
 * accepted_values
+
+Notes:
+* Tests in dbt use SQL count() requests to count rows matching the condition
+  * If there are more than 1 result: test fails
+  * There are option to define warn / error threshold
 
 ##==##
 <!-- .slide: class="with-code"-->
