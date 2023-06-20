@@ -83,6 +83,15 @@ function seedsSlides() {
   ];
 }
 
+function sourceAndRefSlides() {
+  const directory = '40-source-and-ref';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-ref.md`,
+    `${directory}/20-source.md`
+  ];
+}
+
 function jinjaSlides() {
   const directory = '50-jinja-and-macros';
   return [
@@ -100,18 +109,12 @@ function qualitySlides() {
     `${directory}/10-always-test.md`,
     `${directory}/20-generic-tests.md`,
     `${directory}/30-singular-tests.md`,
-    `${directory}/40-model-tests.md`
+    `${directory}/35-packages.md`,
+    `${directory}/40-model-tests.md`,
+    `${directory}/90-lab.md`
   ];
 }
 
-function sourceAndRefSlides() {
-  const directory = '40-source-and-ref';
-  return [
-    `${directory}/00-title.md`,
-    `${directory}/10-ref.md`,
-    `${directory}/20-source.md`
-  ];
-}
 
 
 function formation() {

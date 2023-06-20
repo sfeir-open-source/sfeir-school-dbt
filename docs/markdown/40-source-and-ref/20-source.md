@@ -120,3 +120,47 @@ SELECT *
 FROM {{ ref('companies') }}
 WHERE is_customer = 1
 ```
+
+##==##
+<!-- .slide: class="with-code"-->
+# Declaring source freshness requirement
+
+Updating your models if your sources are up-to-date only makes sense.
+
+Implementing source freshness control will save you compute and brain power.
+
+`/staging/__sources.yaml`
+```yaml[]
+sources:
+  - name: "SAP"
+    project: "ssd-{{ env_var('ENV', 'dev') }}"
+    description: "SAP source"
+    dataset: "sap"
+    freshness: # default freshness for all tables in source
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+      loaded_at_field: __timestamp
+    tables:
+      - name: "companies"
+        freshness: # default freshness
+          warn_after: {count: 7, period: day}
+          error_after: {count: 30, period: day}
+```
+
+Notes:
+* It's possible to add filters to fresshness config
+
+
+##==##
+<!-- .slide: class="with-code"-->
+# Checking source freshness
+
+Checking your sources freshness is pretty straigforward:
+
+```bash[]
+# Check for all sources with freshness configuration
+$ dbt source freshness
+
+# Check only for sources tagged "shes-so-fresh"
+$ dbt source freshness --select tag:shes-so-fresh
+```
