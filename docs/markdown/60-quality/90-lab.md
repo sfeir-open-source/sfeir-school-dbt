@@ -1,6 +1,5 @@
 <!-- .slide: class="exercice" -->
 
-# Use source() and ref() macros
+# Add generic and singular tests
 ## Lab
 
-Replace explicit dependencies with macros

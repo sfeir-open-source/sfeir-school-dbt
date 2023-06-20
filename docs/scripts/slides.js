@@ -86,7 +86,7 @@ function seedsSlides() {
   return [
     `${directory}/00-title.md`,
     `${directory}/10-seeds.md`,
-    `${directory}/20-demo.md`,
+    `${directory}/90-lab.md`,
   ];
 }
 

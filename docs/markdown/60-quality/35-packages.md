@@ -45,35 +45,3 @@ models:
 Notes:
 * There are A LOT of test included both in dbt_utils and dbt_expectations
 * You can test data but also table structure using dbt_expectations
-
-##==##
-<!-- .slide: class="with-code"-->
-# What about testing models ?
-
-What can we do so far:
-
-* test data quality in sources and models
-* test structure of sources and models
-* test the freshness of data using `dbt source freshness`
-
-What can we also do ?
-
-* test your dbt code and models generation
-  * by implementing unit-tests in dbt
-  * that will help you not break anything
-
-Notes:
-* For now, we're just testing data in our output models (our sources)
-* TDDDD anyone ? Test-Driven-Data-Driven-Decsions ?
-
-##==##
-<!-- .slide: class="with-code"-->
-# How does unit-testing work ?
-
-It's based on the assumption that you know:
-
-* What data do you have as input --> **mocks**
-* What data do you want as output --> **expects**
-
-If the **expected** output of your dbt models does not match the input, then something is broken.
-
