@@ -24,12 +24,19 @@ function outroSlides() {
   ];
 }
 
-function modernDataStackSlides() {
-  const directory = '10-modern-data-stack';
+function onceUponATimeSlides() {
+  const directory = '10-once-upon-a-time';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-architectures.md`,
-    // `${directory}/20-adapters.md`,
+  ];
+}
+
+function dbtSlides() {
+  const directory = '12-dbt';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-dbt.md`,
   ];
 }
 
@@ -122,7 +129,8 @@ function formation() {
     //
     ...introSlides(), //
 
-    ...modernDataStackSlides(),//
+    ...onceUponATimeSlides(),//
+    ...dbtSlides(),//
     ...installationSlides(), //
     ...projectSlides(), //
     ...commandsSlides(), //
