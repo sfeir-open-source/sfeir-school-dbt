@@ -1,8 +1,12 @@
 <!-- .slide: class="exercice" -->
 
-# Install your first dbt package
+# Create your first dbt project
 ## Lab
 
-* Look for available packages in the official dbt repo
-* Install dbt-utils package in your project
-* Add a .gitignore file
+* Install dbt
+* Init dbt project "sfeir_school"
+* Configure project and profile
+* Create a static first model
+
+Note:
+- profile.yml file is in the $HOME/.dbt folder

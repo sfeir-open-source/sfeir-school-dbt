@@ -78,6 +78,8 @@ dbt docs serve --port 2828 --no-browser
 
 Additionnal useful commands:
 
+* `dbt list`
+  * List models, seeds, sources, etc. optionaly with filters
 * `dbt deps`
   * Install dbt packages declared in `packages.yml`
 * `dbt parse`
