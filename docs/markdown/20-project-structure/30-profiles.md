@@ -1,14 +1,14 @@
 <!-- .slide -->
 # Profiles
 
-Profiles are a centralized way to store configuration that define the connection details for different databases or data warehouses.
+Profiles are a centralized way to store configuration that defines connection details for different databases or data warehouses.
 
 Profiles tell dbt **HOW** to run.
 
-dbt searches for a profile in this order:
-* A profile.yml file in the main dbt project directory
-* A profile.yml file in the $HOME/.dbt directory
-* A profile.yml file path passed as argument of the dbt commands
+dbt searches for a `profile.yml` file in this order:
+* in the main dbt project directory 
+* in the $HOME/.dbt directory 
+* path passed as argument of the dbt commands
 
 Profiles make it easier to switch between different environments and databases.
 
@@ -19,7 +19,9 @@ Notes:
 
 ##==##
 <!-- .slide: class="with-code"-->
-# Sample profile file 1/3
+# Profiles
+
+## Sample `profile.yml` (1/3)
 
 ```yaml[]
 config:
@@ -31,7 +33,9 @@ config:
 
 ##==##
 <!-- .slide: class="with-code"-->
-# Sample profile file 2/3
+# Profiles
+
+## Sample `profile.yml` (2/3)
 
 ```yaml[]
 # Configuration for all authentication methods
@@ -56,7 +60,9 @@ Notes:
 
 ##==##
 <!-- .slide: class="with-code"-->
-# Sample profile file 3/3
+# Profiles
+
+## Sample `profile.yml` (3/3)
 
 ```yaml[]
 # Actual profiles

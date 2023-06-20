@@ -1,16 +1,16 @@
 <!-- .slide -->
 # The dbt_project.yml file
 
-## What is this file ?
+## What is this file?
 
 `dbt_project.yml` provides configuration settings and metadata for the project
 
 Project files tell dbt **WHAT** to run.
 
-* Project name and version
-* Directories with models, seeds, macros, etc.
-* Global configuration for models, seeds, tests, etc.
-* variables to use in your models / macros
+* Project name and version,
+* _models_, _seeds_ or _macros_ directories,
+* Global configuration for _models_, _seeds_, _tests_, etc.
+* Variables to use in your _models_ and _macros_
 
 Notes:
 - version is not required anymore
@@ -19,7 +19,7 @@ Notes:
 ##==##
 # Directories
 
-dbt will look for entities in configured directories:
+_dbt_ will look for entities in configured paths:
 
 * models
 * macros
@@ -38,21 +38,17 @@ Notes:
 ##==##
 # Global configuration
 
-dbt config directives accumulate hierarchically:
+_dbt_ configuration directives accumulate hierarchically like this:
 
-<br>
+![center hm-200](./assets/images/docs/markdown/20-project-structure/dbt_configuration_directives.svg)
 
-&nbsp;&nbsp;&nbsp;&nbsp;dbt_project file **<** Model property file **<** Model file config block
-
-<br><br>
-
-`dbt_project.yml` is used set project-wide default values, and to set variables used later in the models and macros.
+`dbt_project.yml` is used to set project-wide default values, and variables used later in the models and macros.
 
 ##==##
-<!-- .slide: class="with-code"-->
-# The "+" sign in dbt yaml files
+<!-- .slide: class="center with-code"-->
+# Small digression: understand the _"+"_ sign 
 
-The "+" sign is used for ambiguous situations:
+The _"+"_ sign is used, in dbt YAML files, for ambiguous situations:
 
 ```yaml[]
 ...
