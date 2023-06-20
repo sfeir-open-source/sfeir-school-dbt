@@ -24,8 +24,8 @@ function outroSlides() {
   ];
 }
 
-function modernDataStackSlides() {
-  const directory = '10-modern-data-stack';
+function onceUponATimeSlides() {
+  const directory = '10-once-upon-a-time';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-architectures.md`,
@@ -129,7 +129,7 @@ function formation() {
     //
     ...introSlides(), //
 
-    ...modernDataStackSlides(),//
+    ...onceUponATimeSlides(),//
     ...dbtSlides(),//
     ...installationSlides(), //
     ...projectSlides(), //
