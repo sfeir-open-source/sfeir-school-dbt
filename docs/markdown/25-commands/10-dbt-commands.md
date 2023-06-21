@@ -5,10 +5,10 @@ Compile SQL and execute against the current target database.
 
 <br/><br/>
 ```bash[]
-# Compile and run all models against default target, with default profile
+# Compile and run all models against `default` target, with default profile
 dbt run
 
-# Import all seeds in your prd target with the default profile
+# Compile and run all models against `prd` target, with the default profile
 dbt run --target prd
 ```
 
@@ -16,14 +16,14 @@ dbt run --target prd
 <!-- .slide: class="with-code"-->
 # `dbt seed`
 
-Load data from csv files into your data warehouse.
+Load data from CSV files into your data warehouse.
 
 <br/><br/>
 ```bash[]
-# Import all seeds in default target
+# Import all seeds in `default target
 dbt seed
 
-# Import all seeds in your dev "target", read from your "local" profile
+# Import all seeds in your `dev` target, read from your `localù profile
 dbt seed --profile local --target dev
 ```
 
@@ -31,14 +31,14 @@ dbt seed --profile local --target dev
 <!-- .slide: class="with-code"-->
 # `dbt test`
 
-Runs tests on data / unit-tests
+Runs tests or unit tests for models on data
 <br><br>
 
 ```bash[]
 # Run all tests
 dbt test
 
-# Run test on model "CUSTOMERS" only
+# Run test related to "CUSTOMERS" model only
 dbt test --select CUSTOMERS
 
 # Run test tagged "unit-test" only
@@ -49,11 +49,11 @@ dbt test --select tag:unit-test
 <!-- .slide: class="with-code"-->
 # `dbt build`
 
-Run all Seeds, Models, Snapshots, and tests in DAG order
+Run _seeds_, _models_, _snapshots_ and _test_ in DAG order
 
 <br/><br/>
 ```bash[]
-# Will only build and tests models in the staging directory
+# Build and tests models in the staging directory only
 dbt build --select staging --target prd
 ```
 
@@ -61,27 +61,25 @@ dbt build --select staging --target prd
 <!-- .slide: class="with-code"-->
 # `dbt docs`
 
-Generate or serve the documentation website for your project.
+Generate and serve _dbt_ generated documentation as website for your project.
 
 <br/><br/>
 ```bash[]
-# Generate docs in the "docs" folder
+# Generate documentation in the "docs" folder
 dbt docs generate
 
-# Start a webserver and serve generated doc (default port is port 8080)
+# Start a webserver and serve generated documentation (default port is port 8080)
 dbt docs serve --port 2828 --no-browser
 ```
 
 ##==##
 <!-- .slide: class="with-code"-->
-# See also...
-
-Additionnal useful commands:
+# Additionnal useful commands
 
 * `dbt list`
-  * List models, seeds, sources, etc. optionaly with filters
+  * List _models_, _seeds_, _sources_, etc. optionally with filters
 * `dbt deps`
-  * Install dbt packages declared in `packages.yml`
+  * Install _dbt_ packages declared in `packages.yml`
 * `dbt parse`
   * Simply parse your code and check for errors
 * `dbt compile`

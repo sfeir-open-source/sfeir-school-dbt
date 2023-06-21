@@ -1,9 +1,9 @@
 <!-- .slide -->
 # The `ref()` macro
 
-References are how dbt handle dependencies between models and build the DAG at runtime.
+References are how _dbt_ handle dependencies between models and build the DAG at runtime.
 
-It's handled by dbt with the `ref()` function and it should be the only way for you to reference other models in a `.sql` file.
+It's handled by _dbt_ with the `ref()` function, and it should be the only way for you to reference other models in a `.sql` file.
 
 Seeds can be referenced directly with `ref()` using the seed name.
 
@@ -16,7 +16,9 @@ Notes:
 
 `/models/companies.sql`
 ```sql
-SELECT company_id, company_name, is_customer
+SELECT company_id
+     , company_name
+     , is_customer
 FROM companies
 WHERE enabled = 1
 ```
@@ -24,7 +26,7 @@ WHERE enabled = 1
 <br/>
 
 `/models/customers.sql`
-```sql
+```sql[|2]
 SELECT *
 FROM {{ ref('companies') }}
 WHERE is_customer = 1

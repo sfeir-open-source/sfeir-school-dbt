@@ -1,6 +1,6 @@
 <!-- .slide: class="speaker-slide" -->
 
-# Who are we ?
+# Who are we?
 
 ![speaker](./assets/images/speaker/hmd.png)
 ![first-badge](./assets/images/badges/mongodb-certified-developer.png)
@@ -8,7 +8,8 @@
 ![third-badge](./assets/images/badges/gcp-data-engineer.png)
 ![company](./assets/images/logo-sfeir-blanc.png)
 
-## Henri-Maxime Ducoulombier
+<h2>Henri-Maxime <span style="padding-right:0">Ducoulombier</span></h2>
+
 
 ### Senior Data Architect
 

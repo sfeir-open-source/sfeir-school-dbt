@@ -1,7 +1,7 @@
 <!-- .slide -->
 # Packages
 
-Packages are reusable collections of pre-built dbt code with:
+Packages are reusable collections of pre-built _dbt_ code with:
 
 * models
 * macros
@@ -10,12 +10,12 @@ Packages are reusable collections of pre-built dbt code with:
 
 There a different kind of packages:
 
-* official dbt packages provided by dbt
-* packages from dbt hub but not provided by dbt
+* official _dbt_ packages provided by _dbt_
+* packages from _dbt_ hub but not provided by _dbt_
 * packages for git code repositories
-* your own packages !
+* your own packages!
 
-Grab all the packages you want from : https://hub.getdbt.com/
+Grab all the packages you want from: https://hub.getdbt.com/
 
 
 ##==##
@@ -24,7 +24,7 @@ Grab all the packages you want from : https://hub.getdbt.com/
 
 Rather than rebuilding your own tests, you should use ones provided in packages:
 
-* dbt-labs/dbt_utils (official !)
+* dbt-labs/dbt_utils (official!)
 * calogica/dbt_expectations (community)
 * EqualExperts/dbt_unit_testing (community)
 

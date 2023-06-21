@@ -3,7 +3,7 @@
 
 A singular test is a custom SQL query that returns failing rows.
 
-* dbt runs a `count(*)` on the query
+* _dbt_ runs a `count(*)` on the query
   * If there is at least 1 result, the test fails
   * If there is 0 result, the test pass
 

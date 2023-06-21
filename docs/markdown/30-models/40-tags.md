@@ -1,23 +1,23 @@
 <!-- .slide -->
 # Tagging your ressources
 
-dbt includes the option to tag your models to regroup / filter them.
+_dbt_ includes the option to tag your models to regroup/filter them.
 
 <br/>
 <div>
-Tags can be defined...<br/>
+_tags_ can be defined in:<br/> <br/>
 
-* In your `dbt_project.yml` file
-* In models property file
-* In models configuration blocks
+* your `dbt_project.yml` file
+* models property file
+* models configuration blocks
 </div>
 <!-- .element: class="fragment" -->
 
 <br/>
 <div>
-Tags accumulate hierarchically:
+_tags_ accumulate hierarchically:
 
-&nbsp;&nbsp;&nbsp;&nbsp;dbt_project file < Model property file < Model file config block
+![center hm-200](./assets/images/docs/markdown/20-project-structure/dbt_configuration_directives.svg)
 </div>
 <!-- .element: class="fragment" -->
 
@@ -54,7 +54,7 @@ models:
 ##==##
 <!-- .slide: class="with-code"-->
 
-# Tagging example 2
+# Tagging example
 
 `models/staging/customers.sql`
 ```sql[4]
@@ -65,9 +65,9 @@ models:
 ) }}
 
 SELECT
-    id,
-    area,
-    CONCAT(firstname, ' ', UPPER(lastname)) AS `name`
+    id
+    , area
+    , CONCAT(firstname, ' ', UPPER(lastname)) AS `name`
 FROM
     customers
 ```

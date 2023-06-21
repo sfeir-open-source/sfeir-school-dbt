@@ -1,8 +1,12 @@
-# Déroulement de la formation
+# Program of the training
 
-* À quand la pause ?<br/><br/>
-* À quelle heure mange t-on ?<br/><br/>
-* De quoi va-t-on parler?
+![sfeir-icons big](bell) <span style="vertical-align:top">When is the break?<span><br/><br/>
+
+![sfeir-icons big](clock) <span style="vertical-align:top">What time do we eat?<span><br/><br/>
+
+
+![sfeir-icons big](mic) <span style="vertical-align:top">hat are we going to talk about?</span>
+
 
 ##==##
 <!-- .slide -->

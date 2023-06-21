@@ -1,46 +1,46 @@
 <!-- .slide -->
 # Jinja templating
 
-dbt uses Jinja templating extensively to write SQL code with dynamic and reusable elements.
+_dbt_ uses Jinja templating extensively to write SQL code with dynamic and reusable elements.
 
-Alongside SQL and YAML, understanding Jinja templating is key to dbt mastering.
+Alongside SQL and YAML, understanding Jinja templating is key to mastering _dbt_ .
 
-In dbt, Jinja is used for:
+In _dbt_, Jinja is used for:
 * Variables substitution
-* Control flow and conditionnal statements
+* Control flow and conditional statements
 * Macro expansion
 
 Notes:
-* Jinja and variables are available in config files too !
-* Jinja support is not complete in dbt but it supports the main features
+* Jinja and variables are available in config files too!
+* Jinja support is not complete in dbt, but it supports the main features
 * Macros are reusable pieces of code that can be defined and invoked within your dbt projec
 * Jinja provides control flow structures such as loops and conditional statements, allowing you to apply logic and iterate over data dynamically.
 
 ##==##
-# Variables in dbt
+# Variables in _dbt_
 
-Variables provide a powerful way to make your dbt projects more...
+Variables provide a powerful way to make your dbt projects more:
 
 * Flexible
 * Maintainable
 * Reusable
 
 Notes:
-* Flexible : it's easy to change a variable value
-* Maintainable : it makes your code more readable and dry
-* Reusable : use them in code not specific to your project and provide this code to your organization
+* Flexible: it's easy to change a variable value
+* Maintainable: it makes your code more readable and dry
+* Reusable: use them in code not specific to your project and provide this code to your organization
 
 ##==##
-# Key benefits of variables in dbt
+# Key benefits of variables in _dbt_
 
 * Flexibility
-  * Define values that can be easily modified without changing the underlying code
-* Environment-specific settings:
-  * Enable environment-specific configurations to change behavior
+  * Define values that can be easily modified without changing the underlying code<br/><br/>
+* Environment-specific settings
+  * Enable environment-specific configurations to change behavior<br/><br/>
 * Reusable code
-  * Write reusable code that can adapt to different scenarios
+  * Write reusable code that can adapt to different scenarios<br/><br/>
 * Testing and debugging
-  * Provide variables at runtime to test specific scenarios
+  * Provide variables at runtime to test specific scenarios<br/><br/>
 * Managing secrets and sensitive data
   * Use environment variables to fill in local variables
 
@@ -72,7 +72,7 @@ vars:
 To use a variable anywhere in your models or macros, use the `{{ var('...') }}` function.
 
 `models/dimensions/countries.sql`
-```sql[]
+```sql[|3]
   SELECT countryCode, countryName
   FROM countries
   WHERE country_area = "{{ var('countries-europe') }}"
@@ -82,7 +82,7 @@ To use a variable anywhere in your models or macros, use the `{{ var('...') }}` 
 <!-- .slide: class="with-code"-->
 # Nesting variables
 
-Or more like _nesting-look-a-like_...
+Or more like _nesting-look-a-like_
 
 `dbt_project.yml`
 ```yaml[]
@@ -96,7 +96,7 @@ vars:
 ```
 
 `models/dimensions/countries2.sql`
-```sql[]
+```sql[|3]
   SELECT countryCode, countryName
   FROM countries
   WHERE country_area = "{{ var('countries')['europe'] }}"
@@ -106,14 +106,15 @@ vars:
 <!-- .slide: class="with-code"-->
 # Override values at runtime
 
-You can override values using the `--vars` argument of dbt commands.
+You can override values using the `--vars` argument of _dbt_ commands.
 
-Variables at runtime use a `yaml` dictionnary format.
+Variables at runtime use a `yaml` dictionary format.
 
 ```shell[]
 $ dbt run --vars '{"name": "Fonfec", "date": 20180101}'
 $ dbt run --vars '{name: Fonfec, date: 20180101}'
 ```
+<br/>
 
 Variables defined with the `--vars` command line argument override variables defined in the `dbt_project.yml` file.
 
@@ -126,11 +127,11 @@ They are globally scoped and will be accessible to all packages included in the 
 
 Conditional statements allow you to execute different code blocks based on certain conditions.
 
-In dbt, you can use `{% if %}` and `{% endif %}` to define conditional statements.
+In _dbt_, you can use `{% if %}` and `{% endif %}` to define conditional statements.
 
 <br/>
 
-```sql[]
+```sql[|1,4,6]
 {% if new_customers_only %}
     -- SQL code to execute when 'new_customers_only' is true
     SELECT * FROM {{ ref("customers") }} WHERE date_in >= CURRENT_DATE - INTERVAL '7 days'
@@ -147,7 +148,7 @@ Use conditional blocks anywhere in your SQL code to implement logic based on var
 
 <br/>
 
-```sql[]
+```sql[|4-8|12-14]
 SELECT
   customer_id,
   COALESCE(
@@ -175,7 +176,7 @@ You can use loops to iterate over lists or perform repetitive tasks.
 
 <br/>
 
-```sql[]
+```sql[|4-6]
 SELECT
   customer_id,
   COALESCE(
@@ -208,4 +209,4 @@ WHERE
 
 <br/>
 
-👉 Available filters and functions: https://docs.getdbt.com/reference/dbt-jinja-functions
+![sfeir-icons big](link) <span style="vertical-align:top"> Available filters and functions: https://docs.getdbt.com/reference/dbt-jinja-functions </span>

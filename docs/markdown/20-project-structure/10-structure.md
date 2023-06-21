@@ -45,28 +45,28 @@ notes:
 <!-- .slide: class="two-column" -->
 # Constraints
 
-![sfeir-icons](alert-triangle) _dbt_ is mono-adapter
+![sfeir-icons big](alert-triangle)  <span style="vertical-align:top">_dbt_ is mono-adapter</span>
 
-![sfeir-icons](alert-triangle) _dbt_ is SQL-only
+![sfeir-icons big](alert-triangle)  <span style="vertical-align:top">_dbt_ is SQL-only</span>
 
-![sfeir-icons](alert-triangle) Model and seed names are unique and project-wide
+![sfeir-icons big](alert-triangle)  <span style="vertical-align:top">Model and seed names are unique and project-wide</span>
 
-![sfeir-icons](alert-triangle) _dbt_ will destroy and recreate models at each run
+![sfeir-icons big](alert-triangle)  <span style="vertical-align:top">_dbt_ will destroy and recreate models at each run</span>
 
 
 ##--##
 <!-- .slide: data-background="var(--black)"-->
 # Best practices
 
-![sfeir-icons](thumbs-up) Organize your files in folders
+![sfeir-icons big](thumbs-up)  <span style="vertical-align:top">Organize your files in folders<span>
 
-![sfeir-icons](thumbs-up) Use tags
+![sfeir-icons big](thumbs-up)  <span style="vertical-align:top">Use tags<span>
 
-![sfeir-icons](thumbs-up) Use prefix in file names
+![sfeir-icons big](thumbs-up)  <span style="vertical-align:top">Use prefix in file names<span>
 
-![sfeir-icons](thumbs-up) **D**on't **R**epeat **Y**ourself
+![sfeir-icons big](thumbs-up)  <span style="vertical-align:top">**D**on't **R**epeat **Y**ourself<span>
 
-![sfeir-icons](thumbs-up) Test !
+![sfeir-icons big](thumbs-up)  <span style="vertical-align:top">Test!<span>
 
 
 Notes:

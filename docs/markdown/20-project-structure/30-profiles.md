@@ -95,10 +95,10 @@ profile: "local"  # dbt will look for this profile if not overridden in command 
 
 <br>
 
-_Shell command to run dbt with profile "gitlab"_
+Command to run _dbt_ with profile "gitlab"
 ```bash[]
 # Use default profile
-$ dbt run --profile gitlab
+$ dbt run
 
 # Specify profile to use
 $ dbt run --profile gitlab

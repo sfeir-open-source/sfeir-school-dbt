@@ -1,9 +1,9 @@
 <!-- .slide: class="with-code"-->
 # Sources
 
-Sources are how you declared models from outside of your project to use them as source, mainly in the staging part of your project.
+Sources are how you declared models outside your project to use as a source, mostly in the middle part of your project.
 
-It's handled by dbt with the `source()` macro, and via a source declaration yaml file.
+It's handled by _dbt_ with the `source()` macro, and via a source declaration yaml file.
 
 Sources are not seeds, they are models in your datalake or in data products of your organization.
 
@@ -79,7 +79,7 @@ Sources support additionnal properties like:
 Use the `identifier` property to rename your source table in something more explicit if needed.
 
 `/staging/__sources.yaml`
-```yaml[]
+```yaml[|9]
 ...
 sources:
   - name: "SAP"
@@ -103,7 +103,7 @@ Notes:
 # Using the `source()` macro
 
 `/models/companies.sql`
-```sql[]
+```sql[|5]
 SELECT
   URZEJ AS company_id,
   FLDSR AS company_name,
