@@ -2,5 +2,6 @@
 # Templating
 ## Lab
 
---> Convert 3 files of SQL with common logic using macros
---> use variables
+* Use variables
+* Create and use macros
+

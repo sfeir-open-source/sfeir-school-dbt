@@ -1,6 +1,6 @@
 # Task
 
-Use source() and ref() macros to create dependencies between models.
+Use source() and ref() functions to create dependencies between models.
 
 # Tips
 
