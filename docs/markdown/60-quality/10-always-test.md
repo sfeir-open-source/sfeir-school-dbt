@@ -9,15 +9,15 @@ Test and QA have existed in software development for decades.
 
 Delivering qualitative models and allowing robust data-driven decision require testing.
 
-dbt tests helps ensure the accuracy and reliability of data transformations and models.
+_dbt tests_ helps ensure the accuracy and reliability of data transformations and models.
 
-Tests in dbt are powerful, and convenient!
+Tests in _dbt_ are powerful, and convenient!
 
 
 ##==##
 # What are test good for in dbt ?
 
-Tests in dbt help you...
+Tests in _dbt_ help you:
 
 * Provide data integrity
 * Detect regression

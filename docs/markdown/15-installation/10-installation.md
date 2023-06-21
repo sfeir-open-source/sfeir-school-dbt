@@ -28,9 +28,6 @@ $ pip install dbt-postgres
 *dbt* conveniently provides public Docker images.
 <br/><br/>
 
-***Tips:*** you should create an alias to run your images and mount volumes easily.
-<br/><br/>
-
 ```shell[]
 # Replace this code with correct paths and dbt image
 $ docker run \
@@ -40,6 +37,9 @@ $ docker run \
   <dbt_image_name> \
   run
 ```
+<br/>
+
+![sfeir-icons big](help-circle) <span style="vertical-align:top">You should create an alias to run your images and mount volumes easily.</span>
 
 Notes:
 - even better: use a makefile

@@ -1,8 +1,8 @@
 <!-- .slide: class="with-code"-->
 # Models property file
 
-Models properties can be declared in `.yml` files in your models/ directory.
-
+Model properties can be declared in `.yml` files in your _models_ directory.
+<br/><br/>
 <div>
 Properties can be used to give your models:<br/>
 
@@ -13,7 +13,7 @@ Properties can be used to give your models:<br/>
 <!-- .element: class="fragment" -->
 
 <br/><br/>
-But also to declare **constraints** and **tests** !
+But also to declare **constraints** and **tests**!
 <!-- .element: class="fragment" -->
 
 Notes:

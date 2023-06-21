@@ -1,15 +1,16 @@
 <!-- .slide -->
-# What are seeds in dbt ?
+# What are _seeds_ in _dbt_?
 
-Seeds are useful for small data that doesn't change frequently:
+Seeds are useful for small data that doesn't change frequently, such as:
 
 * reference tables
   * country codes
   * static categorization
-
 * static configuration
+<br/>
+<br/>
 
-👉 Seeds are not considered as `sources` in the scope of dbt. 
+![sfeir-icons big](alert-octagon) <span style="vertical-align:top">Seeds are not considered as `sources` in the scope of _dbt_.</span> 
 
 ##==##
 <!-- .slide -->
@@ -24,12 +25,12 @@ Seeds are useful for small data that doesn't change frequently:
 * Documentation and lineage
 
 ##==##
-<!-- .slide: class="with-code-bg-dark"-->
+<!-- .slide: class="with-code"-->
 # Creating seeds
 
-Seeds are `CSV` files **only**.
+_Seeds_ are `CSV` files **only**.
 
-Options are defined via global project configuration or a seed definition file.
+Options are set through the project's global configuration or a seed definition file.
 
 All seeds are kept in the `seeds` directory and subdirectories.
 
@@ -77,10 +78,10 @@ AQ,Antarctica
 
 Using options, you can:
 
-* Ask dbt to generate seed tables in a specific schema
+* Ask _dbt_ to generate seed tables in a specific schema
 * Define aliases to handle naming conflicts
 * Override default CSV reader options
-* Override the full_refresh option
+* Override the `full_refresh` option
 
 Notes:
 * Explain that target schema is a concatenation of default schema + custom schema
@@ -102,8 +103,10 @@ seeds:
       schema: seed_data
       alias: countries
 ```
+<br/>
+<br/>
 
-👉 Seeds options can also be set in the global `dbt_project.yml` file
+![sfeir-icons big](alert-octagon) <span style="vertical-align:top">Seeds options can also be set in the global `dbt_project.yml` file</span>
 
 Notes:
 * If your options are not working, it's probably because it's in "config" and not at root level

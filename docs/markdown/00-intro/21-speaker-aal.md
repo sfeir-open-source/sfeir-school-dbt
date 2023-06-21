@@ -1,6 +1,6 @@
 <!-- .slide: class="speaker-slide" -->
 
-# Who are we ?
+# Who are we?
 
 ![speaker](./assets/images/speaker/aal.png)
 ![first-badge](./assets/images/badges/gcp-data-engineer.png)
@@ -8,7 +8,8 @@
 ![third-badge](./assets/images/badges/gcp-authorized-trainer.png)
 ![company](./assets/images/logo-sfeir-blanc.png)
 
-## Aurélien Allienne
+<h2>Aurélien<br/><span style="padding-right:0">Allienne</span></h2>
+
 
 ### Senior Data Architect
 

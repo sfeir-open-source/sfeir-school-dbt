@@ -1,10 +1,10 @@
 <!-- .slide: class="exercice" -->
 
-# Create your first dbt project
+# Create your first _dbt_ project
 ## Lab
 
-* Install dbt
-* Init dbt project "sfeir_school"
+* Install _dbt_
+* Create your first _dbt_ project 
 * Configure project and profile
 * Create a static first model
 

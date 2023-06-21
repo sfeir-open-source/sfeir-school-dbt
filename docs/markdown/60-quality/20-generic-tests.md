@@ -7,10 +7,13 @@ Generic tests are parameterized queries that accepts arguments.
 
 There are four generic tests that are available out of the box:
 
-* unique
-* not_null
-* relationships
-* accepted_values
+1. unique
+
+2. not_null
+
+3. relationships
+
+4. accepted_values
 
 Notes:
 * Tests in dbt use SQL count() requests to count rows matching the condition
@@ -24,7 +27,7 @@ Notes:
 Tests are declared in models configuration files, at the column or model level:
 
 `models/__models.yml`
-```yaml[]
+```yaml[|5-6,8-13]
 models:
   - name: int__sales
     columns:
@@ -47,7 +50,7 @@ Notes:
 <!-- .slide: class="with-code"-->
 # Running tests
 
-How to run tests ?
+How to run tests?
 
 ```shell[]
 # Will run all the tests without any filter
@@ -59,7 +62,7 @@ $ dbt build
 # Will only run tests with tag "fail_on_error"
 $ dbt test --select tag:fail_on_error
 
-# Will only run tests with tag "fail_on_error" AND the model int__sales
+# Will only run tests with tag "fail_on_error" AND the model `int__sales`
 $ dbt test --select tag:fail_on_error,int__sales
 ```
 
@@ -71,8 +74,8 @@ Custom generic tests are declared in the `/tests/generic` folder.
 
 They require 1 or 2 arguments:
 
-* model: (mandatory) the resource on which the test is run
-* column_name: (optional) the column on which the test is run
+* model _(mandatory)_: the resource on which the test is run
+* column_name _(optional)_: the column on which the test is run
 
 `/tests/generic/customer_code.sql`
 ```sql[]
@@ -96,7 +99,7 @@ Notes:
 Like any other generic tests, simply use your custom generic test name:
 
 `models/__models.yml`
-```yaml[]
+```yaml[|5,7-8]
 models:
   - name: int__sales
     columns:

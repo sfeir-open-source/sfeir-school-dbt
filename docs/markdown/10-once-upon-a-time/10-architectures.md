@@ -1,6 +1,6 @@
 <!-- .slide: -->
 # Data Platforms evolution
-![center full-width](./assets/images/docs/markdown/10-once-upon-a-time/data-architectures.svg)
+![full-center](./assets/images/docs/markdown/10-once-upon-a-time/data-architectures.svg)
 
 Notes:
 Datalake 
@@ -37,19 +37,19 @@ Data Mesh
 <!-- .slide: class="two-column" -->
 # <u>E</u>xtract <u>T</u>ransform <u>L</u>oad
 
-![sfeir-icons big](git-merge) data is extracted from various sources
+![sfeir-icons big](git-merge) <span style="vertical-align:top">data is extracted from various sources</span>
 
-![sfeir-icons big](tool)u transformed into a suitable form
+![sfeir-icons big](tool) <span style="vertical-align:top">transformed into a suitable form</span>
 
-![sfeir-icons big](upload) and then loaded into a target system for analysis.
+![sfeir-icons big](upload) <span style="vertical-align:top">and then loaded into a target system for analysis.</span>
 
 ##--##
 <!-- .slide: data-background="var(--black)" -->
 
 # <u>E</u>xtract <u>L</u>oad <u>T</u>ransform
 
-![sfeir-icons big](git-merge) data is extracted from various sources
+![sfeir-icons big](git-merge) <span style="vertical-align:top">data is extracted from various sources</span>
 
-![sfeir-icons big](upload) loaded into a target system without immediate transformation
+![sfeir-icons big](upload) <span style="vertical-align:top">loaded into a target system without immediate transformation</span>
 
-![sfeir-icons big](tool) transformation occurs when needed
+![sfeir-icons big](tool) <span style="vertical-align:top">transformation occurs when needed</span>

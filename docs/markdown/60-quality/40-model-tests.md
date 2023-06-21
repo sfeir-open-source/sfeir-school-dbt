@@ -1,5 +1,5 @@
 <!-- .slide: class="with-code"-->
-# What about testing models ?
+# What about testing models?
 
 What can we do so far:
 
@@ -7,10 +7,10 @@ What can we do so far:
 * test structure of sources and models
 * test the freshness of data using `dbt source freshness`
 
-What can we also do ?
+What can we also do?
 
-* test your dbt code and models generation
-  * by implementing unit-tests in dbt
+* test your _dbt_ code and models generation
+  * by implementing unit-tests in _dbt_
   * that will help you not break anything
 
 Notes:
@@ -19,15 +19,14 @@ Notes:
 
 ##==##
 <!-- .slide -->
-# How does unit-testing work ?
+# How does unit-testing work?
 
 It's based on the assumption that you know:
 
 * What data do you have as input --> **mocks**
 * What data do you want as output --> **expects**
 
-If the **expected** output of your dbt models does not match the input, then something is broken.
-
+If the **expected** output of your _dbt_ models does not match the input, then something is broken.
 
 ##==##
 <!-- .slide: class="with-code"-->

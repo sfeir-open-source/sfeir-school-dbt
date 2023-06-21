@@ -3,7 +3,7 @@
 
 ## What is this file?
 
-`dbt_project.yml` provides configuration settings and metadata for the project
+`dbt_project.yml` provides configuration settings and metadata for the project.
 
 Project files tell dbt **WHAT** to run.
 

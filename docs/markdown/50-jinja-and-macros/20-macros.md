@@ -1,13 +1,13 @@
 <!-- .slide -->
 # Reusable code with macros
 
-Macros are reusable blocks of code that can be defined and invoked within your dbt project.
+Macros are reusable blocks of code that can be defined and invoked within your _dbt_ project.
 
 <br/>
 
 * Code Reusability: provides consistency and reduce duplication
-* Encapsulation of Logic: Improve readability
-* Dynamic SQL Generation: SQL queries based on provided parameters or conditions
+* Encapsulation of Logic: improve readability
+* Dynamic SQL generation: SQL queries based on provided parameters or conditions
 * Parameterization: use of parameters brings flexibility
 * Modularity: macros can be organized into modules or files
 

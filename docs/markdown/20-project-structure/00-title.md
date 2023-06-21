@@ -1,2 +1,3 @@
 <!-- .slide: class="transition underline"-->
-# Project structure and best practices
+# Project structure 
+## and best practices
