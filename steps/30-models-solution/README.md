@@ -33,7 +33,7 @@ A new model with the new name is created by dbt, which also outputs a warning be
 models:
     sfeir_school:  # Don't forget the name of your project here...
         school:
-            schema: lab
+            schema: data
 ...
 ```
 

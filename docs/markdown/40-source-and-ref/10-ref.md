@@ -5,6 +5,8 @@ References are how dbt handle dependencies between models and build the DAG at r
 
 It's handled by dbt with the `ref()` function and it should be the only way for you to reference other models in a `.sql` file.
 
+Seeds can be referenced directly with `ref()` using the seed name.
+
 Notes:
 * If you don't use the ref() macro, then you're doing it wrong.
 

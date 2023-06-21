@@ -3,4 +3,6 @@
 # Use source() and ref() macros
 ## Lab
 
-Replace explicit dependencies with source() and ref()
+* Use ref() and source() macros to create dependencies
+* Generate and explore your first documentation
+
