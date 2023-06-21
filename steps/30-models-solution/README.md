@@ -15,6 +15,12 @@ models:
   - name: products
 ```
 
+#Execute `dbt run` command and see what happens
+
+The problem is the ";" at the end of the SQL.
+
+Indeed, dbt wraps your SQL code in a CREATE TABLE or CREATE VIEW, and this would produce invalid SQL.
+
 ## Rename the model file only and re-run `dbt run` --> what happens ?
 
 A new model with the new name is created by dbt, which also outputs a warning because the definition file references a inexisting model.
@@ -51,9 +57,10 @@ version: 2
 
 models:
   - name: products
-    tags:
-      - school
-      - static
+    config:
+      tags:
+        - school
+        - static
 ```
 
 In the dbt_project file:
@@ -61,24 +68,23 @@ In the dbt_project file:
 ```yaml
 ...
 models:
-    sfeir_school:  # Don't forget the name of your project here...
-        school:
-            schema: lab
-            tags: ["school", "static"]
+  sfeir_school:  # Don't forget the name of your project here...
+    school:
+      schema: lab
+      tags: ["school", "static"]
 ...
 ```
 
 ## Add a description and the column list in the definition file 
 
 ```yaml
-version: 2
-
 models:
   - name: products
     description: "My sample model for dbt school"
-    tags:
-      - school
-      - static
+    config:
+      tags:
+        - school
+        - static
     columns:
       - name: product_name
       - name: product_category

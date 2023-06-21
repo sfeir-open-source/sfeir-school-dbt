@@ -22,3 +22,8 @@ Create and configure your first dbt project with the Postgres adapter.
   * compile
   * run
   * build
+
+# Cleanup 
+
+* Remove your test model from your models directory
+* Drop the generated view or table
