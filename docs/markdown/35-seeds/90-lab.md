@@ -1,6 +1,10 @@
 <!-- .slide: class="exercice" -->
 
-# Use source() and ref() macros
+# Using seeds
 ## Lab
 
-Replace explicit dependencies with source() and ref()
+Ingest data in your warehouse using seed files 
+
+* Use the provided CSV files
+* Configure your seeds ingestion
+* Understand when to use seeds
