@@ -1,41 +1,73 @@
-<!-- .slide -->
-# Folders and files structure
+<!-- .slide: class="two-column" -->
+# Project structure
 
-dbt looks for _models_, _macros_, _seeds_, _tests_, etc. in specific directories by default.
+There is a ***CLI*** to initialize your project skeleton:
 
-There is a **CLI** command to build your project skeleton:
+- it will create your project folder and subfolders
+- generate your `dbt_project.yml` file
+- generate a profile file (if it does not exist)
 
-- It will create your project folder and subfolders
-- dbt_project.yml file
-- a profile file (if it does not exist)
+<br/>
+<br/>
+
+By default, *dbt* looks for _models_, _macros_, _seeds_, _tests_, etc. in pre-defined directories .
 
 <br/><br/>
 Next step: update the profile with adapter settings and credentials.
+
+##--##
+<!-- .slide: data-background="var(--black)"-->
+# &nbsp;
+
+```shell[]
+sfeir_school_dbt
+├── README.md
+├── analyses
+├── dbt_project.yml
+├── macros
+├── models
+│   └── example
+│       ├── my_first_dbt_model.sql
+│       ├── my_second_dbt_model.sql
+│       └── schema.yml
+├── seeds
+├── snapshots
+└── tests
+```
+<!-- .element: class="center" -->
+<br/>
 
 notes:
 * make sure your don't push your profile on the repo...
 * ...unless you use environment variables with `env_var()` jinja macro
 
 ##==##
-<!-- .slide-->
-# Constraints and best practices
+<!-- .slide: class="two-column" -->
+# Constraints
 
-**Constraints:**
+![sfeir-icons](alert-triangle) _dbt_ is mono-adapter
 
-* dbt is mono-adapter
-* dbt is SQL-only
-* Model and seed names are unique, project-wide
-* dbt destroy and recreate your model at each run
+![sfeir-icons](alert-triangle) _dbt_ is SQL-only
 
-<br/>
+![sfeir-icons](alert-triangle) Model and seed names are unique and project-wide
 
-**Best practices:**
+![sfeir-icons](alert-triangle) _dbt_ will destroy and recreate models at each run
 
-* Organize your files in folders
-* Use tags
-* Use prefix in file names
-* **D**on't **R**epeat **Y**ourself
-* Test !
+
+##--##
+<!-- .slide: data-background="var(--black)"-->
+# Best practices
+
+![sfeir-icons](thumbs-up) Organize your files in folders
+
+![sfeir-icons](thumbs-up) Use tags
+
+![sfeir-icons](thumbs-up) Use prefix in file names
+
+![sfeir-icons](thumbs-up) **D**on't **R**epeat **Y**ourself
+
+![sfeir-icons](thumbs-up) Test !
+
 
 Notes:
 * You can filter using paths in dbt commands + it's easier to read for future contributors
@@ -47,7 +79,7 @@ Notes:
 # Initializing the project
 
 ```bash[]
-# Create a "sfeir_school" project
+# Create a "sfeir_school_init" project
 
 dbt init sfeir_school_init
 ```

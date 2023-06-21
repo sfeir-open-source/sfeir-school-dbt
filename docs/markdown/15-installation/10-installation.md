@@ -1,22 +1,23 @@
 <!-- .slide: class="with-code"-->
 # Simple installation
 
-For the purpose of this school, we will:
+For the purpose of this school, we will use:
 
-* use PostgreSQL as our database
-* use the latest version of dbt with PostgreSQL adapter
+* [PostgreSQL](https://www.postgresql.org/) as database
+* the [latest version](https://docs.getdbt.com/docs/dbt-versions/core) of dbt with [PostgreSQL adapter](https://docs.getdbt.com/docs/core/connect-data-platform/postgres-setup)
 
 <br/><br/>
-Installation is pretty straightforwardw, depending on your OS:
+Installation is pretty straightforward, depending on your OS:
 
+- MacOS user can easily do it with [brew](https://brew.sh/)
 ```shell[]
-# MacOS, using brew
 $ brew update
 $ brew install git
 $ brew tap dbt-labs/dbt
 $ brew install dbt-postgres
-
-# Using python pip
+```
+- Otherwise, you can use `pip`
+```shell[]
 $ pip install dbt-postgres
 ```
 
@@ -24,10 +25,10 @@ $ pip install dbt-postgres
 <!-- .slide: class="with-code"-->
 # Installation with docker
 
-dbt convieniently provides public Docker images.
+*dbt* conveniently provides public Docker images.
 <br/><br/>
 
-Tips: you should create an alias to run your images and mount volumes easily.
+***Tips:*** you should create an alias to run your images and mount volumes easily.
 <br/><br/>
 
 ```shell[]
