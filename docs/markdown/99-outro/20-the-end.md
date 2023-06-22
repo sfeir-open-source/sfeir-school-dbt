@@ -1,7 +1,7 @@
 <!-- .slide: class="transition bg-blue" -->
 
-# Merci de votre attention !
+# Thank you for your attention!
 <br><br>
-<span class="thanks">Si cette SFEIR School vous a plu,<br>n'hésitez pas à twitter vos impressions en mentionnant<br/>**@SFEIR**
+<span class="thanks">If you liked this SFEIR School,<br/>do not hesitate to tweet your impressions by mentioning <br/>**@SFEIR**
 
-Merci et excellente continuation!<span>
+Thank you and keep up the good work!<span>

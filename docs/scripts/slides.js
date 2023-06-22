@@ -151,9 +151,10 @@ function formation() {
     ...sourceAndRefSlides(), //
     ...jinjaSlides(), //
     ...qualitySlides(), //
+    ...outroSlides(), //
+
     ...advancedSlides(), //
 
-    ...outroSlides(), //
   ].map((slidePath) => {
     return {path: slidePath};
   });
