@@ -94,7 +94,9 @@ function sourceAndRefSlides() {
   return [
     `${directory}/00-title.md`,
     `${directory}/10-ref.md`,
-    `${directory}/20-source.md`
+    `${directory}/20-source.md`,
+    `${directory}/30-docs.md`,
+    `${directory}/90-lab.md`
   ];
 }
 
@@ -104,7 +106,7 @@ function jinjaSlides() {
     `${directory}/00-title.md`,
     `${directory}/10-jinja.md`,
     `${directory}/20-macros.md`,
-    `${directory}/90-lab.md`,
+    `${directory}/90-lab.md`
   ];
 }
 
