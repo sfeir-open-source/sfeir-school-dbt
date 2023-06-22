@@ -1,0 +1,2 @@
+Faker==18.10.1
+pycountry==22.3.5
