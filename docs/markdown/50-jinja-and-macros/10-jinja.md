@@ -25,6 +25,15 @@ Variables provide a powerful way to make your dbt projects more:
 * Maintainable
 * Reusable
 
+<br>
+
+_dbt_ includes several predefined and system variables, for instance:
+
+* _project_name_
+* _model_
+* _target_
+* _this_
+
 Notes:
 * Flexible: it's easy to change a variable value
 * Maintainable: it makes your code more readable and dry
@@ -108,11 +117,13 @@ vars:
 
 You can override values using the `--vars` argument of _dbt_ commands.
 
-Variables at runtime use a `yaml` dictionary format.
+Variables at runtime use a `yaml` dictionary.
 
 ```shell[]
-$ dbt run --vars '{"name": "Fonfec", "date": 20180101}'
-$ dbt run --vars '{name: Fonfec, date: 20180101}'
+$ dbt run --vars '{"firstname": "Sophie", "lastname": "Fonfec", "date": 20180101}'
+
+# With only 1 variable, brackets are optional
+$ dbt run --vars 'name: Fonfec'
 ```
 <br/>
 
@@ -120,6 +131,8 @@ Variables defined with the `--vars` command line argument override variables def
 
 They are globally scoped and will be accessible to all packages included in the project.
 
+Notes:
+* Mind the space in YAML dict format after the :
 
 ##==##
 <!-- .slide: class="with-code"-->
