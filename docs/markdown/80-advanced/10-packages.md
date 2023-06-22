@@ -1,4 +1,0 @@
-<!-- .slide -->
-# dbt Packages
-
-TODO
