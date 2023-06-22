@@ -8,5 +8,5 @@
 * Configure project and profile
 * Create a static first model
 
-Note:
+Notes:
 - profile.yml file is in the $HOME/.dbt folder

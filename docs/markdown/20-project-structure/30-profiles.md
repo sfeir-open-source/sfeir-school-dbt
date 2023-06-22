@@ -3,11 +3,11 @@
 
 Profiles are a centralized way to store configuration that defines connection details for different databases or data warehouses.
 
-Profiles tell dbt **HOW** to run.
+Profiles tell _dbt_ **HOW** to run.
 
-dbt searches for a `profile.yml` file in this order:
-* in the main dbt project directory 
-* in the $HOME/.dbt directory 
+_dbt_ searches for a `profile.yml` file in this order:
+* in the main _dbt_ project directory 
+* in the `$HOME/.dbt` directory 
 * path passed as argument of the dbt commands
 
 Profiles make it easier to switch between different environments and databases.
@@ -23,6 +23,8 @@ Notes:
 
 ## Sample `profile.yml` (1/3)
 
+At the top of your profile files, you can set global configuration directives:
+
 ```yaml[]
 config:
   partial_parse: false
@@ -36,6 +38,8 @@ config:
 # Profiles
 
 ## Sample `profile.yml` (2/3)
+
+You can use anchors in `YAML` to avoid repeating configuration blocks.
 
 ```yaml[]
 # Configuration for all authentication methods
@@ -55,14 +59,13 @@ config_service_account: &config_service_account
   keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
 ```
 
-Notes:
-* Use yaml anchors to avoid repeating yourself
-
 ##==##
 <!-- .slide: class="with-code"-->
 # Profiles
 
 ## Sample `profile.yml` (3/3)
+
+Then use anchors reference in the actual profiles.
 
 ```yaml[]
 # Actual profiles
@@ -96,13 +99,17 @@ profile: "local"  # dbt will look for this profile if not overridden in command 
 <br>
 
 Command to run _dbt_ with profile "gitlab"
+
 ```bash[]
 # Use default profile
 $ dbt run
 
 # Specify profile to use
 $ dbt run --profile gitlab
+
+# Specify profile to use and in which directory
+$ dbt run --profile gitlab --profiles-dir ~/.dbt/profiles/school.yml
 ```
 
 Notes:
-* dbt does NOT use default profile anymore to avoid unintentionnal usage of credentials / env. 
+* dbt does NOT use "default" profile anymore to avoid unintentionnal usage of credentials / env. 

@@ -6,10 +6,10 @@ Compile SQL and execute against the current target database.
 <br/><br/>
 ```bash[]
 # Compile and run all models against `default` target, with default profile
-dbt run
+$ dbt run
 
 # Compile and run all models against `prd` target, with the default profile
-dbt run --target prd
+$ dbt run --target prd --profile composer
 ```
 
 ##==##
@@ -21,10 +21,10 @@ Load data from CSV files into your data warehouse.
 <br/><br/>
 ```bash[]
 # Import all seeds in `default target
-dbt seed
+$ dbt seed
 
 # Import all seeds in your `dev` target, read from your `localù profile
-dbt seed --profile local --target dev
+$ dbt seed --profile local --target dev --show
 ```
 
 ##==##
@@ -36,13 +36,13 @@ Runs tests or unit tests for models on data
 
 ```bash[]
 # Run all tests
-dbt test
+$ dbt test
 
 # Run test related to "CUSTOMERS" model only
-dbt test --select CUSTOMERS
+$ dbt test --select CUSTOMERS
 
 # Run test tagged "unit-test" only
-dbt test --select tag:unit-test
+$ dbt test --select tag:unit-test
 ```
 
 ##==##
@@ -54,7 +54,7 @@ Run _seeds_, _models_, _snapshots_ and _test_ in DAG order
 <br/><br/>
 ```bash[]
 # Build and tests models in the staging directory only
-dbt build --select staging --target prd
+$ dbt build --select staging --target prd
 ```
 
 ##==##
@@ -66,10 +66,10 @@ Generate and serve _dbt_ generated documentation as website for your project.
 <br/><br/>
 ```bash[]
 # Generate documentation in the "docs" folder
-dbt docs generate
+$ dbt docs generate
 
 # Start a webserver and serve generated documentation (default port is port 8080)
-dbt docs serve --port 2828 --no-browser
+$ dbt docs serve --port 2828 --no-browser
 ```
 
 ##==##

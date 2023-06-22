@@ -99,8 +99,8 @@ seeds:
     +schema: school_seeds # Default schema for all seeds in project except ones from packages
     country_codes: # This configures seeds/country_codes.csv
       # Override column types
-      +schema: dimension_seeds
-      +column_types:
+      schema: dimension_seeds
+      column_types:
         country_code: varchar(2)
         country_name: varchar(32)
 ```
