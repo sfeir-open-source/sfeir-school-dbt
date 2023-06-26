@@ -43,15 +43,13 @@ seeds:
 
 `seeds/__seeds.yml`
 ```yaml
-...
 seeds:
   - name: seed_categories
     config:
       alias: categories
-    column_types:
-      - category_code: varchar(8)
-      - category_name: varchar(32)
-      - enabled: boolean
-      - date_in: timestamp
-...
+      column_types:
+        category_code: varchar(8)
+        category_name: varchar(32)
+        enabled: boolean
+        date_in: timestamp
 ```

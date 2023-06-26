@@ -140,7 +140,7 @@ Notes:
 
 Conditional statements allow you to execute different code blocks based on certain conditions.
 
-In _dbt_, you can use `{% if %}` and `{% endif %}` to define conditional statements.
+In _dbt_, you can use ```{% if %}``` and ```{% endif %}``` to define conditional statements.
 
 <br/>
 
