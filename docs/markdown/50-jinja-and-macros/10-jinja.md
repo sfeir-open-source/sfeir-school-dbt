@@ -83,7 +83,7 @@ To use a variable anywhere in your models or macros, use the `{{ var('...') }}` 
 `models/dimensions/countries.sql`
 ```sql[|3]
   SELECT countryCode, countryName
-  FROM countries
+  FROM {{ ref('countries') }}
   WHERE country_area = "{{ var('countries-europe') }}"
 ```
 
@@ -107,7 +107,7 @@ vars:
 `models/dimensions/countries2.sql`
 ```sql[|3]
   SELECT countryCode, countryName
-  FROM countries
+  FROM {{ ref('countries') }}
   WHERE country_area = "{{ var('countries')['europe'] }}"
 ```
 
@@ -145,7 +145,7 @@ In _dbt_, you can use `{% if %}` and `{% endif %}` to define conditional stateme
 <br/>
 
 ```sql[|1,4,6]
-{% if new_customers_only %}
+{% if var('new_customers_only') %}
     -- SQL code to execute when 'new_customers_only' is true
     SELECT * FROM {{ ref("customers") }} WHERE date_in >= CURRENT_DATE - INTERVAL '7 days'
 {% else %}
