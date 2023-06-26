@@ -78,7 +78,7 @@ But it's possible to change this default behavior: <br/>
 # Sample direct configuration
 
 `models/staging/customers.sql`
-```sql[6-11|1-4|]
+```sql[6-11|1-4]
 {{ config(
     materialized="table",
     schema="school"
@@ -96,7 +96,7 @@ FROM
 <!-- .slide: class="with-code"-->
 # `dbt_project.yml` model configuration
 
-```yaml[|6-7|8-9|]
+```yaml[|6-7|8-9]
 name: dbt_school
 config-version: 2
 ...
