@@ -4,8 +4,8 @@
 
 ![speaker](./assets/images/speaker/hmd.png)
 ![first-badge](./assets/images/badges/mongodb-certified-developer.png)
-![second-badge](./assets/images/badges/mongodb-certified-si-architect.png)
-![third-badge](./assets/images/badges/gcp-data-engineer.png)
+![second-badge](./assets/images/badges/gcp-data-engineer.png)
+![third-badge](./assets/images/badges/dbt-developer.png)
 ![company](./assets/images/logo-sfeir-blanc.png)
 
 <h2>Henri-Maxime <span style="padding-right:0">Ducoulombier</span></h2>
