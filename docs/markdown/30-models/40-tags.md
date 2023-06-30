@@ -1,4 +1,5 @@
 <!-- .slide -->
+
 # Tagging your ressources
 
 _dbt_ includes the option to tag your models to regroup/filter them.
@@ -7,9 +8,9 @@ _dbt_ includes the option to tag your models to regroup/filter them.
 <div>
 _tags_ can be defined in:<br/> <br/>
 
-* your `dbt_project.yml` file
-* models property file
-* models configuration blocks
+- your `dbt_project.yml` file
+- models property file
+- models configuration blocks
 </div>
 <!-- .element: class="fragment" -->
 
@@ -18,18 +19,22 @@ _tags_ can be defined in:<br/> <br/>
 _tags_ accumulate hierarchically:
 
 ![center hm-200](./assets/images/docs/markdown/20-project-structure/dbt_configuration_directives.svg)
+
 </div>
 <!-- .element: class="fragment" -->
 
 Notes:
+
 - Tags are not labels in BigQuery -- there is special syntax (dict) in config blocks for that
 
 ##==##
+
 <!-- .slide: class="with-code"-->
 
 # Tagging example
 
 `dbt_project.yml`
+
 ```yaml[]
 ...
 models:
@@ -42,8 +47,10 @@ models:
         - "intermediate-models"
 ```
 
+<!-- {% raw %} -->
 
 `models/staging/__models.yml`
+
 ```yaml[]
 models:
   - name: customers
@@ -51,12 +58,18 @@ models:
       tags: ["staging", "dimensions"]
 ```
 
+<!-- {% endraw %} -->
+
 ##==##
+
 <!-- .slide: class="with-code"-->
 
 # Tagging example
 
 `models/staging/customers.sql`
+
+<!-- {% raw %} -->
+
 ```sql[4]
 {{ config(
     materialized="table",
@@ -72,3 +85,4 @@ FROM
     customers
 ```
 
+<!-- {% endraw %} -->

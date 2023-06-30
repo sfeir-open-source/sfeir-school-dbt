@@ -1,26 +1,32 @@
 <!-- .slide -->
+
 # What is a model?
 
 A _dbt_ model is a `SELECT` statement, written in a `.sql` file.
 
-* Each SQL file contains only one model
-* File name determine the model name
-* Models must be defined in directory `models` and its subdirectories
+- Each SQL file contains only one model
+- File name determine the model name
+- Models must be defined in directory `models` and its subdirectories
 
 <br/><br/>
 During the execution of `dbt run`, `SELECT` requests are wrapped in `CREATE VIEW` or `CREATE TABLE` statements.
+
 <!-- .element: class="fragment" -->
 
 Notes:
+
 - There can be more than 1 SELECT statement in each model
 - Starting with dbt Core 1.3, it's possible to define models using Python files
 - There can't be 2 models with the same name !
 
 ##==##
+
 <!-- .slide: class="with-code"-->
+
 # Sample model
 
 The model `models/staging/customers.sql`
+
 ```sql
 SELECT
   id
@@ -28,6 +34,7 @@ SELECT
   , CONCAT(firstname, ' ', UPPER(lastname)) AS `name`
 FROM customers
 ```
+
 <br/>
 <div>
 will produce the following query:
@@ -41,21 +48,25 @@ CREATE VIEW dbt_school.customers AS (
   FROM customers
 )
 ```
+
 </div>
 <!-- .element: class="fragment" -->
 
 Notes:
+
 - No ";" at the end of the model, or it will generate an error
 
 ##==##
+
 <!-- .slide -->
+
 # Model configuration
 
 By default, _dbt_ will create models:
 
-* Using views and not tables
-* In the default schema defined in the `dbt_project.yml` file
-* Using the `.sql` file name
+- Using views and not tables
+- In the default schema defined in the `dbt_project.yml` file
+- Using the `.sql` file name
 
 <br/>
 <br/>
@@ -63,8 +74,8 @@ By default, _dbt_ will create models:
 <div>
 But it's possible to change this default behavior: <br/>
 
-* In the `dbt_project.yml` configuration file
-* Directly in models using `config` blocks
+- In the `dbt_project.yml` configuration file
+- Directly in models using `config` blocks
 
 <br/>
 
@@ -74,10 +85,15 @@ But it's possible to change this default behavior: <br/>
 <!-- .element: class="fragment" -->
 
 ##==##
+
 <!-- .slide: class="with-code"-->
+
 # Sample direct configuration
 
+<!-- {% raw %} -->
+
 `models/staging/customers.sql`
+
 ```sql[6-11|1-4]
 {{ config(
     materialized="table",
@@ -92,8 +108,12 @@ FROM
     customers
 ```
 
+<!-- {% endraw %} -->
+
 ##==##
+
 <!-- .slide: class="with-code"-->
+
 # `dbt_project.yml` model configuration
 
 ```yaml[|6-7|8-9]

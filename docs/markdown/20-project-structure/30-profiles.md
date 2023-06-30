@@ -1,4 +1,5 @@
 <!-- .slide -->
+
 # Profiles
 
 Profiles are a centralized way to store configuration that defines connection details for different databases or data warehouses.
@@ -6,19 +7,23 @@ Profiles are a centralized way to store configuration that defines connection de
 Profiles tell _dbt_ **HOW** to run.
 
 _dbt_ searches for a `profile.yml` file in this order:
-* in the main _dbt_ project directory 
-* in the `$HOME/.dbt` directory 
-* path passed as argument of the dbt commands
+
+- in the main _dbt_ project directory
+- in the `$HOME/.dbt` directory
+- path passed as argument of the dbt commands
 
 Profiles make it easier to switch between different environments and databases.
 
 Notes:
-* Profile file are yaml files
-* You can have as many profiles as you want in a file, or use different files (use arguments to define which file to use)
-* Profiles enhance the flexibility and portability of your dbt projects
+
+- Profile file are yaml files
+- You can have as many profiles as you want in a file, or use different files (use arguments to define which file to use)
+- Profiles enhance the flexibility and portability of your dbt projects
 
 ##==##
+
 <!-- .slide: class="with-code"-->
+
 # Profiles
 
 ## Sample `profile.yml` (1/3)
@@ -34,12 +39,16 @@ config:
 ```
 
 ##==##
+
 <!-- .slide: class="with-code"-->
+
 # Profiles
 
 ## Sample `profile.yml` (2/3)
 
 You can use anchors in `YAML` to avoid repeating configuration blocks.
+
+<!-- {% raw %} -->
 
 ```yaml[]
 # Configuration for all authentication methods
@@ -59,8 +68,12 @@ config_service_account: &config_service_account
   keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
 ```
 
+<!-- {% endraw %} -->
+
 ##==##
+
 <!-- .slide: class="with-code"-->
+
 # Profiles
 
 ## Sample `profile.yml` (3/3)
@@ -83,12 +96,15 @@ local:
 ```
 
 ##==##
+
 <!-- .slide: class="with-code"-->
+
 # Using profiles
 
 Default profile name must be set in `dbt_project.yml` file.
 
 `dbt_project.yml`
+
 ```yaml[]
 ...
 name: "sfeir_school_dbt"
@@ -112,4 +128,5 @@ $ dbt run --profile gitlab --profiles-dir ~/.dbt/profiles/school.yml
 ```
 
 Notes:
-* dbt does NOT use "default" profile anymore to avoid unintentionnal usage of credentials / env. 
+
+- dbt does NOT use "default" profile anymore to avoid unintentionnal usage of credentials / env.
