@@ -83,11 +83,12 @@ function sourceAndRefSlides() {
 }
 
 function jinjaSlides() {
-  const directory = '50-jinja-and-macros';
+  const directory = '50-historical-data';
   return [
     `${directory}/00-title.md`,
-    `${directory}/10-jinja.md`,
-    `${directory}/20-macros.md`,
+    `${directory}/10-snapshots.md`,
+    `${directory}/20-snapshots-definition.md`,
+    `${directory}/30-snapshots-exec-and-manage.md`,
     `${directory}/90-lab.md`,
   ];
 }
