@@ -93,15 +93,14 @@ function historicalDataSlides() {
   ];
 }
 
-function qualitySlides() {
-  const directory = '60-quality';
+function packageDependanciesSlides() {
+  const directory = '70-package-dependancies';
   return [
     `${directory}/00-title.md`,
-    `${directory}/10-always-test.md`,
-    `${directory}/20-generic-tests.md`,
-    `${directory}/30-singular-tests.md`,
-    `${directory}/35-packages.md`,
-    `${directory}/40-model-tests.md`,
+    `${directory}/10-packages.md`,
+    `${directory}/20-hub.md`,
+    `${directory}/30-installing.md`,
+    `${directory}/40-build.md`,
     `${directory}/90-lab.md`,
   ];
 }
@@ -132,7 +131,7 @@ function formation() {
     ...seedsSlides(), //
     ...historicalDataSlides(), //
     ...advancedSlides(), //
-    ...qualitySlides(), //
+    ...packageDependanciesSlides(), //
     ...outroSlides(), //
 
     ...advancedSlides(), //
