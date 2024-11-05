@@ -66,7 +66,7 @@ function modelsSlides() {
 }
 
 function seedsSlides() {
-  const directory = '35-seeds';
+  const directory = '45-seeds';
   return [`${directory}/00-title.md`, `${directory}/10-seeds.md`, `${directory}/90-lab.md`];
 }
 
