@@ -1,3 +1,11 @@
+<!-- .slide: class="transition"-->
+
+# Working with dbt models
+
+## Introducing tagging feature for metadata organization
+
+##==##
+
 <!-- .slide -->
 
 # Tagging your ressources
@@ -15,17 +23,15 @@ _tags_ can be defined in:<br/> <br/>
 <!-- .element: class="fragment" -->
 
 <br/>
-<div>
-_tags_ accumulate hierarchically:
 
-![center hm-200](./assets/images/docs/markdown/20-project-structure/dbt_configuration_directives.svg)
+Tags can also be applied to seeds, sources, exposures and even columns.
 
-</div>
 <!-- .element: class="fragment" -->
 
 Notes:
 
 - Tags are not labels in BigQuery -- there is special syntax (dict) in config blocks for that
+  Adding tags to columns is used to run a subset of tests on specific columns.
 
 ##==##
 
@@ -33,47 +39,22 @@ Notes:
 
 # Tagging example
 
-`dbt_project.yml`
+_models/staging/\_\_models.yml_
 
-```yaml[]
-...
-models:
-  dbt_school:
-    +tags: ["sfeir", "school"]
-    staging:
-      +tags: "staging-models"
-    intermediate:
-      +tags:
-        - "intermediate-models"
-```
-
-<!-- {% raw %} -->
-
-`models/staging/__models.yml`
-
-```yaml[]
+```yaml
 models:
   - name: customers
     config: # Don't forget the "config" block
-      tags: ["staging", "dimensions"]
+      tags: ['staging', 'dimensions']
 ```
 
-<!-- {% endraw %} -->
+_models/staging/customers.sql_
 
-##==##
-
-<!-- .slide: class="with-code"-->
-
-# Tagging example
-
-`models/staging/customers.sql`
-
-<!-- {% raw %} -->
-
-```sql[4]
+```sql
 {{ config(
-    materialized="table",
-    schema="school",
+    tags=["staging", "dimensions"]
+) }}
+{{ config(
     tags=["staging", "dimensions"]
 ) }}
 
@@ -82,7 +63,28 @@ SELECT
     , area
     , CONCAT(firstname, ' ', UPPER(lastname)) AS `name`
 FROM
-    customers
+    erp.customers
 ```
 
-<!-- {% endraw %} -->
+##==##
+
+<!-- .slide: class="with-code"-->
+
+# Use tags at run time
+
+You can use dbt command line arguments to run specific models with tags:
+
+```bash
+# Run models with tag “dimension” only
+$ dbt test --select tag:dimension
+
+# Run models with tag “dimension” and the underlying models too
+$ dbt test --select +tag:dimension
+
+# Run models with tag “dimension” and the underlying models too
+# Except models with tag “int”
+$ dbt test --select +tag:dimension --exclude tag:int
+
+# Run seeds with tag “reference” only
+$ dbt seed -s tag:reference
+```

@@ -59,9 +59,9 @@ function modelsSlides() {
     `${directory}/00-title.md`,
     `${directory}/10-what-is-a-model.md`,
     `${directory}/20-materializations.md`,
-    `${directory}/30-models-properties-file.md`,
-    `${directory}/40-tags.md`,
     `${directory}/90-lab.md`,
+    `${directory}/30-advanced-materializations.md`,
+    `${directory}/40-tags.md`,
   ];
 }
 
