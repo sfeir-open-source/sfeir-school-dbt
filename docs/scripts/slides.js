@@ -1,52 +1,41 @@
-import {SfeirThemeInitializer} from '../web_modules/sfeir-school-theme/sfeir-school-theme.mjs';
+import { SfeirThemeInitializer } from '../web_modules/sfeir-school-theme/sfeir-school-theme.mjs';
 
 // One method per module
 function schoolSlides() {
-  return [
-  ];
+  return [];
 }
 
 function introSlides() {
   const directory = '00-intro';
   return [
     `${directory}/00-title.md`,
+    `${directory}/01-logistic.md`,
     `${directory}/10-intro.md`,
+    `${directory}/11-agenda-day1.md`,
+    `${directory}/12-agenda-day2.md`,
     `${directory}/21-speaker-aal.md`,
     `${directory}/22-speaker-hmd.md`,
-    `${directory}/30-who-are-you.md`
+    `${directory}/30-who-are-you.md`,
   ];
 }
 function outroSlides() {
   const directory = '99-outro';
-  return [
-    `${directory}/10-questions.md`,
-    `${directory}/20-the-end.md`
-  ];
+  return [`${directory}/10-questions.md`, `${directory}/20-the-end.md`];
 }
 
 function onceUponATimeSlides() {
   const directory = '10-once-upon-a-time';
-  return [
-    `${directory}/00-title.md`,
-    `${directory}/10-architectures.md`,
-  ];
+  return [`${directory}/00-title.md`, `${directory}/10-architectures.md`];
 }
 
 function dbtSlides() {
   const directory = '12-dbt';
-  return [
-    `${directory}/00-title.md`,
-    `${directory}/10-dbt.md`,
-  ];
+  return [`${directory}/00-title.md`, `${directory}/10-dbt.md`];
 }
 
 function installationSlides() {
   const directory = '15-installation';
-  return [
-    `${directory}/00-title.md`,
-    `${directory}/10-installation.md`,
-    `${directory}/20-adapters.md`,
-  ];
+  return [`${directory}/00-title.md`, `${directory}/10-installation.md`, `${directory}/20-adapters.md`];
 }
 
 function projectSlides() {
@@ -61,11 +50,7 @@ function projectSlides() {
 
 function commandsSlides() {
   const directory = '25-commands';
-  return [
-    `${directory}/00-title.md`,
-    `${directory}/10-dbt-commands.md`,
-    `${directory}/90-lab.md`
-  ];
+  return [`${directory}/00-title.md`, `${directory}/10-dbt-commands.md`, `${directory}/90-lab.md`];
 }
 
 function modelsSlides() {
@@ -82,11 +67,7 @@ function modelsSlides() {
 
 function seedsSlides() {
   const directory = '35-seeds';
-  return [
-    `${directory}/00-title.md`,
-    `${directory}/10-seeds.md`,
-    `${directory}/90-lab.md`,
-  ];
+  return [`${directory}/00-title.md`, `${directory}/10-seeds.md`, `${directory}/90-lab.md`];
 }
 
 function sourceAndRefSlides() {
@@ -96,7 +77,7 @@ function sourceAndRefSlides() {
     `${directory}/10-ref.md`,
     `${directory}/20-source.md`,
     `${directory}/30-docs.md`,
-    `${directory}/90-lab.md`
+    `${directory}/90-lab.md`,
   ];
 }
 
@@ -106,7 +87,7 @@ function jinjaSlides() {
     `${directory}/00-title.md`,
     `${directory}/10-jinja.md`,
     `${directory}/20-macros.md`,
-    `${directory}/90-lab.md`
+    `${directory}/90-lab.md`,
   ];
 }
 
@@ -119,7 +100,7 @@ function qualitySlides() {
     `${directory}/30-singular-tests.md`,
     `${directory}/35-packages.md`,
     `${directory}/40-model-tests.md`,
-    `${directory}/90-lab.md`
+    `${directory}/90-lab.md`,
   ];
 }
 
@@ -133,7 +114,7 @@ function advancedSlides() {
     `${directory}/40-statement-blocks.md`,
     `${directory}/50-production.md`,
     `${directory}/60-artifacts.md`,
-  ]
+  ];
 }
 
 function formation() {
@@ -141,8 +122,8 @@ function formation() {
     //
     ...introSlides(), //
 
-    ...onceUponATimeSlides(),//
-    ...dbtSlides(),//
+    ...onceUponATimeSlides(), //
+    ...dbtSlides(), //
     ...installationSlides(), //
     ...projectSlides(), //
     ...commandsSlides(), //
@@ -154,9 +135,8 @@ function formation() {
     ...outroSlides(), //
 
     ...advancedSlides(), //
-
   ].map((slidePath) => {
-    return {path: slidePath};
+    return { path: slidePath };
   });
 }
 

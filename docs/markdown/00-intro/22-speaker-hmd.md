@@ -10,7 +10,6 @@
 
 <h2>Henri-Maxime <span style="padding-right:0">Ducoulombier</span></h2>
 
-
 ### Senior Data Architect
 
 <!-- .element: class="icon-rule icon-first" -->

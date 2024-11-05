@@ -1,16 +1,24 @@
-# Program of the training
-
-![sfeir-icons big](bell) <span style="vertical-align:top">When is the break?<span><br/><br/>
-
-![sfeir-icons big](clock) <span style="vertical-align:top">What time do we eat?<span><br/><br/>
-
-![sfeir-icons big](mic) <span style="vertical-align:top">What are we going to talk about?</span>
-
-##==##
 <!-- .slide -->
-# What are we going to learn?
 
-* Set up _dbt_ and start a project
-* How to use seeds, sources, models and the relations between them
-* How to use jinja templating and macros
-* An overview of testing
+# Objectifs de la formation
+
+**Acquérir les compétences suivantes :**
+
+- Comprendres les concepts clés, les avantages et l’architecture de dbt
+- Créer des modèles de données structurés et effectuer des transformations pour les préparer
+- Maîtriser les fonctionnalités avancées telles que les macros, les modèles Jinja, les variables
+- Utiliser les snapshots dbt pour suivre les changements au fil du temps et gérer les données historiques
+- Mettre en œuvre des tests pour garantir la qualité et l'intégrité des données
+
+**Et vos objectifs personnels ?**
+
+Notes:
+Comprendre les concepts clés, les avantages et l'architecture de dbt en tant qu'outil de transformation et de modélisation des données.
+
+Créer des modèles de données structurés avec dbt, et effectuer des transformations pour traiter et préparer les données en vue de l'analyse.
+
+Maîtriser les fonctionnalités avancées telles que les macros, les modèles Jinja, les variables et le contrôle de flux
+
+Utiliser les instantanés (snapshots) dbt pour suivre les changements au fil du temps et gérer les données historiques, facilitant l'analyse des tendances historiques et les dimensions à changement lent.
+
+Mettre en œuvre des tests pour garantir la qualité et l'intégrité des données, permettant de valider les résultats des transformations et de détecter les anomalies
