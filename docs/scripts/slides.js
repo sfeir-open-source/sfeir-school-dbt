@@ -82,7 +82,7 @@ function sourceAndRefSlides() {
   ];
 }
 
-function jinjaSlides() {
+function historicalDataSlides() {
   const directory = '50-historical-data';
   return [
     `${directory}/00-title.md`,
@@ -107,15 +107,13 @@ function qualitySlides() {
 }
 
 function advancedSlides() {
-  const directory = '80-advanced';
+  const directory = '60-advanced';
   return [
     `${directory}/00-title.md`,
-    `${directory}/10-snapshots.md`,
-    `${directory}/20-analyses.md`,
-    `${directory}/30-hooks.md`,
-    `${directory}/40-statement-blocks.md`,
-    `${directory}/50-production.md`,
-    `${directory}/60-artifacts.md`,
+    `${directory}/10-jinja.md`,
+    `${directory}/20-macros.md`,
+    `${directory}/30-templating.md`,
+    `${directory}/90-lab.md`,
   ];
 }
 
@@ -132,7 +130,8 @@ function formation() {
     ...modelsSlides(), //
     ...sourceAndRefSlides(), //
     ...seedsSlides(), //
-    ...jinjaSlides(), //
+    ...historicalDataSlides(), //
+    ...advancedSlides(), //
     ...qualitySlides(), //
     ...outroSlides(), //
 
