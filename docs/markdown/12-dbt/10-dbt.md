@@ -20,7 +20,7 @@
 
 ![sfeir-icons big](book) <span style="vertical-align:top">Documentation is accessible and easily updated</span>
 
-![sfeir-icons big](database) <span style="vertical-align:top">KISS: use macros to write reusable SQL</span>
+![sfeir-icons big](terminal) <span style="vertical-align:top">KISS: use macros to write reusable SQL</span>
 
 ##==##
 
