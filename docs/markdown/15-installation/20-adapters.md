@@ -1,18 +1,19 @@
 <!-- .slide -->
+
 # Verified adapters
 
-* BigQuery (Google Cloud)
-* AlloyDB (Google Cloud)
-* Redshift (AWS)
-* Databricks
-* PostgreSQL
-* Snowflake
-* Spark
-* Starburst/Trino
+- BigQuery (Google Cloud)
+- AlloyDB (Google Cloud)
+- Redshift (AWS)
+- Databricks
+- PostgreSQL
+- Snowflake
+- Spark
+- Starburst/Trino
 
 <br/><br/>
 
-Complete list: https://docs.getdbt.com/docs/supported-data-platforms
+![sfeir-icons big](alert-circle) Complete list: https://docs.getdbt.com/docs/supported-data-platforms
 
 Notes:
 
@@ -20,20 +21,21 @@ Notes:
 - Verified adapters are available in dbt cloud (with a process of validation)
 
 ##==##
+
 # Community adapters
 
-* Athena
-* Oracle
-* Clickhouse
-* Rockset
-* SQLite
-* SQL Server & Azure SQL
-* Teradata
-* MySQL
+- Athena
+- Oracle
+- Clickhouse
+- Rockset
+- SQLite
+- SQL Server & Azure SQL
+- Teradata
+- MySQL
 
 <br/><br/>
 
-Complete list: https://docs.getdbt.com/docs/community-adapters
+![sfeir-icons big](alert-circle) Complete list: https://docs.getdbt.com/docs/community-adapters
 
 Notes:
 

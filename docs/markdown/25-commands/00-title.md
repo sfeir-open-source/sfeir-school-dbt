@@ -1,3 +1,5 @@
 <!-- .slide: class="transition"-->
 
-# dbt CLI commands
+# Introduction to dbt
+
+## dbt CLI commands

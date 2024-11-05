@@ -1,5 +1,5 @@
 <!-- .slide: class="transition"-->
 
-# Project structure
+# Introduction to dbt
 
-## and best practices
+## Project structure and best practices

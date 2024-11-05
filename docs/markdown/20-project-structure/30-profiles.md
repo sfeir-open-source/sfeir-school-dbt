@@ -8,11 +8,15 @@ Profiles tell _dbt_ **HOW** to run.
 
 _dbt_ searches for a `profile.yml` file in this order:
 
-- in the main _dbt_ project directory
-- in the `$HOME/.dbt` directory
 - path passed as argument of the dbt commands
+- then at the root of your dbt project directory
+- then in the `$HOME/.dbt` directory
 
-Profiles make it easier to switch between different environments and databases.
+Profiles make it easier to switch between different environments and databases thanks to targets.
+
+Be careful not to commit your `profiles.yml` file with hardcoded credentials !
+
+<!-- .element: class="admonition warning" -->
 
 Notes:
 
@@ -26,31 +30,11 @@ Notes:
 
 # Profiles
 
-## Sample `profile.yml` (1/3)
+## Sample profile.yml (1/2)
 
-At the top of your profile files, you can set global configuration directives:
+You can use anchors in YAML to avoid repeating configuration blocks.
 
-```yaml[]
-config:
-  partial_parse: false
-  use_colors: true
-  printer_width: 120
-  send_anonymous_usage_stats: false
-```
-
-##==##
-
-<!-- .slide: class="with-code"-->
-
-# Profiles
-
-## Sample `profile.yml` (2/3)
-
-You can use anchors in `YAML` to avoid repeating configuration blocks.
-
-<!-- {% raw %} -->
-
-```yaml[]
+```yaml
 # Configuration for all authentication methods
 config_global: &config_global
   type: bigquery
@@ -68,23 +52,21 @@ config_service_account: &config_service_account
   keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
 ```
 
-<!-- {% endraw %} -->
-
 ##==##
 
 <!-- .slide: class="with-code"-->
 
 # Profiles
 
-## Sample `profile.yml` (3/3)
+## Sample profile.yml (2/2)
 
 Then use anchors reference in the actual profiles.
 
-```yaml[]
+```yaml
 # Actual profiles
 gitlab:
   target: dev # Default target name.
-  outputs:
+  outputs: # The list of targets and the config associated with them
     dev:
       <<: *config_service_account
 
@@ -105,18 +87,16 @@ Default profile name must be set in `dbt_project.yml` file.
 
 `dbt_project.yml`
 
-```yaml[]
-...
-name: "sfeir_school_dbt"
-profile: "local"  # dbt will look for this profile if not overridden in command args
-...
-```
+```yaml
 
-<br>
+---
+name: 'sfeir_institute_dbt'
+profile: 'local' # dbt will look for this profile if not overridden in command args
+```
 
 Command to run _dbt_ with profile "gitlab"
 
-```bash[]
+```bash
 # Use default profile
 $ dbt run
 
@@ -124,7 +104,7 @@ $ dbt run
 $ dbt run --profile gitlab
 
 # Specify profile to use and in which directory
-$ dbt run --profile gitlab --profiles-dir ~/.dbt/profiles/school.yml
+$ dbt run --profile gitlab --profiles-dir ~/.dbt/profiles/institute.yml
 ```
 
 Notes:

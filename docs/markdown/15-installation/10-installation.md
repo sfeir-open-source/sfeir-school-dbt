@@ -1,34 +1,56 @@
 <!-- .slide: class="with-code"-->
-# Simple installation
 
-For the purpose of this school, we will use:
+# Installing dbt
 
-* [PostgreSQL](https://www.postgresql.org/) as database
-* the [latest version](https://docs.getdbt.com/docs/dbt-versions/core) of dbt with [PostgreSQL adapter](https://docs.getdbt.com/docs/core/connect-data-platform/postgres-setup)
+## Simple installation
 
-<br/><br/>
 Installation is pretty straightforward, depending on your OS:
 
-- MacOS user can easily do it with [brew](https://brew.sh/)
-```shell[]
+Use pip, <del>preferably</del> mandatorily in a virtual environment:
+
+```shell
+$ mkdir sfeir-institute-dbt
+$ python3 -m venv dbt-env
+$ source dbt-env/bin/activate
+$ pip install dbt-core dbt-postgres
+$ dbt --version
+```
+
+MacOS user can easily do it with [brew](https://brew.sh/) :
+
+```shell
 $ brew update
 $ brew install git
 $ brew tap dbt-labs/dbt
 $ brew install dbt-postgres
 ```
-- Otherwise, you can use `pip`
-```shell[]
-$ pip install dbt-postgres
-```
 
 ##==##
-<!-- .slide: class="with-code"-->
-# Installation with docker
 
-*dbt* conveniently provides public Docker images.
+# Other options
+
+## Use a virtual machine
+
+If you can’t run python or install new packages, use a VM with python and install dbt with pip in a virtual environment.
+
+- Light and ephemeral
+- Does not need a lot of resources
+- Your database actually does the work
+
+**… or use dbt cloud**
+
+##==##
+
+<!-- .slide: class="with-code"-->
+
+# Installing dbt
+
+## Installation with docker
+
+_dbt_ conveniently provides public Docker images.
 <br/><br/>
 
-```shell[]
+```shell
 # Replace this code with correct paths and dbt image
 $ docker run \
   --network=host \
@@ -37,9 +59,11 @@ $ docker run \
   <dbt_image_name> \
   run
 ```
+
 <br/>
 
-![sfeir-icons big](help-circle) <span style="vertical-align:top">You should create an alias to run your images and mount volumes easily.</span>
+![sfeir-icons big](alert-circle) <span style="vertical-align:top">You should create an alias to run your images and mount volumes easily.</span>
 
 Notes:
+
 - even better: use a makefile
