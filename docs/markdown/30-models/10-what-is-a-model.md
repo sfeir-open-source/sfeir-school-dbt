@@ -51,7 +51,7 @@ Inside these folders, you should also regroup models together, by domain, type, 
 
 Even within folders, your dbt model file name must remain globally unique !
 
-<!-- .element: class="admonition warning" -->
+<!-- .element: class="admonition important" -->
 
 Notes:
 Example of base models : you have the same customers system in multiple regions, with the sames columns, and you union all of them before using them to create your clean, staging models.

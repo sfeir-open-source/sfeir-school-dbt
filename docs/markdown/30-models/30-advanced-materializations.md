@@ -75,7 +75,7 @@ It will drop the current table and create new one.
 
 Depending on your incremental logic, full refresh may incur data loss, and is costly for large models because it rebuilds everything.
 
-<!-- .element: class="admonition info" -->
+<!-- .element: class="admonition important" -->
 
 ##==##
 
