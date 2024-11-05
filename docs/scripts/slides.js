@@ -116,6 +116,18 @@ function advancedSlides() {
   ];
 }
 
+function testingSlides() {
+  const directory = '80-testing';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-testing.md`,
+    `${directory}/15-choose-testing.md`,
+    `${directory}/16-lab.md`,
+    `${directory}/20-unit.md`,
+    `${directory}/30-automated.md`,
+  ];
+}
+
 function formation() {
   return [
     //
@@ -132,6 +144,7 @@ function formation() {
     ...historicalDataSlides(), //
     ...advancedSlides(), //
     ...packageDependanciesSlides(), //
+    ...testingSlides(), //
     ...outroSlides(), //
 
     ...advancedSlides(), //
