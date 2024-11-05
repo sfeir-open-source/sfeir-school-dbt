@@ -1,2 +1,1 @@
-<!-- .slide: class="transition underline"-->
-# What is _dbt_?
+<!-- .slide: class="transition"-->

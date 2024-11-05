@@ -1,3 +1,5 @@
-<!-- .slide: class="transition underline"-->
-# Project structure 
+<!-- .slide: class="transition"-->
+
+# Project structure
+
 ## and best practices

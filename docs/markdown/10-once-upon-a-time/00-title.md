@@ -1,4 +1,4 @@
-<!-- .slide: class="transition underline"-->
+<!-- .slide: class="transition"-->
 
 # Evolution of Data Stack
 

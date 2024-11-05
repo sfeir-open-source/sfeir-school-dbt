@@ -1,2 +1,3 @@
-<!-- .slide: class="transition underline"-->
+<!-- .slide: class="transition"-->
+
 # _dbt_ models

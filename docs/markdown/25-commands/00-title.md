@@ -1,3 +1,3 @@
-<!-- .slide: class="transition underline"-->
-# dbt CLI commands
+<!-- .slide: class="transition"-->
 
+# dbt CLI commands

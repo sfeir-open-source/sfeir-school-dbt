@@ -1,2 +1,1 @@
-<!-- .slide: class="transition underline"-->
-# Installing _dbt_
+<!-- .slide: class="transition"-->
