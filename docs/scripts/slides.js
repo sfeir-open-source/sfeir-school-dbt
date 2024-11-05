@@ -74,9 +74,10 @@ function sourceAndRefSlides() {
   const directory = '40-source-and-ref';
   return [
     `${directory}/00-title.md`,
-    `${directory}/10-ref.md`,
-    `${directory}/20-source.md`,
-    `${directory}/30-docs.md`,
+    `${directory}/10-source.md`,
+    `${directory}/20-ref.md`,
+    `${directory}/30-filters.md`,
+    `${directory}/40-freshness.md`,
     `${directory}/90-lab.md`,
   ];
 }
@@ -128,8 +129,8 @@ function formation() {
     ...projectSlides(), //
     ...commandsSlides(), //
     ...modelsSlides(), //
-    ...seedsSlides(), //
     ...sourceAndRefSlides(), //
+    ...seedsSlides(), //
     ...jinjaSlides(), //
     ...qualitySlides(), //
     ...outroSlides(), //
