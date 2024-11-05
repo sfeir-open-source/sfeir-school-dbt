@@ -128,6 +128,17 @@ function testingSlides() {
   ];
 }
 
+function contractAndVersionsSlides() {
+  const directory = '90-contracts';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-contracts.md`,
+    `${directory}/20-keys.md`,
+    `${directory}/30-versions.md`,
+    `${directory}/90-lab.md`,
+  ];
+}
+
 function formation() {
   return [
     //
@@ -145,6 +156,7 @@ function formation() {
     ...advancedSlides(), //
     ...packageDependanciesSlides(), //
     ...testingSlides(), //
+    ...contractAndVersionsSlides(), //
     ...outroSlides(), //
 
     ...advancedSlides(), //
