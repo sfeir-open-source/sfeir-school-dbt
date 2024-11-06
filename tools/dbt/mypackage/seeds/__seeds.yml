@@ -1,0 +1,15 @@
+seeds:
+  - name: seed_categories
+    config:
+      alias: categories
+      column_types:
+        category_code: varchar(8)
+        category_name: varchar(32)
+        enabled: boolean
+        date_in: timestamp
+  - name: seed_companies
+    config:
+      alias: companies
+  - name: seed_countries
+    config:
+      alias: countries

@@ -1,2 +1,2 @@
-Faker==18.10.1
-pycountry==22.3.5
+dbt-postgres===1.7.3
+mkdocs==1.5.3

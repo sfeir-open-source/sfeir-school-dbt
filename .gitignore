@@ -73,3 +73,7 @@ docs/test.html
 venv
 
 /dbt_local/
+/dbt/sfeir_institute/
+.user.yml
+/dbt-env/
+logs/
