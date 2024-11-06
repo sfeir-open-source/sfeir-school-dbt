@@ -19,7 +19,7 @@ function introSlides() {
   ];
 }
 function outroSlides() {
-  const directory = '099-outro';
+  const directory = '999-outro';
   return [`${directory}/10-questions.md`, `${directory}/20-the-end.md`];
 }
 
@@ -139,6 +139,17 @@ function contractAndVersionsSlides() {
   ];
 }
 
+function documentationSlides() {
+  const directory = '100-documentation';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-documentation.md`,
+    `${directory}/15-maintain-doc.md`,
+    `${directory}/20-lineage.md`,
+    `${directory}/90-lab.md`,
+  ];
+}
+
 function formation() {
   return [
     //
@@ -157,6 +168,7 @@ function formation() {
     ...packageDependanciesSlides(), //
     ...testingSlides(), //
     ...contractAndVersionsSlides(), //
+    ...documentationSlides(), //
     ...outroSlides(), //
   ].map((slidePath) => {
     return { path: slidePath };
