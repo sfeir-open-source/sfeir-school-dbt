@@ -161,6 +161,19 @@ function analysesExposuresHooksSlides() {
   ];
 }
 
+function artifactsSlides() {
+  const directory = '120-artifacts';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-runtime.md`,
+    `${directory}/20-catalog.md`,
+    `${directory}/30-sources.md`,
+    `${directory}/40-manifest.md`,
+    `${directory}/50-run_result.md`,
+    `${directory}/90-lab.md`,
+  ];
+}
+
 function formation() {
   return [
     //
@@ -181,6 +194,7 @@ function formation() {
     ...contractAndVersionsSlides(), //
     ...documentationSlides(), //
     ...analysesExposuresHooksSlides(), //
+    ...artifactsSlides(), //
     ...outroSlides(), //
   ].map((slidePath) => {
     return { path: slidePath };
