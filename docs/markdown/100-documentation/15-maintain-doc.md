@@ -92,10 +92,10 @@ macros:
       Fallback to a default field value in case all field contains invalid string.
       Note: This macro consider numeric-only values as falsy'
     arguments:
-      - name: \_fields
+      - name: _fields
         type: list
         description: 'The fields to search for an i18n compatible value'
-      - name: \_default_field
+      - name: _default_field
         type: string
         description: 'The field to take the default value from in case of zero match'
 ```
@@ -152,10 +152,10 @@ macros:
   - name: i18n_compatible_name
     description: '{{ doc("macro__i18n_compatible_name") }}'
     arguments:
-      - name: \_fields
+      - name: _fields
         type: list
         description: '{{ doc("macro__i18n_compatible_name___fields") }}'
-      - name: \_default_field
+      - name: _default_field
         type: string
         description: '{{ doc("macro__i18n_compatible_name___default_field") }}'
 ```

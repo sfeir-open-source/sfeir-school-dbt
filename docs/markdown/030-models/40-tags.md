@@ -50,10 +50,7 @@ models:
 
 _models/staging/customers.sql_
 
-```sql
-{{ config(
-    tags=["staging", "dimensions"]
-) }}
+```sql[2]
 {{ config(
     tags=["staging", "dimensions"]
 ) }}

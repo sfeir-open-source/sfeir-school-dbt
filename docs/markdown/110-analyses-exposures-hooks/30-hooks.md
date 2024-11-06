@@ -62,7 +62,7 @@ _models/customers.sql_
     header = true,
     field_delimiter = ';')
 AS (
-  SELECT \*
+  SELECT *
   FROM {{ this }}
 );"
 ) }}

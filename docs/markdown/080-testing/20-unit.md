@@ -54,20 +54,21 @@ _models/unit_tests.yml_
 
 ```yaml
 unit_tests:
-- name: test_is_valid_email
-  description: "Check email validity."
-  model: int_customers
-  given:
-  - input: ref('stg_customers')
-    rows:
-    - {email: sophie@sfeir.com, domain: sfeir.com}
-    - {email: “mar c@sfeir.com”, domain: sfeir.com}
-    - {email: thibault@yahoo.fr, domain: yahoo.fr}
-  - input: ref('stg_domains')
-    rows: - {domain: sfeir.com}
+  - name: test_is_valid_email
+    description: 'Check email validity.'
+    model: int_customers
+    given:
+      - input: ref('stg_customers')
+        rows:
+          - { email: sophie@sfeir.com, domain: sfeir.com }
+          - { email: “mar c@sfeir.com”, domain: sfeir.com }
+          - { email: thibault@yahoo.fr, domain: yahoo.fr }
+      - input: ref('stg_domains')
+        rows:
+          - { domain: sfeir.com }
     expect:
-    rows:
-    - {email: sophie@sfeir.com, is_valid_email_address: true}
-    - {email: “mar c@sfeir.com”, is_valid_email_address: false}
-    - {email: thibault@yahoo.fr, is_valid_email_address: false}
+      rows:
+        - { email: sophie@sfeir.com, is_valid_email_address: true }
+        - { email: “mar c@sfeir.com”, is_valid_email_address: false }
+        - { email: thibault@yahoo.fr, is_valid_email_address: false }
 ```

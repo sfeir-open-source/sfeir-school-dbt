@@ -42,9 +42,9 @@ Tests are declared in models configuration files, at the column or model level.
 
 **models/\_\_models.yml**
 
-```yaml
+```yaml[5-6,8-13]
 models:
-  - name: int\_\_sales
+  - name: int__sales
     columns:
       - name: order_id
         data_tests:
@@ -77,7 +77,7 @@ $ dbt build
 $ dbt test --select tag:fail_on_error
 
 # Will only run tests with tag "fail_on_error" AND the model `int__sales`
-$ dbt test --select tag:fail_on_error,int\_\_sales
+$ dbt test --select tag:fail_on_error,int__sales
 ```
 
 ##==##
@@ -123,13 +123,15 @@ Like any other generic tests, simply use your custom generic test name:
 
 _models/\_\_models.yml_
 
-```yaml
+```yaml[5,7-8]
 models:
-- name: int\_\_sales
+- name: int__sales
   columns:
   - name: order_id
-    data_tests: - unique - valid_id
-    name: "VALID_ORDER_ID"
+    data_tests:
+      - unique
+      - valid_id
+        name: "VALID_ORDER_ID"
 ```
 
 ##==##
@@ -138,7 +140,7 @@ models:
 
 A singular test is a custom SQL query that returns failing rows.
 
-dbt runs a `count(\*)` on the defined query:
+dbt runs a `count(*)` on the defined query:
 
 - If there is at least 1 result, the test fails
 - If there is 0 result, the test pass
@@ -203,7 +205,7 @@ _models/\_\_models.yml_
 
 ```yaml
 models:
-  - name: int\_\_sales
+  - name: int__sales
     columns:
       - name: order_id
         data_tests:

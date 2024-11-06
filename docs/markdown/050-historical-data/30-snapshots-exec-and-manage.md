@@ -40,7 +40,8 @@ $ dbt snapshot -s orders_snapshot
 You can use snapshot ids in the **ref()** macro.
 
 ```sql
-SELECT \*
+SELECT
+  *
 FROM {{ ref(‘orders_snapshot’) }}
 WHERE
   dbt_valid_to IS NULL

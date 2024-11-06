@@ -135,12 +135,12 @@ full_refresh can be disabled on seeds to prevent DROP CASCADE in specific adapte
 seeds:
   - name: seed_companies
     config:
-    enabled: false
-    alias: companies
+      enabled: false
+      alias: companies
   - name: seed_countries
     config:
-    schema: seed_data
-    alias: countries
+      schema: seed_data
+      alias: countries
 ```
 
 <br>

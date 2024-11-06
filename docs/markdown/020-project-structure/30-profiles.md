@@ -88,8 +88,6 @@ Default profile name must be set in `dbt_project.yml` file.
 `dbt_project.yml`
 
 ```yaml
-
----
 name: 'sfeir_institute_dbt'
 profile: 'local' # dbt will look for this profile if not overridden in command args
 ```

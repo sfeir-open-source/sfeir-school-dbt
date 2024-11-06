@@ -17,16 +17,16 @@ _snapshots/institute.sql_
 ```sql
 {% snapshot institute_snapshot %}
 {{
-config(
-target_schema='snapshots',
-unique_key='id',
+  config(
+    target_schema='snapshots',
+    unique_key='id',
 
-        strategy='timestamp',
-        updated_at='__timestamp'
-    )
+    strategy='timestamp',
+    updated_at='__timestamp'
+  )
 
 }}
-SELECT \* FROM {{ source(‘sfeir’, ‘institute’) }}
+SELECT * FROM {{ source(‘sfeir’, ‘institute’) }}
 {% endsnapshot %}
 ```
 
@@ -86,7 +86,7 @@ _snapshots/institute.sql_
       check_cols=[‘name’, ‘status’]
     )
 }}
-SELECT \* FROM {{ source(‘sfeir’, ‘institute’) }}
+SELECT * FROM {{ source(‘sfeir’, ‘institute’) }}
 {% endsnapshot %}
 ```
 

@@ -33,8 +33,6 @@ Sources are already in your data lake or in data products of your organization, 
 `/staging/__sources.yaml`
 
 ```yaml
-version: 2
-
 sources:
   - name: 'SAP'
     project: "ssd-{{ env_var('ENV', 'dev') }}"
@@ -104,8 +102,7 @@ Use the `identifier` property to rename your source table in something more expl
 
 `/staging/__sources.yaml`
 
-```yaml[9]
-...
+```yaml[8]
 sources:
   - name: "SAP"
     project: "ssd-{{ env_var('ENV', 'dev') }}"
@@ -116,7 +113,6 @@ sources:
         identifier: "MCMPY"
         columns:
           - name: "URZEJ"
-...
 ```
 
 Notes:

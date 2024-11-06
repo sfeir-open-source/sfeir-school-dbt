@@ -198,7 +198,7 @@ But it's possible to change this default behavior: <br/>
 ```yaml
 name: sfeir_institute
 config-version: 2
----
+. . .
 models:
   sfeir_institute: # Must match the `name` configuration
     +materialized: view # Default configuration for all models

@@ -52,21 +52,21 @@
 
 ```yaml
 include:
-- project: data/common/ci-template
-  ref: latest
-  file:
-  - stages/dbt-test.yml
-  - stages/dbt-seed.yml
-  - stages/deploy-dbt-image.yml
-  - stages/deploy-dbt-docs.yml
+  - project: data/common/ci-template
+    ref: latest
+    file:
+      - stages/dbt-test.yml
+      - stages/dbt-seed.yml
+      - stages/deploy-dbt-image.yml
+      - stages/deploy-dbt-docs.yml
 
 dbt_unit_test_jobs:
   script:
-    - !reference [".dbt", "script"]
+    - !reference ['.dbt', 'script']
     - |
-    if [ -n "$DBT_VARS_TEST" ]; then
-      dbt_vars=" --vars '$(echo ''$DBT_VARS_TEST'')'"
-    fi
+      if [ -n "$DBT_VARS_TEST" ]; then
+        dbt_vars=" --vars '$(echo ''$DBT_VARS_TEST'')'"
+      fi
     - eval "dbt test ${dbt_params}${dbt_vars} --select test_type:unit"
 ```
 

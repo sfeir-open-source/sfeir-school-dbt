@@ -104,7 +104,7 @@ To use a variable anywhere in your models or macros, use the {{ var(‘...’) }
 
 _models/dimensions/countries.sql_
 
-```sql
+```sql[3]
 SELECT countryCode, countryName
   FROM {{ ref('countries') }}
   WHERE country_area = "{{ var('countries-europe', ‘XXX’) }}"
@@ -114,7 +114,7 @@ You can also use environment variables with use the {{ env_var(‘...’) }} jin
 
 _models/dimensions/countries_env.sql_
 
-```sql
+```sql[3]
 SELECT countryCode, countryName
   FROM {{ ref('countries') }}
   WHERE country_area = "{{ env_var('countries-europe', ‘XXX’) }}"
@@ -145,7 +145,7 @@ vars:
 
 _models/dimensions/countries2.sql_
 
-```sql
+```sql[3]
 SELECT countryCode, countryName
   FROM {{ ref('countries') }}
   WHERE country_area = "{{ var('countries')['europe'] }}"

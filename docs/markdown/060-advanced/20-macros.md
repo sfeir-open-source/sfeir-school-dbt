@@ -34,11 +34,11 @@ _/macros/formulas/turnover.sql_
 
 ```sql
 {% macro turnover() %}
-  (base_price \* quantity - rebate)
+  (base_price * quantity - rebate)
 {% endmacro %}
 
 {% macro raw_turnover() %}
-  (base_price \* quantity)
+  (base_price * quantity)
 {% endmacro %}
 ```
 
@@ -81,10 +81,10 @@ _/macros/formulas/turnover.sql_
 ```sql
 {% macro turnover(_include_rebate) %}
   (
-  base_price \* quantity
-  {% if _include_rebate %}
-  - rebate
-  {% endif %}
+    base_price * quantity
+    {% if _include_rebate %}
+    - rebate
+    {% endif %}
   )
 {% endmacro %}
 ```
@@ -112,10 +112,11 @@ Documenting macros is done using a YAML file:
 ```yaml
 macros:
   - name: i18n_compatible_name
-    description: "Compute a international-compatible name from a list of fields."
+    description: 'Compute a international-compatible name from a list of fields.'
   - name: turnover
     description: Compute turnover for each line in sales
-    arguments: - name: \_include_rebate
-      type: bool
-      description: Include rebate amount in the computation or not
+    arguments:
+      - name: _include_rebate
+        type: bool
+        description: Include rebate amount in the computation or not
 ```
