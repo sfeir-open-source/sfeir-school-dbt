@@ -150,6 +150,17 @@ function documentationSlides() {
   ];
 }
 
+function analysesExposuresHooksSlides() {
+  const directory = '110-analyses-exposures-hooks';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-analyses.md`,
+    `${directory}/20-exposures.md`,
+    `${directory}/30-hooks.md`,
+    `${directory}/90-lab.md`,
+  ];
+}
+
 function formation() {
   return [
     //
@@ -169,6 +180,7 @@ function formation() {
     ...testingSlides(), //
     ...contractAndVersionsSlides(), //
     ...documentationSlides(), //
+    ...analysesExposuresHooksSlides(), //
     ...outroSlides(), //
   ].map((slidePath) => {
     return { path: slidePath };
