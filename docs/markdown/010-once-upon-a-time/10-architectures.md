@@ -1,5 +1,3 @@
-<!-- .slide: -->
-
 # Data Platforms evolution
 
 ![full-center](./assets/images/docs/markdown/10-once-upon-a-time/data-architectures.svg)
