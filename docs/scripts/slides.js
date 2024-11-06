@@ -6,7 +6,7 @@ function schoolSlides() {
 }
 
 function introSlides() {
-  const directory = '00-intro';
+  const directory = '000-intro';
   return [
     `${directory}/00-title.md`,
     `${directory}/01-logistic.md`,
@@ -19,27 +19,27 @@ function introSlides() {
   ];
 }
 function outroSlides() {
-  const directory = '99-outro';
+  const directory = '099-outro';
   return [`${directory}/10-questions.md`, `${directory}/20-the-end.md`];
 }
 
 function onceUponATimeSlides() {
-  const directory = '10-once-upon-a-time';
+  const directory = '010-once-upon-a-time';
   return [`${directory}/00-title.md`, `${directory}/10-architectures.md`];
 }
 
 function dbtSlides() {
-  const directory = '12-dbt';
+  const directory = '012-dbt';
   return [`${directory}/00-title.md`, `${directory}/10-dbt.md`];
 }
 
 function installationSlides() {
-  const directory = '15-installation';
+  const directory = '015-installation';
   return [`${directory}/00-title.md`, `${directory}/10-installation.md`, `${directory}/20-adapters.md`];
 }
 
 function projectSlides() {
-  const directory = '20-project-structure';
+  const directory = '020-project-structure';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-structure.md`,
@@ -49,12 +49,12 @@ function projectSlides() {
 }
 
 function commandsSlides() {
-  const directory = '25-commands';
+  const directory = '025-commands';
   return [`${directory}/00-title.md`, `${directory}/10-dbt-commands.md`, `${directory}/90-lab.md`];
 }
 
 function modelsSlides() {
-  const directory = '30-models';
+  const directory = '030-models';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-what-is-a-model.md`,
@@ -66,12 +66,12 @@ function modelsSlides() {
 }
 
 function seedsSlides() {
-  const directory = '45-seeds';
+  const directory = '045-seeds';
   return [`${directory}/00-title.md`, `${directory}/10-seeds.md`, `${directory}/90-lab.md`];
 }
 
 function sourceAndRefSlides() {
-  const directory = '40-source-and-ref';
+  const directory = '040-source-and-ref';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-source.md`,
@@ -83,7 +83,7 @@ function sourceAndRefSlides() {
 }
 
 function historicalDataSlides() {
-  const directory = '50-historical-data';
+  const directory = '050-historical-data';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-snapshots.md`,
@@ -94,7 +94,7 @@ function historicalDataSlides() {
 }
 
 function packageDependanciesSlides() {
-  const directory = '70-package-dependancies';
+  const directory = '070-package-dependancies';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-packages.md`,
@@ -106,7 +106,7 @@ function packageDependanciesSlides() {
 }
 
 function advancedSlides() {
-  const directory = '60-advanced';
+  const directory = '060-advanced';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-jinja.md`,
@@ -117,7 +117,7 @@ function advancedSlides() {
 }
 
 function testingSlides() {
-  const directory = '80-testing';
+  const directory = '080-testing';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-testing.md`,
@@ -129,7 +129,7 @@ function testingSlides() {
 }
 
 function contractAndVersionsSlides() {
-  const directory = '90-contracts';
+  const directory = '090-contracts';
   return [
     `${directory}/00-title.md`,
     `${directory}/10-contracts.md`,
@@ -158,8 +158,6 @@ function formation() {
     ...testingSlides(), //
     ...contractAndVersionsSlides(), //
     ...outroSlides(), //
-
-    ...advancedSlides(), //
   ].map((slidePath) => {
     return { path: slidePath };
   });
