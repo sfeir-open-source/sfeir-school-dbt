@@ -12,11 +12,11 @@
 
 ## incremental
 
-![sfeir-icons big](plus-circle) <span style="vertical-align:top">Allows you to track changes to source data and update only relevant records.</span>
+![sfeir-icons big](plus-circle) Allows you to track changes to source data and update only relevant records.
 
-![sfeir-icons big](cpu) <span style="vertical-align:top">Incremental materialization are efficient when working with large datasets, as they avoid recomputing the entire transformation.</span>
+![sfeir-icons big](cpu) Incremental materialization are efficient when working with large datasets, as they avoid recomputing the entire transformation.
 
-![sfeir-icons big](watch) <span style="vertical-align:top">They are commonly used for data pipelines that require frequent updates or near real-time data availability.</span>
+![sfeir-icons big](watch) They are commonly used for data pipelines that require frequent updates or near real-time data availability.
 
 ##--##
 
@@ -26,11 +26,11 @@
 
 ## materialized views
 
-![sfeir-icons big](clock) <span style="vertical-align:top">Incremental logic but managed by the database rather than inside dbt. Support starting in dbt 1.6, availability and features depends on the adapter</span>
+![sfeir-icons big](clock) Incremental logic but managed by the database rather than inside dbt. Support starting in dbt 1.6, availability and features depends on the adapter
 
-![sfeir-icons big](git-commit) <span style="vertical-align:top">Combine query performance and the data freshness in a single object.</span>
+![sfeir-icons big](git-commit) Combine query performance and the data freshness in a single object.
 
-![sfeir-icons big](refresh-cw) <span style="vertical-align:top">Materialized views may or may not be the good choice for your models, depending on the latency and how often you need to update your data</span>
+![sfeir-icons big](refresh-cw) Materialized views may or may not be the good choice for your models, depending on the latency and how often you need to update your data
 
 Notes:
 Mviews do not support all features depending on the platform : joins, aggregations, window functions, etc.

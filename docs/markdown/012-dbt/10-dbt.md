@@ -12,15 +12,15 @@
 
 <br/>
 
-![sfeir-icons big](edit) <span style="vertical-align:top">Transformation are expressed with SQL `SELECT` statement only</span>
+![sfeir-icons big](edit) Transformation are expressed with SQL `SELECT` statement only
 
-![sfeir-icons big](refresh-ccw) <span style="vertical-align:top">Reference between models are automatically build</span>
+![sfeir-icons big](refresh-ccw) Reference between models are automatically build
 
-![sfeir-icons big](target) <span style="vertical-align:top">Tests ensure model accuracy</span>
+![sfeir-icons big](target) Tests ensure model accuracy
 
-![sfeir-icons big](book) <span style="vertical-align:top">Documentation is accessible and easily updated</span>
+![sfeir-icons big](book) Documentation is accessible and easily updated
 
-![sfeir-icons big](terminal) <span style="vertical-align:top">KISS: use macros to write reusable SQL</span>
+![sfeir-icons big](terminal) KISS: use macros to write reusable SQL
 
 ##==##
 

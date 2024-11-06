@@ -55,11 +55,11 @@ Data Mesh
 
 # <u>E</u>xtract <u>T</u>ransform <u>L</u>oad
 
-![sfeir-icons big](git-merge) <span style="vertical-align:top">data is **extracted** from various sources</span>
+![sfeir-icons big](git-merge) data is **extracted** from various sources
 
-![sfeir-icons big](tool) <span style="vertical-align:top">**transformed** into a suitable form</span>
+![sfeir-icons big](tool) **transformed** into a suitable form
 
-![sfeir-icons big](upload) <span style="vertical-align:top">and then **loaded** into a target system for analysis.</span>
+![sfeir-icons big](upload) and then **loaded** into a target system for analysis.
 
 ##--##
 
@@ -67,8 +67,8 @@ Data Mesh
 
 # <u>E</u>xtract <u>L</u>oad <u>T</u>ransform
 
-![sfeir-icons big](git-merge) <span style="vertical-align:top">data is **extracted** from various sources</span>
+![sfeir-icons big](git-merge) data is **extracted** from various sources
 
-![sfeir-icons big](upload) <span style="vertical-align:top">**loaded** into a target system without immediate transformation</span>
+![sfeir-icons big](upload) **loaded** into a target system without immediate transformation
 
-![sfeir-icons big](tool) <span style="vertical-align:top">**transformation** occurs when needed, to expose data products and use cases</span>
+![sfeir-icons big](tool) **transformation** occurs when needed, to expose data products and use cases

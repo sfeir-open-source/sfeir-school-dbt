@@ -62,7 +62,7 @@ $ docker run \
 
 <br/>
 
-![sfeir-icons big](alert-circle) <span style="vertical-align:top">You should create an alias to run your images and mount volumes easily.</span>
+![sfeir-icons big](alert-circle) You should create an alias to run your images and mount volumes easily.
 
 Notes:
 
