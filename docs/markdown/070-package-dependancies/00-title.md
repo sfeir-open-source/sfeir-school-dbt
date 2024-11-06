@@ -1,5 +1,5 @@
 <!-- .slide: class="transition" -->
 
-# Testing
+# Packages and dependencies
 
-## Module 9
+## Module 8
