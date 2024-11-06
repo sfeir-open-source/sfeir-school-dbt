@@ -85,6 +85,8 @@ Depending on your incremental logic, full refresh may incur data loss, and is co
 
 ## models/sales-append.sql
 
+<!-- {% raw %} -->
+
 ```sql
 {{
     config(
@@ -105,6 +107,8 @@ WHERE **timestamp > (SELECT MAX(**timestamp) FROM {{ this }})
 {% endif %}
 ```
 
+<!-- {% endraw %} -->
+
 ##==##
 
 <!-- .slide: class="with-code max-height"-->
@@ -112,6 +116,8 @@ WHERE **timestamp > (SELECT MAX(**timestamp) FROM {{ this }})
 # Incremental model example
 
 ## models/sales-unique.sql
+
+<!-- {% raw %} -->
 
 ```sql
 {{
@@ -133,3 +139,5 @@ FROM "erp"."sales"
 WHERE **timestamp > (SELECT MAX(**timestamp) FROM {{ this }})
 {% endif %}
 ```
+
+<!-- {% endraw %} -->

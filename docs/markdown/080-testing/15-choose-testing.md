@@ -99,6 +99,8 @@ They require 2 arguments:
 
 _tests/generic/validator/id.sql_
 
+<!-- {% raw %} -->
+
 ```sql
 {% test valid_id(model, column_name) %}
   SELECT
@@ -107,6 +109,8 @@ _tests/generic/validator/id.sql_
   WHERE {{ column_name }} !~ '^\d{10}$'
 {% endtest %}
 ```
+
+<!-- {% endraw %} -->
 
 Notes:
 If the test return at least 1 row, then it means it failed

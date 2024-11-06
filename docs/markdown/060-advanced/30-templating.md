@@ -14,6 +14,8 @@ Conditional statements allow you to execute different code blocks based on certa
 
 In dbt, you can use code if / else / endif blocks to define conditional statements.
 
+<!-- {% raw %} -->
+
 ```sql
 {% if var('new_customers_only') %} -- SQL code to execute when 'new*customers_only' is true
   SELECT *
@@ -25,6 +27,8 @@ In dbt, you can use code if / else / endif blocks to define conditional statemen
 {% endif %}
 ```
 
+<!-- {% raw %} -->
+
 ##==##
 
 <!-- .slide: class="with-code"-->
@@ -32,6 +36,8 @@ In dbt, you can use code if / else / endif blocks to define conditional statemen
 # Conditional statements
 
 Use conditional blocks anywhere in your SQL code to implement logic based on variables.
+
+<!-- {% raw %} -->
 
 ```sql[|4-9|12-14]
 SELECT
@@ -50,6 +56,8 @@ LIMIT {{ var("pagesize") }}
 {%- endif %}
 ```
 
+<!-- {% endraw %} -->
+
 ##==##
 
 <!-- .slide: class="with-code"-->
@@ -57,6 +65,8 @@ LIMIT {{ var("pagesize") }}
 # Control flow
 
 You can use loops to iterate over lists or perform repetitive tasks.
+
+<!-- {% raw %} -->
 
 ```sql[|4-6]
 SELECT
@@ -68,6 +78,8 @@ SELECT
   customer_company
 FROM {{ ref("seed_customers") }}
 ```
+
+<!-- {% endraw %} -->
 
 ##==##
 

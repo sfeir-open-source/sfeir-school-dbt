@@ -32,6 +32,8 @@ If you have to repeat code logic or formulas more than once: use a macro.
 
 _/macros/formulas/turnover.sql_
 
+<!-- {% raw %} -->
+
 ```sql
 {% macro turnover() %}
   (base_price * quantity - rebate)
@@ -41,6 +43,8 @@ _/macros/formulas/turnover.sql_
   (base_price * quantity)
 {% endmacro %}
 ```
+
+<!-- {% endraw %} -->
 
 Notes:
 Even if they are defined in SQL file, macro can also not produce any SQL output
@@ -78,6 +82,8 @@ You can create more complex logic in a single macro using arguments.
 
 _/macros/formulas/turnover.sql_
 
+<!-- {% raw %} -->
+
 ```sql
 {% macro turnover(_include_rebate) %}
   (
@@ -88,6 +94,8 @@ _/macros/formulas/turnover.sql_
   )
 {% endmacro %}
 ```
+
+<!-- {% endraw %} -->
 
 _models/sales.sql_
 

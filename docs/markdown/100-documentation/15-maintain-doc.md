@@ -122,6 +122,8 @@ Then, simply use the `doc()` macro in your property files.
 
 macros/\_doc.md
 
+<!-- {% raw %} -->
+
 ```django
 {% docs macro__i18n_compatible_name %}
 Compute a international-compatible name from a list of fields.
@@ -138,6 +140,8 @@ The fields to search for an i18n compatible value
 The field to take the default value from in case of zero match
 {% enddocs %}
 ```
+
+<!-- {% endraw %} -->
 
 ##==##
 
