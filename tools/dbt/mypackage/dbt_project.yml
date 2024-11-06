@@ -1,0 +1,4 @@
+name: 'mypackage'
+version: '1.0.0'
+macro-paths: ["macros"]
+seed-paths: ["seeds"]

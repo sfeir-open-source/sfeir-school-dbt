@@ -1,0 +1,8 @@
+/.terraform.lock.hcl
+/terraform.tfstate.backup
+/terraform.tfstate
+/.idea/
+/.terraform/
+
+/auth/auth.json
+/tfvars/hmax.tfvars

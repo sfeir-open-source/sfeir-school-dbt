@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sfeir-open-source/sfeir-school-template.git"
+    "url": "git+https://github.com/sfeir-open-source/sfeir-school-dbt.git"
   },
   "keywords": [
     "dbt",
@@ -21,11 +21,11 @@
   "author": "h-max",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sfeir-open-source/sfeir-school-template/issues"
+    "url": "https://github.com/sfeir-open-source/sfeir-school-dbt/issues"
   },
-  "homepage": "https://github.com/sfeir-open-source/sfeir-school-template",
+  "homepage": "https://github.com/sfeir-open-source/sfeir-school-dbt",
   "dependencies": {
-    "sfeir-school-theme": "^3.0.0"
+    "sfeir-school-theme": "^3.2.0-rc"
   },
   "devDependencies": {
     "chokidar-cli": "^3.0.0",

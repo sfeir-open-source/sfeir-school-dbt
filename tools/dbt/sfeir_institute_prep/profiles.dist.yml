@@ -1,0 +1,14 @@
+sfeir_institute:
+  target: dev
+
+  outputs:
+
+    dev:
+      type: postgres
+      threads: 8
+      host: [IP HERE]
+      port: 5432
+      user: [USER]
+      pass: [PASSWORD]
+      dbname: [DB]
+      schema: [SCHEMA]
