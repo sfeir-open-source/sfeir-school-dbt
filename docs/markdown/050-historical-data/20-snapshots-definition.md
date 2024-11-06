@@ -14,6 +14,8 @@ Detect data changes with update_at field, that map a timestamp column
 
 _snapshots/institute.sql_
 
+{% raw %}
+
 ```sql
 {% snapshot institute_snapshot %}
 {{
@@ -29,6 +31,8 @@ _snapshots/institute.sql_
 SELECT * FROM {{ source(‘sfeir’, ‘institute’) }}
 {% endsnapshot %}
 ```
+
+{% endraw %}
 
 ##==##
 
@@ -75,6 +79,8 @@ Detect data changes with the check_cols field, that list columns required to ide
 
 _snapshots/institute.sql_
 
+{% raw %}
+
 ```sql[|3-9]
 {% snapshot institute_snapshot %}
 {{
@@ -89,6 +95,8 @@ _snapshots/institute.sql_
 SELECT * FROM {{ source(‘sfeir’, ‘institute’) }}
 {% endsnapshot %}
 ```
+
+{% endraw %}
 
 Notes:
 The SQL request must include the check_cols and unique key if any
