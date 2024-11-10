@@ -15,6 +15,7 @@ function introSlides() {
     `${directory}/12-agenda-day2.md`,
     `${directory}/21-speaker-aal.md`,
     `${directory}/22-speaker-hmd.md`,
+    `${directory}/23-speaker-jmo.md`,
     `${directory}/30-who-are-you.md`,
   ];
 }
