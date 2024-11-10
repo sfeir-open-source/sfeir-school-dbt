@@ -13,7 +13,7 @@ function introSlides() {
     `${directory}/10-intro.md`,
     `${directory}/11-agenda-day1-institute.md`,
     `${directory}/12-agenda-day2-institute.md`,
-    `${directory}/12-agenda-school.md`,
+    `${directory}/13-agenda-school.md`,
     `${directory}/21-speaker-aal.md`,
     `${directory}/22-speaker-hmd.md`,
     `${directory}/23-speaker-jmo.md`,
