@@ -8,7 +8,7 @@
 
 <!-- .slide -->
 
-# Tagging your ressources
+# Tagging your resources
 
 _dbt_ includes the option to tag your models to regroup/filter them.
 

@@ -40,7 +40,7 @@
 
 ## ephemeral
 
-![sfeir-icons big](plus-circle) Creates temporary tables in the data warehouse for the duration of a single dbt run or query.
+![sfeir-icons big](plus-circle) Creates a CTE that is replaced in the models querying this table.
 
 ![sfeir-icons big](cpu) Used for intermediate calculations or as intermediate areas in complex data transformations.
 
