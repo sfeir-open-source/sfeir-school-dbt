@@ -4,7 +4,9 @@
 
 ## Execute custom code before and after dbt runs
 
+
 ##==##
+
 
 # Executing custom code
 
@@ -28,9 +30,11 @@ Common usages are:
 Notes:
 In recent dbt version, grant operations should leverage the “grant” properties of models and not hooks anymore, unless for specific cases.
 
+
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Executing custom code
 
@@ -44,7 +48,9 @@ Some adapters run dbt queries inside SQL transactions: use helper macros (`befor
 
 <!-- .element: class="admonition warning" -->
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 
@@ -71,7 +77,9 @@ SELECT customer_id, customer_firstname, customer_lastname
 FROM {{ ref('stg_customers') }}
 ```
 
+
 ##==##
+
 
 # Before-run and after-run
 

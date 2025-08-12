@@ -4,7 +4,9 @@
 
 ## Understanding dbt models
 
+
 ##==##
+
 
 <!-- .slide -->
 
@@ -28,9 +30,11 @@ Notes:
 
 It is actually a way to run PySpark code via dbt and requires additional setup.
 
+
 ##==##
 
-<!-- .slide:-->
+
+
 
 # How to organize models ?
 
@@ -58,9 +62,11 @@ Example of base models : you have the same customers system in multiple regions,
 
 Example 2 of base models : you have your customers and deleted customers in 2 differents sources and want to join them as one : create 2 base models and join them in the staging area.
 
+
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Use folder to run part of your project
 
@@ -80,7 +86,9 @@ $ dbt run --select "models/staging/customers"
 $ dbt run --select "staging.customers"
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="transition"-->
 
@@ -88,7 +96,9 @@ $ dbt run --select "staging.customers"
 
 ## How do _dbt_ models work?
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -126,9 +136,11 @@ Notes:
 
 - No ";" at the end of the model, or it will generate an error
 
+
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Sample model with CTEs
 
@@ -165,7 +177,9 @@ CREATE VIEW sfeir_institute.customers AS (
 Notes:
 CTE = Common Table Expression
 
+
 ##==##
+
 
 <!-- .slide -->
 
@@ -189,7 +203,9 @@ But it's possible to change this default behavior: <br/>
 </div>
 <!-- .element: class="fragment" -->
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -206,7 +222,9 @@ models:
       +materialized: table # applies to all models in the `staging` directory
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -231,7 +249,9 @@ models:
 Notes:
 Beware of what goes in config and what does not
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -256,7 +276,9 @@ FROM
 Notes:
 You can only change config settings here, not declare columns, contracts, etc.
 
+
 ##==##
+
 
 # Models property file
 
@@ -274,7 +296,9 @@ Models configuration is an important part of using dbt:
 
 A complete dbt project includes **both** SQL files and definition files.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 

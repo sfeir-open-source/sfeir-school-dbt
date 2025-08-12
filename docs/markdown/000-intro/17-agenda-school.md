@@ -1,4 +1,6 @@
-<!-- .slide: class="two-column" -->
+<!-- .slide: class="tc-multiple-columns" -->
+
+##++##
 
 # Agenda
 
@@ -10,7 +12,6 @@
 - dbt sources and references
 - Advanced data transformation and control
 - Dependencies
-
-##--##
-
-<!-- .slide: data-background="./assets/images/docs/markdown/00-intro/agenda-marissa-grootes-Fj1aWk4LcNg-unsplash.jpg" class="mask" -->
+##++##
+##++## data-background="./assets/images/docs/markdown/00-intro/agenda-marissa-grootes-Fj1aWk4LcNg-unsplash.jpg" class="mask"
+##++##

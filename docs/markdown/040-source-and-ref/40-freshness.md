@@ -4,7 +4,9 @@
 
 ## Checking source freshness
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 
@@ -32,7 +34,9 @@ sources:
           error_after: { count: 30, period: day }
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

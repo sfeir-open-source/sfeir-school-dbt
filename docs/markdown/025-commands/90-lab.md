@@ -13,7 +13,9 @@ Download the slides as PDF here: https://storage.googleapis.com/hm-sfeir-institu
 | dbname        | `dbt_XXX(replace XXX with you seat number)` |
 | schema        | `dbt`                                       |
 
+
 ##==##
+
 
 <!-- .slide: class="exercice" -->
 

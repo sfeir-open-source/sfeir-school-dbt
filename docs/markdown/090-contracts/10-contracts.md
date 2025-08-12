@@ -4,7 +4,9 @@
 
 ## Enforcing data type on models
 
+
 ##==##
+
 
 # Enforcing data type on models
 
@@ -18,7 +20,9 @@ On the opposite of tests, contracts are checked **before the model is built**, a
 
 Contracts change the way `CREATE TABLE` or `CREATE VIEW` statement are built, and enforce types and constraints this way.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -50,7 +54,9 @@ SELECT 1 AS id, "Sophie" AS name
 SELECT "1" AS id, "Sophie" AS name
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 

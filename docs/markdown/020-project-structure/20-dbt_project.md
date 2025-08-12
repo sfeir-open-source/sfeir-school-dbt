@@ -18,7 +18,9 @@ Notes:
 - version is not required anymore
 - use explicit names for project
 
+
 ##==##
+
 
 # Directories
 
@@ -39,17 +41,21 @@ Notes:
 
 - Use subdirectories to organize models, macros, seeds, etc.
 
+
 ##==##
+
 
 # Global configuration
 
 _dbt_ configuration directives accumulate hierarchically like this:
 
-![center hm-200](./assets/images/docs/markdown/20-project-structure/dbt_configuration_directives.svg)
+![](./assets/images/docs/markdown/20-project-structure/dbt_configuration_directives.svg 'center hm-200')
 
 `dbt_project.yml` is used to set project-wide default values, and variables used later in the models and macros.
 
+
 ##==##
+
 
 <!-- .slide: class="center with-code"-->
 
@@ -73,7 +79,9 @@ Notes:
 - Important clarification to avoid errors when reading dbt yaml files
   YAML has some limitations, even if it has a lot of advantages : we will see them as we built the project
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -95,7 +103,9 @@ models:
         columns: true # Add "description" to fields in models
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -119,7 +129,9 @@ seeds:
         country_name: varchar(32)
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

@@ -25,7 +25,9 @@ $ brew tap dbt-labs/dbt
 $ brew install dbt-postgres
 ```
 
+
 ##==##
+
 
 # Other options
 
@@ -39,7 +41,9 @@ If you can’t run python or install new packages, use a VM with python and inst
 
 **… or use dbt cloud**
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -62,7 +66,7 @@ $ docker run \
 
 <br/>
 
-![sfeir-icons big](alert-circle) You should create an alias to run your images and mount volumes easily.
+![](alert-circle 'tc-icons feather tc-big') You should create an alias to run your images and mount volumes easily.
 
 Notes:
 

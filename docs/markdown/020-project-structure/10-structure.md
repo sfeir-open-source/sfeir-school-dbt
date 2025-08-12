@@ -1,34 +1,37 @@
-<!-- .slide: class="two-column" -->
+<!-- .slide: class="tc-multiple-columns" -->
+
+##++##
 
 # Constraints
 
-![sfeir-icons big](alert-triangle) **dbt** is mono-adapter
+![](alert-triangle 'tc-icons feather tc-big') **dbt** is mono-adapter
 
-![sfeir-icons big](alert-triangle) **dbt** is SQL-only (or almost)
+![](alert-triangle 'tc-icons feather tc-big') **dbt** is SQL-only (or almost)
 
-![sfeir-icons big](alert-triangle) Model and seed names are unique
+![](alert-triangle 'tc-icons feather tc-big') Model and seed names are unique
 
-![sfeir-icons big](alert-triangle) **dbt** will destroy and recreate models at each run
-
-##--##
-
-<!-- .slide: data-background="var(--black)"-->
+![](alert-triangle 'tc-icons feather tc-big') **dbt** will destroy and recreate models at each run
+##++##
+##++## data-background="var(--black)" class="contrast-opposite"
 
 # Best Practices
 
-![sfeir-icons big](thumbs-up) Organize your files in folders
+![](thumbs-up 'tc-icons feather tc-big') Organize your files in folders
 
-![sfeir-icons big](thumbs-up) Use tags
+![](thumbs-up 'tc-icons feather tc-big') Use tags
 
-![sfeir-icons big](thumbs-up) Use prefix in file names
+![](thumbs-up 'tc-icons feather tc-big') Use prefix in file names
 
-![sfeir-icons big](thumbs-up) **D**on't **R**epeat **Y**ourself
+![](thumbs-up 'tc-icons feather tc-big') **D**on't **R**epeat **Y**ourself
 
-![sfeir-icons big](thumbs-up) Implement tests !
+![](thumbs-up 'tc-icons feather tc-big') Implement tests !
+##++##
 
 ##==##
 
-<!-- .slide: class="two-column" -->
+<!-- .slide: class="tc-multiple-columns" -->
+
+##++##
 
 # Project structure
 
@@ -44,16 +47,8 @@ By default, _dbt_ looks for _**models**, **macros**, **seeds**, **tests**_, etc.
 
 <br/>
 Next step: update the profile with adapter settings and credentials.
-
-Notes:
-
-- You can filter using paths in dbt commands + it's easier to read for future contributors
-- Use macros, it's powerful !
-- destroy / create unless incremental materialization
-
-##--##
-
-<!-- .slide: data-background="var(--black)" class="with-code"-->
+##++##
+##++## data-background="var(--black)" class="with-code"
 
 # &nbsp;
 
@@ -83,9 +78,15 @@ sfeir_institute_dbt
 <!-- .element: class="center" -->
 <br/>
 
-notes:
+##++##
+
+Notes:
 
 - make sure your don't push your profile on the repo...
 - ...unless you use environment variables with `env_var()` jinja macro
 
 Remember the –profiles-dir option when initializing the project.
+
+- You can filter using paths in dbt commands + it's easier to read for future contributors
+- Use macros, it's powerful !
+- destroy / create unless incremental materialization

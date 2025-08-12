@@ -4,7 +4,9 @@
 
 ## Introduction to seeds in dbt
 
+
 ##==##
+
 
 # What are _seeds_ in _dbt_?
 
@@ -21,7 +23,9 @@ Seeds are not considered as sources in the scope of dbt. You use them with the r
 
 <!-- .element: class="admonition important" -->
 
+
 ##==##
+
 
 <!-- .slide: class="transition"-->
 
@@ -29,7 +33,9 @@ Seeds are not considered as sources in the scope of dbt. You use them with the r
 
 ## Creating and populating seed data
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -51,7 +57,9 @@ seeds
 1 directory, 4 files
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 
@@ -75,7 +83,9 @@ AS,American Samoa
 AQ,Antarctica
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="transition"-->
 
@@ -83,7 +93,9 @@ AQ,Antarctica
 
 ## Advantages of using seeds for data initialization
 
+
 ##==##
+
 
 # Benefits of using seeds
 
@@ -101,7 +113,9 @@ AQ,Antarctica
 
 - Seeds are included in the generated documentation and lineage
 
+
 ##==##
+
 
 <!-- .slide: class="transition"-->
 
@@ -109,7 +123,9 @@ AQ,Antarctica
 
 ## Integrating seeds with your dbt models
 
+
 ##==##
+
 
 # Seeds options
 
@@ -123,7 +139,9 @@ Using options, you can:
 Notes:
 full_refresh can be disabled on seeds to prevent DROP CASCADE in specific adapters (Redshift, Snowflake)
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

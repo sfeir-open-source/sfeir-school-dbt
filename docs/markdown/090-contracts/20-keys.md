@@ -4,7 +4,9 @@
 
 ## Declaring keys and constraints
 
+
 ##==##
+
 
 # Declaring keys and constraints
 
@@ -22,7 +24,9 @@ Constraints are enforced in **tables only** and not on views or ephemeral models
 
 <!-- .element: class="admonition warning" -->
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 

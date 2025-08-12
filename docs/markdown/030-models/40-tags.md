@@ -4,7 +4,9 @@
 
 ## Introducing tagging feature for metadata organization
 
+
 ##==##
+
 
 <!-- .slide -->
 
@@ -33,7 +35,9 @@ Notes:
 - Tags are not labels in BigQuery -- there is special syntax (dict) in config blocks for that
   Adding tags to columns is used to run a subset of tests on specific columns.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -63,7 +67,9 @@ FROM
     erp.customers
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

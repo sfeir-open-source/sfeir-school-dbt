@@ -4,9 +4,11 @@
 
 ## Highlight potential risk in code
 
-##==##
 
-<!-- .slide: class="two-column"-->
+##==##
+<!-- .slide: class="tc-multiple-columns"-->
+
+##++##
 
 # Don't trust anyone
 
@@ -17,10 +19,10 @@ Delivering qualitative models and allowing robust data-driven decision require t
 dbt tests helps ensure the accuracy and reliability of data transformations and models.
 
 Tests in dbt are powerful, and convenient!
+##++##
+##++## data-background="./assets/images/docs/markdown/80-testing/tester_douter.jpg"
+##++##
 
-##--##
-
-<!-- .slide: data-background="./assets/images/docs/markdown/80-testing/tester_douter.jpg"-->
 
 Notes:
 Ensemble de symboles représentant tout objet, événements, etc. susceptible d’être interprété.
@@ -28,8 +30,8 @@ Ensemble de symboles représentant tout objet, événements, etc. susceptible d�
 La donnée produit de l’information (au sens modification de la connaissance)
 
 En ce sens, elle va pouvoir servir de base au raisonnement, à la recherche
-
 ##==##
+
 
 # What are test good for in dbt?
 
@@ -45,7 +47,9 @@ Tests in dbt help you:
 
 - **Collaborate** with others
 
+
 ##==##
+
 
 # What could go wrong ?
 

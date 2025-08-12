@@ -6,49 +6,50 @@
 
 ##==##
 
-<!-- .slide: class="two-column" -->
+<!-- .slide: class="tc-multiple-columns" -->
+
+##++##
 
 # Materialization strategies
 
 ## view
 
-![sfeir-icons big](plus-circle) Default materialization in dbt. Good choice for low compute models like renaming or recasting.
+![](plus-circle 'tc-icons feather tc-big') Default materialization in dbt. Good choice for low compute models like renaming or recasting.
 
-![sfeir-icons big](cpu) Does not use storage in your warehouse, but uses compute time every time you read from it. Beware of stacking too many views on top of each others.
+![](cpu 'tc-icons feather tc-big') Does not use storage in your warehouse, but uses compute time every time you read from it. Beware of stacking too many views on top of each others.
 
-![sfeir-icons big](watch) Very fast to create at build time. Data may vary each time you read from a view.
-
-##--##
-
-<!-- .slide: data-background="var(--black)" -->
+![](watch 'tc-icons feather tc-big') Very fast to create at build time. Data may vary each time you read from a view.
+##++##
+##++## data-background="var(--black)" class="contrast-opposite"
 
 # &nbsp;
 
 ## table
 
-![sfeir-icons big](clock) Very fast to query, but can be long to (re)create at each run.
+![](clock 'tc-icons feather tc-big') Very fast to query, but can be long to (re)create at each run.
 
-![sfeir-icons big](git-commit) Must be refreshed to include updates to underlying sources.
+![](git-commit 'tc-icons feather tc-big') Must be refreshed to include updates to underlying sources.
 
-![sfeir-icons big](refresh-cw) Preferred choice for models exposed as data products or use cases, and models used as reference by many other models.
+![](refresh-cw 'tc-icons feather tc-big') Preferred choice for models exposed as data products or use cases, and models used as reference by many other models.
+##++##
 
 ##==##
 
-<!-- .slide: class="two-column" -->
+<!-- .slide: class="tc-multiple-columns" -->
+
+##++##
 
 # Materialization strategies
 
 ## ephemeral
 
-![sfeir-icons big](plus-circle) Creates a CTE that is replaced in the models querying this table.
+![](plus-circle 'tc-icons feather tc-big') Creates a CTE that is replaced in the models querying this table.
 
-![sfeir-icons big](cpu) Used for intermediate calculations or as intermediate areas in complex data transformations.
+![](cpu 'tc-icons feather tc-big') Used for intermediate calculations or as intermediate areas in complex data transformations.
 
-![sfeir-icons big](watch) Offers a flexible and efficient way to manage temporary data transformations and calculations within your dbt workflows.
-
-##--##
-
-<!-- .slide: data-background="var(--black)" -->
+![](watch 'tc-icons feather tc-big') Offers a flexible and efficient way to manage temporary data transformations and calculations within your dbt workflows.
+##++##
+##++## data-background="var(--black)" class="contrast-opposite"
 
 # &nbsp;
 
@@ -57,3 +58,5 @@
 - Incremental
 
 - Materialized views
+
+##++##

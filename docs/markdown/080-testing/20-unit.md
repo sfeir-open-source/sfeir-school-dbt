@@ -4,7 +4,9 @@
 
 ## Unit tests
 
+
 ##==##
+
 
 # What about testing models?
 
@@ -25,7 +27,9 @@ New in dbt 1.8+ : unit testing does not require an external package anymore.
 Notes:
 Soon : integrated unit tests in future version of dbt
 
+
 ##==##
+
 
 # How does unit-testing work?
 
@@ -44,7 +48,9 @@ You **should not run unit test in production**, but in development phase only: u
 $ dbt build --exclude-resource-type unit_test
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 

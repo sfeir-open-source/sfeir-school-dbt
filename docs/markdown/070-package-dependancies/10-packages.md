@@ -4,7 +4,9 @@
 
 ## Introduction to dbt packages
 
+
 ##==##
+
 
 # Packages
 
@@ -14,7 +16,9 @@ Packages contains SQL macros and models tailored for specific tasks.
 
 It is the best way to share common macros and models between dbt projects in your organization.
 
+
 ##==##
+
 
 # Common community dbt packages
 

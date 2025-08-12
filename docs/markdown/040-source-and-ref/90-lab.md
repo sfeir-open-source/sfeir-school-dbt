@@ -8,7 +8,9 @@
 - Create and test a circular reference
 - Use selectors to run a single model, parents and children models
 
+
 ##==##
+
 
 <!-- .slide: class="exercice" -->
 

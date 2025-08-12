@@ -4,9 +4,11 @@
 
 ## Understanding catalog.json
 
+
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Understanding catalog.json
 

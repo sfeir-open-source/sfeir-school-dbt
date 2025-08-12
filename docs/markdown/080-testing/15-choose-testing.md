@@ -6,8 +6,6 @@
 
 ##==##
 
-<!-- .slide:-->
-
 # Choosing the right test
 
 | Test type      | Target                                  | Pros/cons                                                              |
