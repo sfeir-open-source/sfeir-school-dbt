@@ -32,6 +32,6 @@
     "shelljs": "^0.8.5"
   },
   "dependencies": {
-    "sfeir-school-theme": "^4.0.0-rc-10"
+    "sfeir-school-theme": "^4.0.0-rc-11"
   }
 }
