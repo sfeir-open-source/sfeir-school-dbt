@@ -4,7 +4,9 @@
 
 ## Filtering execution
 
+
 ##==##
+
 
 # Filtering execution
 
@@ -14,7 +16,9 @@ Using a combination of --select and --exclude arguments, dbt users can filter pr
 
 Even if the syntax is straightforward, it offers a lot of options to select nodes using names, tags, path, types and even state of last run.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 
@@ -44,7 +48,9 @@ dbt run -s stg__orders stg__customers
 Notes:
 Recommendation : use quotes around the selectors
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 

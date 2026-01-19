@@ -24,7 +24,9 @@ Notes:
 - You can have as many profiles as you want in a file, or use different files (use arguments to define which file to use)
 - Profiles enhance the flexibility and portability of your dbt projects
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -52,7 +54,9 @@ config_service_account: &config_service_account
   keyfile: "{{ env_var('GOOGLE_APPLICATION_CREDENTIALS') }}"
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -77,7 +81,9 @@ local:
       <<: *config_oauth
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

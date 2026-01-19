@@ -4,7 +4,9 @@
 
 ## The importance of lineage
 
+
 ##==##
+
 
 # Graphical lineage
 
@@ -25,15 +27,20 @@ Lineage in dbt shows:
 
 And the connections between all them.
 
+
 ##==##
+
 
 # Graphical lineage
 
-![full-center h-800](./assets/images/docs/markdown/100-documentation/graphical-lineage.png)
+![](./assets/images/docs/markdown/100-documentation/graphical-lineage.png 'h-800') 
+<!-- .element: class="full-center" -->
+
 
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Documentation
 

@@ -4,7 +4,9 @@
 
 ## Setting up automated tests
 
+
 ##==##
+
 
 # Automating generic and singular tests
 
@@ -26,7 +28,9 @@
 
 - Run tests before it’s too late and don’t expose bad quality data
 
+
 ##==##
+
 
 # Automating unit tests
 
@@ -42,7 +46,9 @@
 - Integrate in your CI before the stage of build and deploy
 - You wouldn’t deploy a mobile app without testing
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 
@@ -70,7 +76,9 @@ dbt_unit_test_jobs:
     - eval "dbt test ${dbt_params}${dbt_vars} --select test_type:unit"
 ```
 
+
 ##==##
+
 
 # Tests aren’t free
 

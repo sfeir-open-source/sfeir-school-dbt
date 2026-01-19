@@ -4,7 +4,9 @@
 
 ## Introduction to _dbt_ sources
 
+
 ##==##
+
 
 # Sources
 
@@ -14,7 +16,9 @@ It's handled by dbt with the `source()` macro, and via a source declaration yaml
 
 Sources are already in your data lake or in data products of your organization, and you point to them in your dbt project.
 
+
 ##==##
+
 
 <!-- .slide: class="transition"-->
 
@@ -22,7 +26,9 @@ Sources are already in your data lake or in data products of your organization, 
 
 ## Configuring _dbt_ sources
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -44,7 +50,9 @@ sources:
       - name: 'ZORGZ'
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 
@@ -79,7 +87,9 @@ Notes:
 - You don't need to add columns unless you want to add options on them and generate documentation
 - Column list is not used to generate the model : you still have to create a SQL file with the source name
 
+
 ##==##
+
 
 # Source properties
 
@@ -92,7 +102,9 @@ Sources support additionnal properties like:
   - with filters and loaded_at column
 - **tags**
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -119,7 +131,9 @@ Notes:
 
 - This can be used to reference sharded tables in BigQuery, like "events\_\*" which is not a valid model name
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

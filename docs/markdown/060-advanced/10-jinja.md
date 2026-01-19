@@ -4,7 +4,9 @@
 
 ## Jinja
 
+
 ##==##
+
 
 # Jinja templating
 
@@ -18,7 +20,9 @@ In _dbt, Jinja_ is used for:
 - Control flow and conditional statements
 - Macro expansion
 
+
 ##==##
+
 
 <!-- .slide: class="transition"-->
 
@@ -26,7 +30,9 @@ In _dbt, Jinja_ is used for:
 
 ## Variables
 
+
 ##==##
+
 
 # Variables in dbt
 
@@ -43,9 +49,11 @@ dbt includes several predefined and system variables, for instance:
 - target
 - this
 
+
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Key benefits of variables in dbt
 
@@ -71,7 +79,9 @@ dbt includes several predefined and system variables, for instance:
 Notes:
 dbt can read env variables using the env() macro
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -94,7 +104,9 @@ vars:
     currency: ['USD', 'EUR', 'DJF']
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -125,7 +137,9 @@ var() and env_var() have an optional second parameter to add a default value in 
 
 default value is not always a good choice : sometimes it’s better to crash if a variable is not defined
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -154,7 +168,9 @@ SELECT countryCode, countryName
 Notes:
 Beware of default values handling when using nested variables.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

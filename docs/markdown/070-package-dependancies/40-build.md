@@ -4,7 +4,9 @@
 
 ## Build your own package
 
+
 ##==##
+
 
 # Why build your own package ?
 
@@ -12,7 +14,9 @@
 
 - Provide your organization or the dbt community with models and macros dedicated to specific adapter, source or datasets
 
+
 ##==##
+
 
 # How is a package built ?
 
@@ -32,7 +36,9 @@
 SELECT * FROM {{ mypackage.custom_ref("mymodel") }}
 ```
 
+
 ##==##
+
 
 # Hosting your dbt packages
 

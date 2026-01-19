@@ -4,9 +4,11 @@
 
 ## Understanding sources.json
 
+
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Understanding sources.json
 

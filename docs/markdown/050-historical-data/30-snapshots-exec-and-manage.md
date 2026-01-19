@@ -4,7 +4,9 @@
 
 ## Executing and managing snapshots
 
+
 ##==##
+
 
 # Snapshot orchestration
 
@@ -21,7 +23,9 @@
 
 dbt try to handle columns addition itself, but you may want to not track all columns changed in your snapshots strategy.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

@@ -1,6 +1,8 @@
 # Data Platforms evolution
 
-![full-center](./assets/images/docs/markdown/10-once-upon-a-time/data-architectures.svg)
+![](./assets/images/docs/markdown/10-once-upon-a-time/data-architectures.svg)
+
+<!-- .element: class="full-center" -->
 
 Notes:
 Datalake
@@ -23,13 +25,13 @@ Data Mesh
 
 # 2012 Data Landscape
 
-![center hm-800](./assets/images/docs/markdown/10-once-upon-a-time/2012-data-landscape.png)
+![](./assets/images/docs/markdown/10-once-upon-a-time/2012-data-landscape.png 'center hm-800')
 
 ##==##
 
 # 2021 Data Landscape
 
-![center hm-800](./assets/images/docs/markdown/10-once-upon-a-time/2021-data-landscape.png)
+![](./assets/images/docs/markdown/10-once-upon-a-time/2021-data-landscape.png 'center hm-800')
 
 ##==##
 
@@ -37,7 +39,7 @@ Data Mesh
 
 ## From ETL...
 
-![center full-width](./assets/images/docs/markdown/10-once-upon-a-time/data-platforms.svg)
+![](./assets/images/docs/markdown/10-once-upon-a-time/data-platforms.svg 'center full-width')
 
 ##==##
 
@@ -45,28 +47,29 @@ Data Mesh
 
 ## ...to ELT
 
-![center full-width](./assets/images/docs/markdown/10-once-upon-a-time/modern-data-platforms.svg)
+![](./assets/images/docs/markdown/10-once-upon-a-time/modern-data-platforms.svg 'center full-width')
 
 ##==##
 
-<!-- .slide: class="two-column" -->
+<!-- .slide: class="tc-multiple-columns" -->
+
+##++##
 
 # <u>E</u>xtract <u>T</u>ransform <u>L</u>oad
 
-![sfeir-icons big](git-merge) data is **extracted** from various sources
+![](git-merge 'tc-icons feather tc-big') data is **extracted** from various sources
 
-![sfeir-icons big](tool) **transformed** into a suitable form
+![](tool 'tc-icons feather tc-big') **transformed** into a suitable form
 
-![sfeir-icons big](upload) and then **loaded** into a target system for analysis.
-
-##--##
-
-<!-- .slide: data-background="var(--black)" -->
+![](upload 'tc-icons feather tc-big') and then **loaded** into a target system for analysis.
+##++##
+##++## data-background="var(--black)" class="contrast-opposite"
 
 # <u>E</u>xtract <u>L</u>oad <u>T</u>ransform
 
-![sfeir-icons big](git-merge) data is **extracted** from various sources
+![](git-merge 'tc-icons feather tc-big') data is **extracted** from various sources
 
-![sfeir-icons big](upload) **loaded** into a target system without immediate transformation
+![](upload 'tc-icons feather tc-big') **loaded** into a target system without immediate transformation
 
-![sfeir-icons big](tool) **transformation** occurs when needed, to expose data products and use cases
+![](tool 'tc-icons feather tc-big') **transformation** occurs when needed, to expose data products and use cases
+##++##

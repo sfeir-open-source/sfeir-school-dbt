@@ -4,7 +4,9 @@
 
 ## Declaring exposures
 
+
 ##==##
+
 
 # Exposures
 
@@ -19,7 +21,9 @@ Use exposures as dbt selectors, to run, test and list ressources associated with
 $ dbt run --select +exposure:my_dashboard
 ```
 
+
 ##==##
+
 
 # Declaring exposures
 
@@ -38,7 +42,9 @@ Exposures have 3 required properties:
   - ML
   - Application
 
+
 ##==##
+
 
 # Declaring exposures
 
@@ -52,7 +58,9 @@ Because documentation is important, exposures also support the following propert
 
 Exposures also rely on the **depends_on** property for lineage, as a list of reference to sources, models, etc.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code max-height"-->
 

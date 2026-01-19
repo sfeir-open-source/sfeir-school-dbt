@@ -1,26 +1,27 @@
+<!-- .slide: class="tc-multiple-columns" -->
+
+##++##
+
 # Core concepts
 
-<!-- .slide: class="two-column" -->
-
-![center hm-800](./assets/images/docs/markdown/12-dbt/analytics-engineering-dbt.png)
-
-##--##
-
-<!-- .slide: data-background="var(--black)"-->
+![](./assets/images/docs/markdown/12-dbt/analytics-engineering-dbt.png 'center hm-800')
+##++##
+##++## data-background="var(--black)" class="contrast-opposite"
 
 #
 
 <br/>
 
-![sfeir-icons big](edit) Transformation are expressed with SQL `SELECT` statement only
+![](edit 'tc-icons feather tc-big') Transformation are expressed with SQL `SELECT` statement only
 
-![sfeir-icons big](refresh-ccw) Reference between models are automatically build
+![](refresh-ccw 'tc-icons feather tc-big') Reference between models are automatically build
 
-![sfeir-icons big](target) Tests ensure model accuracy
+![](target 'tc-icons feather tc-big') Tests ensure model accuracy
 
-![sfeir-icons big](book) Documentation is accessible and easily updated
+![](book 'tc-icons feather tc-big') Documentation is accessible and easily updated
 
-![sfeir-icons big](terminal) KISS: use macros to write reusable SQL
+![](terminal 'tc-icons feather tc-big') KISS: use macros to write reusable SQL
+##++##
 
 ##==##
 

@@ -1,5 +1,3 @@
-<!-- .slide:-->
-
 # dbt CLI commands
 
 - Make sure you are at the root of your dbt project to run commands

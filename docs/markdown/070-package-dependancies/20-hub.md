@@ -4,18 +4,24 @@
 
 ## Exploring dbt hub
 
-##==##
-
-<!-- .slide:-->
-
-# Exploring dbt hub
-
-![full-center h-700](./assets/images/docs/markdown/70-package-dependancies/dbt-packages.png)
 
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Exploring dbt hub
 
-![full-center h-700](./assets/images/docs/markdown/70-package-dependancies/dbt-packages-exploring.png)
+![](./assets/images/docs/markdown/70-package-dependancies/dbt-packages.png 'h-700') 
+<!-- .element: class="full-center" -->
+
+
+##==##
+
+
+
+
+# Exploring dbt hub
+
+![](./assets/images/docs/markdown/70-package-dependancies/dbt-packages-exploring.png 'h-700') 
+<!-- .element: class="full-center" -->

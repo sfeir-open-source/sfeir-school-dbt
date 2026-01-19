@@ -4,7 +4,9 @@
 
 ## Generate and maintain accessible up-to-date model documentation
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -28,7 +30,9 @@ sources:
             description: 'Starting date of application of this rate'
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -51,7 +55,9 @@ models:
         description: 'Date of forecast evaluation'
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -77,7 +83,9 @@ seeds:
         description: '3-alpha country code in the ISO 3166 format'
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -100,7 +108,9 @@ macros:
         description: 'The field to take the default value from in case of zero match'
 ```
 
+
 ##==##
+
 
 # Leverage doc() macro for better documentation
 
@@ -114,7 +124,9 @@ Instead of writing documentation inline, use Markdown files to :
 
 Then, simply use the `doc()` macro in your property files.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -143,7 +155,9 @@ The field to take the default value from in case of zero match
 
 <!-- {% endraw %} -->
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -167,7 +181,9 @@ macros:
 Notes:
 Don’t forget the single quote around the {{ doc() }}
 
+
 ##==##
+
 
 # Persist documentation in your database
 
@@ -187,7 +203,9 @@ models:
     ...
 ```
 
+
 ##==##
+
 
 # Generating documentation
 
@@ -216,7 +234,9 @@ Notes:
 
 --empty-catalog
 
+
 ##==##
+
 
 # Serving documentation
 

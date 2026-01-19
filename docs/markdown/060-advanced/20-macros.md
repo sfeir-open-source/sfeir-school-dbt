@@ -4,7 +4,9 @@
 
 ## Macros
 
+
 ##==##
+
 
 # Reusable code with macros
 
@@ -20,7 +22,9 @@ Macros are reusable blocks of code that can be defined and invoked within your d
 
 - Modularity: macros can be organized into modules or files
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -49,7 +53,9 @@ _/macros/formulas/turnover.sql_
 Notes:
 Even if they are defined in SQL file, macro can also not produce any SQL output
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -72,7 +78,9 @@ WHERE TRUE
   {{ order_completed() }} -- Potential complex logic here
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -106,7 +114,9 @@ SELECT
   FROM {{ ref("sales") }}
 ```
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

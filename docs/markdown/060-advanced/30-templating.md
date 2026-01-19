@@ -4,7 +4,9 @@
 
 ## Jinja, a templating language
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -29,7 +31,9 @@ In dbt, you can use code if / else / endif blocks to define conditional statemen
 
 <!-- {% raw %} -->
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -58,7 +62,9 @@ LIMIT {{ var("pagesize") }}
 
 <!-- {% endraw %} -->
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -81,7 +87,9 @@ FROM {{ ref("seed_customers") }}
 
 <!-- {% endraw %} -->
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

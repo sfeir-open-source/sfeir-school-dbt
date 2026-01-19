@@ -4,7 +4,9 @@
 
 ## Working with _dbt_ references
 
+
 ##==##
+
 
 # The `ref()` macro
 
@@ -20,7 +22,9 @@ Notes:
 
 - If you don't use the ref() macro, then you're doing it wrong.
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 

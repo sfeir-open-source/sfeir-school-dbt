@@ -4,7 +4,9 @@
 
 ## Configuring and defining snapshots
 
+
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -34,15 +36,17 @@ SELECT * FROM {{ source(‘sfeir’, ‘institute’) }}
 
 <!-- {% endraw %} -->
 
-##==##
 
-<!-- .slide: class="two-column"-->
+##==##
+<!-- .slide: class="tc-multiple-columns"-->
+
+##++##
 
 # Timestamp strategy execution workflow
 
 ![](./assets/images/docs/markdown/50-historical-data/snapshots-timestamp-strategy.svg)
-
-##--##
+##++##
+##++##
 
 &nbsp;
 &nbsp;
@@ -68,8 +72,10 @@ for new record
 
 - set dbt_valid_from column with updated_at value
 - set dbt_valid_to column with null value
+##++##
 
 ##==##
+
 
 <!-- .slide: class="with-code"-->
 
@@ -103,15 +109,17 @@ The SQL request must include the check_cols and unique key if any
 
 To check changes on all column, use the string “all” instead of an array
 
-##==##
 
-<!-- .slide: class="two-column"-->
+##==##
+<!-- .slide: class="tc-multiple-columns"-->
+
+##++##
 
 # TODO - Check strategy execution workflow
 
 ![](./assets/images/docs/markdown/50-historical-data/snapshots-timestamp-strategy.svg)
-
-##--##
+##++##
+##++##
 
 &nbsp;
 &nbsp;
@@ -137,3 +145,4 @@ for new record
 
 - set dbt_valid_from with CURRENT_TIMESTAMP()
 - set dbt_valid_to with null value
+##++##

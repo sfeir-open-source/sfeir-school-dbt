@@ -4,7 +4,9 @@
 
 ## Documenting dbt projects
 
+
 ##==##
+
 
 # Documenting dbt projects
 
@@ -14,18 +16,24 @@ Good documentation will help your data consumers **discover and understand your 
 
 > “ The doc is the code” <br>(it’s not)
 
-##==##
-
-<!-- .slide:-->
-
-# Sample generated documentation
-
-![full-center h-800](./assets/images/docs/markdown/100-documentation/doc-generation.png)
 
 ##==##
 
-<!-- .slide:-->
+
+
 
 # Sample generated documentation
 
-![full-center h-800](./assets/images/docs/markdown/100-documentation/doc-generated.png)
+![](./assets/images/docs/markdown/100-documentation/doc-generation.png 'h-800') 
+<!-- .element: class="full-center" -->
+
+
+##==##
+
+
+
+
+# Sample generated documentation
+
+![](./assets/images/docs/markdown/100-documentation/doc-generated.png 'h-800') 
+<!-- .element: class="full-center" -->
