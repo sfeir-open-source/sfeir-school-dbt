@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: sfeir-dbt-postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-dbt_trainer}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dbt_password}
+      POSTGRES_DB: ${POSTGRES_DB:-sfeir_dbt}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-dbt_trainer}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dbt-network
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  dbt-network:
+    driver: bridge

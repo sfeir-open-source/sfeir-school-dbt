@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: my_first_model
+    description: "An example dbt model"
+    columns:
+      - name: id
+        description: "The primary key"
+        tests:
+          - unique
+          - not_null
+      - name: name
+        description: "Name field"
+      - name: created_at
+        description: "Timestamp when record was created"

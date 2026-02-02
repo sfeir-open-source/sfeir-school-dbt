@@ -1,0 +1,13 @@
+# Configuration Terraform pour SFEIR School DBT
+
+# COPIEZ CE FICHIER vers terraform.tfvars et remplissez les valeurs
+
+project_id          = "your-gcp-project-id"     # Votre projet GCP
+region              = "europe-west1"             # Région (europe-west1, us-central1, etc.)
+cloudsql_password   = "ChangeMe123!Secure"      # Mot de passe sécurisé (min 8 caractères)
+cloudsql_user_count = 20                        # Nombre d'étudiants
+cloudsql_tier       = "db-f1-micro"             # Taille: db-f1-micro (petit), db-g1-small (moyen)
+
+# Coûts estimés:
+# - db-f1-micro : ~7€/mois (0.0175€/h) - Suffisant pour ~20 étudiants
+# - db-g1-small : ~25€/mois (0.025€/h) - Pour ~50 étudiants

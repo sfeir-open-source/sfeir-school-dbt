@@ -1,0 +1,17 @@
+# Exemple de configuration dbt pour connexion cloud
+# COPIEZ ce fichier dans ~/.dbt/profiles.yml
+# et remplacez les valeurs entre <> par celles fournies par le formateur
+
+sfeir_student:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      threads: 4
+      host: <IP_ADDRESS>        # Ex: 34.77.xxx.xxx
+      port: 5432
+      user: dbt
+      pass: <PASSWORD>          # Fourni par le formateur
+      dbname: sfeir_dbt         # ou student_XX selon attribution
+      schema: public
+      sslmode: require          # Important pour GCP
