@@ -1,108 +1,38 @@
-# 🔧 Ressources Partagées - SFEIR School DBT
-
-Projets dbt templates et données utilisés par formateurs et étudiants.
-
-## 📂 Structure
-
-```
 shared/
-├── dbt-projects/          # Projets dbt templates
-│   ├── starter/           # Projet vide pour commencer
-│   ├── demo/              # Projet de démonstration formateur
-│   └── solutions/         # Solutions des labs par module
-│       ├── module-03/
-│       ├── module-04/
-│       └── ...
-│
-└── data/                  # Données CSV
-    ├── seeds/             # Seeds pour dbt
-    └── samples/           # Données d'exemple supplémentaires
-```
 
-## 🎯 Projets DBT
+Guide Ressources Partagées
 
-### starter/
+Ce guide présente les ressources communes à disposition des formateurs et des étudiants :
 
-Projet vide prêt à l'emploi pour commencer un lab.
+- Projets dbt templates pour démarrer rapidement un nouveau projet ou un exercice.
+- Données CSV pour réaliser des tests et des démonstrations.
+- Solutions des exercices pour vérifier vos travaux.
 
-**Utilisation :**
-```bash
-# Formateur
-cp -r shared/dbt-projects/starter ./formateur/local/mon-projet
+Pour utiliser un projet ou des données, copiez simplement le dossier correspondant dans votre espace de travail.
 
-# Étudiant
-cp -r shared/dbt-projects/starter ./etudiant/local/mon-lab
-```
-
-**Contenu :**
-- Structure de base dbt
-- Configuration minimale
-- Exemples commentés
+En cas de question, demandez conseil au formateur.
 - Seeds de base
 
 ### demo/
 
 Projet de démonstration complet pour le formateur.
 
-**Contenu :**
-- Modèles de tous types (views, tables, incremental)
-- Tests complets
-- Documentation
-- Macros utiles
-- Seeds complets
+Guide Ressources Partagées
 
-**Utilisation :**
-```bash
-cd shared/dbt-projects/demo
-dbt seed
-dbt run
-dbt test
-dbt docs generate
-```
+Ce dossier contient toutes les ressources communes pour la formation DBT :
 
-### solutions/
+- **Projets DBT** :
+  - `starter/` : projet vide pour démarrer un exercice ou un lab
+  - `solutions/` : solutions complètes de tous les labs, organisées par module
+  - `demo/` : projet de démonstration complet pour le formateur
 
-Solutions complètes de tous les labs, organisées par module.
+- **Données** :
+  - Seeds CSV et exemples pour les exercices
 
-**Structure :**
-```
-solutions/
-├── module-03/        # Models basiques
-├── module-04/        # Materializations
-├── module-05/        # Seeds
-├── module-06/        # Sources et Refs
-├── module-07/        # Historical data
-├── module-08/        # Advanced features
-├── module-09/        # Tests
-├── module-10/        # Contracts
-├── module-11/        # Documentation
-└── module-12/        # Packages
-```
+**Utilisation** :
+Pour démarrer un lab, copiez le dossier `starter/` dans votre espace de travail. Pour vérifier vos travaux, consultez les dossiers `solutions/`. Les données sont prêtes à l’emploi dans le dossier `data/`.
 
-**Utilisation :**
-```bash
-cd shared/dbt-projects/solutions/module-03
-dbt run
-```
-
-## 📊 Données
-
-### seeds/
-
-Fichiers CSV utilisés comme données de base.
-
-**Fichiers disponibles :**
-- `companies.csv` : Liste des entreprises
-- `customers.csv` : Clients
-- `orders.csv` : Commandes
-- `categories.csv` : Catégories de produits
-- `countries.csv` : Pays
-
-**Utilisation :**
-```bash
-# Dans un projet dbt
-cp ../../shared/data/seeds/*.csv ./seeds/
-dbt seed
+En cas de question, demandez conseil au formateur.
 ```
 
 ### samples/

@@ -7,7 +7,9 @@ version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-profile: 'sfeir_student'
+# Pour formateur: utilisez 'sfeir_trainer'
+# Pour étudiant: utilisez 'sfeir_student'
+profile: 'sfeir_trainer'
 
 # These configurations specify where dbt should look for different types of files.
 # You probably won't need to change these!

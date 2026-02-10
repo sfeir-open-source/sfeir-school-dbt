@@ -1,79 +1,42 @@
-# 🛠️ SFEIR School DBT - Setup Tools
+tools/
 
-Ce dossier contient tous les outils nécessaires pour mettre en place l'environnement de formation DBT en **une commande**.
+# SFEIR School DBT - Outils de Setup
 
-## 📋 Structure
+Bienvenue dans le projet SFEIR School DBT. Ce dossier contient tous les outils nécessaires pour mettre en place votre environnement de formation DBT, que vous soyez formateur ou étudiant.
+
+## Où aller maintenant ?
+
+### Vous êtes formateur ?
+
+Consultez le **[Guide Formateur](GUIDE-FORMATEUR.md)** pour découvrir comment préparer votre environnement de formation, déployer l'infrastructure cloud si nécessaire, et distribuer les accès à vos étudiants.
+
+**Quick Start - Environnement local :**
+```bash
+cd formateur/local && make setup
+```
+
+### Vous êtes étudiant ?
+
+Consultez le **[Guide Étudiant](GUIDE-ETUDIANT.md)** pour installer votre environnement de travail DBT et commencer les exercices de la formation.
+
+**Quick Start - Installation locale :**
+```bash
+cd etudiant/local && make setup
+```
+
+## Structure du projet
 
 ```
 tools/
-├── formateur/     # 🎓 Setup pour le formateur
-├── etudiant/      # 🎒 Setup pour les étudiants
-└── shared/        # 🔧 Ressources partagées (projets dbt, données)
+├── GUIDE-FORMATEUR.md    → Guide complet pour les formateurs
+├── GUIDE-ETUDIANT.md     → Guide complet pour les étudiants
+├── formateur/            → Scripts et configuration formateur
+├── etudiant/             → Scripts et configuration étudiant
+└── shared/               → Projets DBT et données partagées
 ```
 
-## 🚀 Quick Start
+## Support
 
-### Pour le formateur
+En cas de problème, consultez d'abord le guide correspondant à votre profil. Chaque guide contient une section dédiée à la résolution des problèmes courants.
 
-**Option 1 : Environnement local (Docker)**
-```bash
-cd formateur/local
-make setup
-```
-
-**Option 2 : Environnement cloud (GCP)**
-```bash
-cd formateur/cloud
-make deploy
-```
-
-### Pour les étudiants
-
-**Option 1 : Environnement local (Docker)**
-```bash
-cd etudiant/local
-make setup
-```
-
-**Option 2 : Connexion au cloud du formateur**
-```bash
-cd etudiant/cloud
-make connect
-```
-
-## 🎯 Philosophie KISS (Keep It Simple, Stupid)
-
-- **Une commande** pour démarrer
-- **Un dossier** par rôle (formateur/étudiant)
-- **Un sous-dossier** par environnement (local/cloud)
-- **Un README** à chaque niveau qui explique tout
-- **Support multi-plateforme** (Linux, macOS, Windows)
-
-## 📚 Documentation
-
-- [Guide Formateur](./formateur/README.md)
-- [Guide Étudiant](./etudiant/README.md)
-
-## ⚙️ Prérequis
-
-### Formateur - Local
-- Docker et Docker Compose
-- Make
-
-### Formateur - Cloud
-- gcloud CLI
-- Terraform
-- Compte GCP avec permissions
-
-### Étudiant - Local
-- Docker et Docker Compose (pas de droits admin requis)
-- Make
-- Python 3.8+
-
-### Étudiant - Cloud
-- Python 3.8+
-- Accès fourni par le formateur
-
-## 🆘 Support
-
-En cas de problème, consultez les README spécifiques à votre rôle et environnement.
+Pour toute question supplémentaire, contactez l'équipe pédagogique SFEIR.

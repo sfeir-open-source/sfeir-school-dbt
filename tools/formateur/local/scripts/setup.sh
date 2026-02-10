@@ -48,10 +48,12 @@ echo -e "${YELLOW}📦 Installation de dbt dans un environnement virtuel...${NC}
 if [ ! -d "venv" ]; then
     echo "Création du venv..."
     python3 -m venv venv
+    echo -e "${GREEN}✅ venv créé${NC}"
 fi
-source venv/bin/activate
-pip install -U pip -q
-pip install -q dbt-postgres==1.7.3
+
+# Utiliser directement le pip de la venv (pas besoin d'activer)
+./venv/bin/pip install -U pip -q
+./venv/bin/pip install -q -r requirements.txt
 echo -e "${GREEN}✅ dbt installé${NC}"
 echo ""
 
@@ -101,11 +103,16 @@ else
 fi
 echo ""
 
-# Charger les seeds si le projet demo existe
-if [ -d "../../shared/dbt-projects/demo" ]; then
-    echo -e "${YELLOW}📊 Chargement des données de démonstration...${NC}"
-    cd ../../shared/dbt-projects/demo
-    dbt seed --profiles-dir ~/.dbt
+# Charger les seeds si le projet starter existe
+if [ -d "../../shared/dbt-projects/starter" ]; then
+    echo -e "${YELLOW}� Copie des seeds...${NC}"
+    mkdir -p ../../shared/dbt-projects/starter/seeds
+    cp ../../shared/data/seeds/*.csv ../../shared/dbt-projects/starter/seeds/ 2>/dev/null || true
+    echo -e "${GREEN}✅ Seeds copiés${NC}"
+    
+    echo -e "${YELLOW}�📊 Chargement des données de démonstration...${NC}"
+    cd ../../shared/dbt-projects/starter
+    ../../../formateur/local/venv/bin/dbt seed --profiles-dir ~/.dbt
     if [ $? -eq 0 ]; then
         echo -e "${GREEN}✅ Données chargées${NC}"
     else
