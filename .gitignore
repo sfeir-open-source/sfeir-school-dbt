@@ -77,3 +77,22 @@ venv
 .user.yml
 /dbt-env/
 logs/
+
+# DuckDB databases (portable mode)
+*.duckdb
+*.duckdb.wal
+
+# dbt artifacts
+dbt_packages/
+target/
+profiles.yml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Python portable installations (bootstrap mode)
+tools/*/portable/python_portable/
+tools/*/portable/venv/

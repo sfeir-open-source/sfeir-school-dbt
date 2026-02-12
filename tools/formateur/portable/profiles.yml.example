@@ -1,0 +1,10 @@
+sfeir_trainer_portable:
+  outputs:
+    dev:
+      type: duckdb
+      path: ./sfeir_dbt.duckdb
+      threads: 4
+      extensions:
+        - httpfs
+        - parquet
+  target: dev

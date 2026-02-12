@@ -229,6 +229,156 @@ La documentation PostgreSQL (postgresql.org/docs) est également une ressource p
 
 Pour tout ce qui concerne Docker, la documentation officielle docs.docker.com contient des guides détaillés sur tous les aspects de l'outil.
 
+## Option 3 : Environnement portable avec DuckDB (nouveau !)
+
+### Pourquoi proposer le mode portable à vos étudiants ?
+
+Le mode portable résout les problèmes les plus fréquents rencontrés au démarrage des formations :
+
+**Problèmes résolus :**
+- ❌ Étudiants sans droits administrateur (machines d'entreprise)
+- ❌ Impossibilité d'installer Docker (politique IT restrictive)
+- ❌ Ordinateurs anciens qui peinent avec Docker
+- ❌ Perte de temps sur le setup le jour J (30 min → 2 min)
+- ❌ Problèmes réseau avec les téléchargements d'images Docker
+
+**Avantages pour vous, formateur :**
+- ✅ **Démarrage garanti** - 100% des étudiants opérationnels en 2 minutes
+- ✅ **Démos fluides** - Base de données fichier, pas de latence réseau
+- ✅ **Distribution facile** - Copiez l'environnement sur clé USB
+- ✅ **Débogage simplifié** - Un seul fichier .duckdb à inspecter
+- ✅ **Mode hors ligne** - Formez même sans internet
+
+### Préparer votre environnement portable
+
+L'installation est identique aux étudiants, mais avec le profil formateur :
+
+```bash
+cd tools/formateur/portable
+make setup
+```
+
+Cela installe :
+- dbt-core version 1.10+
+- dbt-duckdb (adaptateur DuckDB)
+- Configure le profil `sfeir_trainer_portable`
+- Charge toutes les données de démonstration
+
+### Utilisation pendant la formation
+
+**Commandes disponibles :**
+```bash
+make test          # Tester dbt
+make dbt-seed      # Charger les données
+make dbt-run       # Exécuter les modèles
+make dbt-test      # Lancer les tests
+make dbt-build     # Tout exécuter
+make dbt-shell     # Mode interactif
+make clean         # Reset complet
+```
+
+**Pour vos démonstrations live :**
+
+```bash
+# Option 1 : Commandes make
+cd tools/formateur/portable
+make dbt-run --select customers
+
+# Option 2 : Mode interactif (recommandé pour les démos)
+make dbt-shell
+# Vous êtes maintenant dans le projet avec dbt activé
+dbt run --select orders
+dbt test
+exit
+```
+
+### Distribuer l'environnement portable aux étudiants
+
+**Méthode 1 : Installation individuelle (recommandée)**
+
+Demandez aux étudiants de suivre la section "Option 3" du Guide Étudiant. Chacun installe son environnement en 2 minutes.
+
+**Méthode 2 : Distribution d'un environnement pré-configuré**
+
+Si vous anticipez des problèmes (salle sans internet, etc.) :
+
+```bash
+# 1. Créer un environnement complet
+cd tools/etudiant/portable
+make setup
+
+# 2. Créer une archive (sans le venv pour gagner de la place)
+cd ../..
+tar -czf sfeir-dbt-portable.tar.gz \
+  etudiant/portable/requirements.txt \
+  etudiant/portable/profiles.yml.example \
+  etudiant/portable/scripts/ \
+  etudiant/portable/Makefile \
+  etudiant/portable/README.md \
+  shared/dbt-projects/starter/ \
+  shared/data/
+
+# 3. Distribuer l'archive (clé USB, drive partagé, etc.)
+```
+
+Les étudiants décompressent et lancent `make setup`.
+
+### Comparaison des environnements
+
+| Aspect | Local (Docker) | Cloud (GCP) | Portable (DuckDB) |
+|--------|----------------|-------------|-------------------|
+| Installation | 30 min | 5 min | 2 min |
+| Droits admin | Requis | Non | Non |
+| Internet | Setup uniquement | Permanent | Setup uniquement |
+| Isolation | Par container | Par base | Par fichier |
+| Performance | Excellente | Variable | Excellente |
+| Coût formateur | 0€ | ~7-25€/mois | 0€ |
+| Compatibilité SQL | PostgreSQL 100% | PostgreSQL 100% | PostgreSQL 95% |
+
+### Recommandation d'utilisation
+
+**Stratégie hybride (recommandée) :**
+
+1. **Vous, formateur** : Utilisez le mode **local (Docker)** pour vos préparations principales. Gardez le mode portable comme backup et pour tester que les exercices fonctionnent aussi avec DuckDB.
+
+2. **Étudiants** :
+   - **Par défaut** : Mode **portable** - Setup rapide garanti
+   - **Si Docker disponible** : Mode **local** - Plus proche de la prod
+   - **Si problèmes** : Mode **cloud** - Backup ultime
+
+Cette stratégie assure que 100% des étudiants peuvent démarrer immédiatement.
+
+### Différences DuckDB vs PostgreSQL à connaître
+
+Pour la formation, les différences sont minimes :
+
+**Ce qui fonctionne à l'identique (95% des exercices) :**
+- ✅ Types de données (INT, VARCHAR, DATE, TIMESTAMP, etc.)
+- ✅ Window functions (ROW_NUMBER, LAG, LEAD, RANK, etc.)
+- ✅ CTEs (WITH clauses)
+- ✅ JOINs (INNER, LEFT, RIGHT, FULL)
+- ✅ Agrégations (SUM, COUNT, AVG, etc.)
+- ✅ Macros dbt
+- ✅ Tests et documentation dbt
+- ✅ Incremental models
+
+**Petites différences (rares dans la formation) :**
+- ⚠️ Un seul schema par défaut (pas de `CREATE SCHEMA`)
+- ⚠️ Une seule écriture à la fois (OK pour usage individuel)
+- ⚠️ Certaines fonctions PostgreSQL spécifiques (ex: `string_agg` → `list_aggr`)
+
+**Solution :** Les exercices de la formation sont conçus pour être compatibles avec les deux. Si vous créez des exercices custom, testez-les avec DuckDB.
+
+### Support technique
+
+Documentation complète dans :
+- [tools/formateur/portable/README.md](formateur/portable/README.md)
+- [tools/etudiant/portable/README.md](etudiant/portable/README.md)
+
+**DuckDB** :
+- Documentation : https://duckdb.org/docs/
+- dbt-duckdb : https://github.com/duckdb/dbt-duckdb
+
 ### Projets et données partagées
 
 N'oubliez pas que le dossier `shared/` contient tous les projets DBT de référence : le projet starter que les étudiants copient pour démarrer leurs labs, le projet demo que vous utilisez pour vos démonstrations, et surtout le dossier `solutions/` qui contient les solutions complètes de tous les exercices, organisées par module.
@@ -243,4 +393,5 @@ Pour les questions techniques spécifiques à cet environnement de setup, réfé
 
 ---
 
-Vous êtes maintenant prêt à animer votre formation SFEIR School DBT. Bonne formation !
+Vous êtes maintenant prêt à animer votre formation SFEIR School DBT avec **trois options d'environnement** pour garantir que tous vos étudiants puissent travailler dans les meilleures conditions. Bonne formation !
+

@@ -7,8 +7,15 @@ version: '1.0.0'
 config-version: 2
 
 # This setting configures which "profile" dbt uses for this project.
-# Pour formateur: utilisez 'sfeir_trainer'
-# Pour étudiant: utilisez 'sfeir_student'
+# 
+# Profils disponibles :
+# - 'sfeir_trainer' : Formateur avec Docker + PostgreSQL (local)
+# - 'sfeir_trainer_portable' : Formateur avec DuckDB (portable)
+# - 'sfeir_student' : Étudiant avec Docker + PostgreSQL (local)
+# - 'sfeir_student_portable' : Étudiant avec DuckDB (portable)
+# - 'sfeir_student_cloud' : Étudiant connecté à l'environnement cloud
+#
+# Par défaut, le profil formateur est utilisé. Changez selon votre besoin.
 profile: 'sfeir_trainer'
 
 # These configurations specify where dbt should look for different types of files.
@@ -23,6 +30,15 @@ snapshot-paths: ["snapshots"]
 clean-targets:
   - "target"
   - "dbt_packages"
+
+# Configuring seeds
+# Configuration pour la compatibilité DuckDB
+seeds:
+  sfeir_starter:
+    +quote_columns: false
+    categories:
+      +column_types:
+        date_in: varchar
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models

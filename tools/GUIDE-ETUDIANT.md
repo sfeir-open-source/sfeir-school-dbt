@@ -6,9 +6,13 @@ Bienvenue dans la formation SFEIR School DBT ! Ce guide va vous accompagner dans
 
 Vous allez découvrir DBT (Data Build Tool), un outil puissant qui transforme la façon dont on construit des pipelines de données. Mais avant de commencer à coder, vous devez préparer votre machine pour pouvoir exécuter les exercices de la formation.
 
-Vous avez deux options pour travailler pendant la formation. La première consiste à installer un environnement complet sur votre machine avec Docker et PostgreSQL. C'est l'option recommandée car elle vous rend totalement autonome et vous permet de travailler même sans connexion internet. La seconde option consiste à vous connecter à une base de données hébergée dans le cloud par votre formateur. Cette option est plus simple côté installation, mais nécessite une connexion internet stable.
+Vous avez **trois options** pour travailler pendant la formation :
 
-Lisez les deux sections suivantes pour choisir l'option qui vous convient le mieux.
+1. **Option locale avec Docker** - Installation complète avec PostgreSQL (recommandée si vous avez Docker)
+2. **Option cloud** - Connexion à une base hébergée par le formateur (nécessite internet stable)
+3. **Option portable** 🆕 - Base de données DuckDB embarquée (idéale si pas de droits admin ou Docker)
+
+Lisez les trois sections suivantes pour choisir l'option qui vous convient le mieux.
 
 ## Option 1 : Installation locale (recommandée)
 
@@ -172,11 +176,159 @@ Ensuite, pensez à garder vos credentials en sécurité. Ne les partagez avec pe
 
 Enfin, sachez que si plusieurs étudiants exécutent des requêtes lourdes en même temps, la base de données peut ralentir temporairement. C'est normal, ce n'est pas un problème de votre côté.
 
+## Option 3 : Mode portable avec DuckDB (nouvelle option recommandée !)
+
+### Pourquoi choisir le mode portable ?
+
+Le mode portable est la **solution idéale** si vous êtes dans l'une de ces situations :
+- ❌ Vous n'avez **pas les droits administrateur** sur votre machine d'entreprise
+- ❌ Vous ne pouvez **pas installer Docker** (politique IT restrictive)
+- ❌ Votre ordinateur est **ancien** et peine avec Docker
+- ✅ Vous voulez l'installation **la plus rapide** possible (2 minutes chrono)
+- ✅ Vous voulez un environnement **100% portable** (copiable sur clé USB)
+
+Avec le mode portable, vous n'installez qu'un seul outil : **dbt avec l'adaptateur DuckDB**. DuckDB est une base de données embarquée (fichier unique) qui ne nécessite aucun serveur. C'est ultra-léger, ultra-rapide, et la syntaxe SQL est quasi identique à PostgreSQL.
+
+### Prérequis et installation
+
+Vous avez **deux options** selon votre situation :
+
+#### Option A : Vous avez Python installé (≥3.8)
+
+Si vous avez déjà Python sur votre machine, l'installation est ultra-simple :
+
+**Sur macOS / Linux :**
+```bash
+cd tools/etudiant/portable
+make setup
+```
+
+**Sur Windows (sans Make) :**
+```batch
+cd tools\etudiant\portable
+scripts\setup.bat
+```
+
+**Ou avec PowerShell :**
+```powershell
+cd tools\etudiant\portable
+.\scripts\setup.ps1
+```
+
+L'installation prend **2 minutes maximum** et installe :
+- Un environnement virtuel Python (sans droits admin)
+- dbt-core version 1.10+
+- dbt-duckdb (adaptateur DuckDB pour dbt)
+- Configure automatiquement votre profil dbt
+- Charge les données d'exemple dans une base DuckDB
+
+#### Option B : Vous n'avez RIEN installé (installation bootstrap - zéro prérequis)
+
+**🎯 Solution idéale si vous n'avez même pas Python installé et aucun moyen de l'installer !**
+
+Le script **bootstrap** télécharge automatiquement Python portable (sans installation système) et installe tout le nécessaire dans le dossier du projet. **Aucun droit administrateur requis !**
+
+**Sur macOS / Linux :**
+```bash
+cd tools/etudiant/portable/scripts
+./bootstrap.sh
+```
+
+**Sur Windows :**
+```batch
+cd tools\etudiant\portable\scripts
+bootstrap.bat
+```
+
+**Ou avec PowerShell :**
+```powershell
+cd tools\etudiant\portable\scripts
+.\bootstrap.ps1
+```
+
+Le script bootstrap fait tout automatiquement :
+1. 📥 Télécharge Python portable (Miniforge sur Mac/Linux, Python Embeddable sur Windows)
+2. 📦 Installe Python dans le dossier `python_portable/` (aucune modification système)
+3. 🔧 Crée un environnement virtuel avec dbt + DuckDB
+4. ⚙️ Configure automatiquement les profils dbt
+5. 📊 Charge les données d'exemple
+6. ✅ Teste que tout fonctionne
+
+**Tout reste dans le dossier du projet, rien n'est installé dans le système !**
+
+Installation complète : **5-7 minutes** selon votre connexion internet.
+
+### Utilisation au quotidien
+
+Les commandes sont identiques à la version locale :
+
+```bash
+cd tools/etudiant/portable
+
+make test          # Tester que dbt fonctionne
+make dbt-seed      # Charger les données CSV
+make dbt-run       # Exécuter vos modèles dbt
+make dbt-test      # Lancer les tests
+make dbt-build     # Tout faire : seed + run + test
+make dbt-shell     # Mode interactif dbt
+make clean         # Tout nettoyer et repartir de zéro
+```
+
+### Votre base de données
+
+Votre base de données complète tient dans **un seul fichier** :
+```
+tools/shared/dbt-projects/starter/sfeir_dbt.duckdb
+```
+
+Pour explorer vos données avec Python :
+```python
+import duckdb
+conn = duckdb.connect('sfeir_dbt.duckdb')
+conn.execute("SHOW TABLES").fetchall()
+conn.execute("SELECT * FROM companies LIMIT 5").fetchdf()
+```
+
+### Différences avec PostgreSQL
+
+**Bonne nouvelle** : Pour 95% des exercices de la formation, vous ne verrez **aucune différence** !
+
+DuckDB supporte :
+- ✅ Tous les types de données standards (INT, VARCHAR, DATE, etc.)
+- ✅ Les window functions (ROW_NUMBER, LAG, LEAD, etc.)
+- ✅ Les CTEs (WITH clauses)
+- ✅ Les JOINs complexes
+- ✅ Les macros dbt
+- ✅ Les tests et la documentation dbt
+
+Petites différences (rares dans la formation) :
+- Un seul schema par défaut (vs plusieurs dans PostgreSQL)
+- Une seule écriture à la fois (mais OK pour usage individuel)
+
+### Avantages du mode portable
+
+| Avantage | Description |
+|----------|-------------|
+| 🚀 **Installation rapide** | 2 minutes vs 30 minutes avec Docker |
+| 💻 **Pas de droits admin** | Fonctionne même sur machines verrouillées |
+| 📦 **100% portable** | Copiez le dossier sur clé USB = environnement complet |
+| 🔌 **Hors ligne** | Aucun serveur, aucune connexion nécessaire |
+| 🧹 **Nettoyage facile** | Supprimez le fichier .duckdb = reset complet |
+| 💾 **Backup simple** | Copiez le fichier = backup complet |
+
+### En cas de problème
+
+Si vous rencontrez des problèmes, consultez le [README détaillé du mode portable](etudiant/portable/README.md) qui contient :
+- Résolution des problèmes courants
+- Astuces pour Windows/Mac/Linux
+- Exemples d'utilisation avancée
+- FAQ complète
+
 ## Démarrer votre premier lab
 
 ### Copier le projet starter
 
-Maintenant que votre environnement est prêt (que ce soit en local ou cloud), vous allez pouvoir commencer à travailler. Pour chaque exercice de la formation, vous allez partir d'un projet de base appelé "starter" et le modifier selon les consignes.
+Maintenant que votre environnement est prêt (local, cloud, ou portable), vous allez pouvoir commencer à travailler. Pour chaque exercice de la formation, vous allez partir d'un projet de base appelé "starter" et le modifier selon les consignes.
 
 Le projet starter se trouve dans le dossier `shared/dbt-projects/starter` du repository. Pour commencer un lab, copiez ce dossier et renommez-le. Par exemple, pour le premier lab :
 
