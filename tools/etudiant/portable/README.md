@@ -1,243 +1,285 @@
-# Setup Étudiant Portable - SFEIR School DBT
+# 📦 SFEIR School DBT - Version Portable Windows
 
-## 🎯 C'est quoi le mode portable ?
+## 🎯 Vue d'ensemble
 
-Le mode portable utilise **DuckDB**, une base de données fichier ultra-légère :
-- ✅ **Installation en 2 minutes** - Juste Python, pas de Docker
-- ✅ **Aucun droit admin requis** - Fonctionne partout  
-- ✅ **100% portable** - Tout tient dans un dossier, copiable sur clé USB
-- ✅ **Compatible** - Même syntaxe SQL que PostgreSQL
+Cette version portable permet aux étudiants d'installer et utiliser dbt **sans droits administrateur** et **sans Docker**. Tout est contenu dans un seul exécutable auto-installable.
 
-Parfait si vous n'avez **pas de droits admin** ou **pas Docker** sur votre machine !
+## ✨ Caractéristiques
 
-## 🚀 Installation ultra-rapide
+- ✅ **Aucun droit admin requis** - Installation utilisateur uniquement
+- ✅ **Pas de Docker** - Utilise DuckDB (base de données fichier)
+- ✅ **Installation en 1 clic** - Un seul exécutable `.exe`
+- ✅ **100% portable** - Peut être copié sur clé USB
+- ✅ **Persistance des données** - Le travail est sauvegardé entre les sessions
+- ✅ **Désinstallation propre** - Peut tout supprimer facilement
+- ✅ **Terminal interactif** - Toutes les commandes dbt disponibles
+- ✅ **Explorateur de DB** - Visualisation des données intégrée
 
-### Option A : Vous avez Python installé (≥3.8)
+## 📁 Structure du projet
 
-#### Sur macOS / Linux
-```bash
-cd tools/etudiant/portable
-make setup
+```
+portable/
+├── installer/                  # 🏗️ Construction de l'installateur
+│   ├── installer.nsi          # Script NSIS pour créer l'exe
+│   ├── build-installer.ps1    # Script de build automatique
+│   └── assets/
+│       └── icon.ico           # Icône de l'application
+├── scripts/                    # 📜 Scripts utilisateur
+│   ├── dbt-shell.bat          # Terminal DBT interactif
+│   ├── explore-db.py          # Explorateur de base de données
+│   ├── explore-db.bat         # Wrapper pour l'explorateur
+│   ├── backup-work.bat        # Sauvegarde du travail
+│   └── uninstall.bat          # Désinstallation manuelle
+├── templates/                  # 📋 Templates de configuration
+│   ├── profiles.yml           # Configuration dbt
+│   └── dbeaver-template.json  # Template connexions DBeaver
+├── docs/                       # 📚 Documentation utilisateur
+│   ├── INSTALLATION.md        # Guide d'installation
+│   ├── USAGE.md               # Guide d'utilisation
+│   └── VISUALIZATION.md       # Guide visualisation des données
+├── requirements.txt            # Dépendances Python
+└── README.md                   # Ce fichier
 ```
 
-#### Sur Windows (sans Make)
+## 👨‍🎓 Pour les étudiants
+
+### Installation
+
+Vous avez reçu le fichier `sfeir-dbt-installer.exe`. C'est tout ce dont vous avez besoin !
+
+1. **Double-cliquez** sur l'installateur
+2. **Suivez** l'assistant (2-3 minutes)
+3. **C'est prêt !** Des raccourcis sont créés sur votre bureau
+
+### Utilisation
+
+**Ouvrez "SFEIR DBT Terminal"** (raccourci bureau) puis :
+
 ```batch
-cd tools\etudiant\portable
-scripts\setup.bat
-```
+# Aller dans un lab
+dbt-lab1
 
-Ou avec PowerShell :
-```powershell
-cd tools\etudiant\portable
-.\scripts\setup.ps1
-```
+# Charger les données
+dbt seed
 
-### Option B : Vous n'avez RIEN installé (zéro prérequis)
-
-**Cette option télécharge automatiquement Python portable + dbt sans aucun droit admin !**
-
-#### Sur macOS / Linux
-```bash
-cd tools/etudiant/portable/scripts
-./bootstrap.sh
-```
-
-#### Sur Windows
-```batch
-cd tools\etudiant\portable\scripts
-bootstrap.bat
-```
-
-Ou avec PowerShell :
-```powershell
-cd tools\etudiant\portable\scripts
-.\bootstrap.ps1
-```
-
-Le script bootstrap :
-1. Télécharge Python portable (aucune installation système)
-2. Installe dbt et DuckDB localement
-3. Configure automatiquement tout
-4. Charge les données initiales
-5. **Tout dans le dossier projet, rien dans le système !**
-
-## 📋 Commandes pour travailler
-
-```bash
-make help          # Afficher l'aide complète
-make test          # Tester que dbt fonctionne
-make dbt-seed      # Charger les données CSV dans DuckDB
-make dbt-run       # Exécuter vos modèles dbt
-make dbt-test      # Lancer les tests
-make dbt-build     # Tout faire d'un coup : seed + run + test
-make dbt-shell     # Mode interactif pour utiliser dbt directement
-make clean         # Tout supprimer et repartir de zéro
-```
-
-## 🎓 Utiliser pendant la formation
-
-### 1. Premier démarrage
-
-```bash
-cd tools/etudiant/portable
-make setup         # Installation (une seule fois)
-make dbt-seed      # Charger les données
-make dbt-run       # Exécuter les premiers modèles
-```
-
-### 2. Pendant les exercices
-
-```bash
-# Ouvrir le projet starter dans votre éditeur
-cd ../../shared/dbt-projects/starter
-
-# Modifier vos modèles SQL dans le dossier models/
-
-# Tester vos changements
-cd ../../../etudiant/portable
-make dbt-run
-
-# Ou en mode interactif
-make dbt-shell
-dbt run --select mon_modele
-dbt test
-exit
-```
-
-### 3. Voir vos données
-
-Votre base de données est un fichier : `tools/shared/dbt-projects/starter/sfeir_dbt.duckdb`
-
-**Avec Python (recommandé) :**
-```python
-import duckdb
-conn = duckdb.connect('../../shared/dbt-projects/starter/sfeir_dbt.duckdb')
-
-# Voir les tables
-conn.execute("SHOW TABLES").fetchall()
-
-# Requêter
-conn.execute("SELECT * FROM companies LIMIT 5").fetchdf()
-```
-
-**Avec DuckDB CLI (si installé) :**
-```bash
-duckdb ../../shared/dbt-projects/starter/sfeir_dbt.duckdb
-# Puis : SELECT * FROM companies;
-```
-
-## 🔄 Différences avec PostgreSQL
-
-**Bonne nouvelle :** Pour 95% des exercices, **aucune différence** !
-
-DuckDB supporte :
-- ✅ Les mêmes types de données
-- ✅ Les window functions
-- ✅ Les CTEs (WITH)
-- ✅ Les JOINs complexes
-- ✅ Les macros dbt
-
-Petites différences (rares) :
-- ⚠️ Un seul schema par défaut (vs plusieurs dans Postgres)
-- ⚠️ Une seule écriture à la fois (mais OK pour usage solo)
-
-## 🆘 Problèmes courants
-
-### "Python n'est pas trouvé"
-
-**Sur macOS :**
-```bash
-brew install python3
-# Ou télécharger sur python.org
-```
-
-**Sur Windows :**
-Téléchargez sur https://www.python.org/ et cochez "Add to PATH"
-
-### "Command not found: make" (Windows)
-
-Utilisez plutôt les scripts :
-```batch
-scripts\setup.bat
-```
-
-Ou installez Make via Chocolatey :
-```powershell
-choco install make
-```
-
-### Réinitialiser complètement
-
-```bash
-make clean        # Tout supprimer
-rm -rf venv       # Supprimer l'environnement Python
-make setup        # Réinstaller
-```
-
-### "Module duckdb not found"
-
-Activez d'abord l'environnement virtuel :
-```bash
-source venv/bin/activate  # macOS/Linux
-# ou
-venv\Scripts\activate.bat # Windows
-
-pip install -r requirements.txt
-```
-
-## 💡 Astuces
-
-### Travailler sur plusieurs labs
-
-```bash
-# Copier le projet starter pour chaque lab
-cp -r tools/shared/dbt-projects/starter mon-lab-01
-cd mon-lab-01
-
-# Utiliser dbt directement
-source ../../../etudiant/portable/venv/bin/activate
+# Exécuter les modèles
 dbt run
+
+# Explorer la base
+dbt-explore
 ```
 
-### Sauvegarder votre travail
+### Documentation complète
 
-Votre base de données complète tient dans un fichier :
-```bash
-# Backup
-cp sfeir_dbt.duckdb sfeir_dbt.duckdb.backup
+📖 Lisez la documentation dans `docs/` :
+- [INSTALLATION.md](docs/INSTALLATION.md) - Guide d'installation détaillé
+- [USAGE.md](docs/USAGE.md) - Comment utiliser dbt au quotidien
+- [VISUALIZATION.md](docs/VISUALIZATION.md) - Visualiser vos données
 
-# Ou copier sur clé USB
-cp sfeir_dbt.duckdb /path/to/usb/
+## 👨‍🏫 Pour les formateurs
+
+### Construire l'installateur
+
+#### Prérequis
+
+- **Windows** (pour compiler avec NSIS)
+- **NSIS** installé : https://nsis.sourceforge.io/Download
+  ```powershell
+  # Avec Chocolatey
+  choco install nsis
+  ```
+- **PowerShell** (généralement déjà installé)
+- **Connexion internet** (pour télécharger Python et les packages)
+
+#### Build de l'installateur
+
+```powershell
+# 1. Aller dans le dossier installer
+cd tools/etudiant/portable/installer
+
+# 2. Lancer le script de build
+.\build-installer.ps1
+
+# 3. Attendre 5-10 minutes
+#    Le script va :
+#    - Télécharger Python portable
+#    - Télécharger tous les packages Python (dbt, duckdb, etc.)
+#    - Préparer les labs avec les données
+#    - Compiler l'installateur NSIS
+
+# 4. Résultat
+#    Fichier créé : sfeir-dbt-installer.exe (~50-80 MB)
 ```
 
-### Partager avec un collègue
+#### Options avancées
 
-Zipper et envoyer :
-```bash
-zip -r mon-projet.zip . -x "venv/*" "*.pyc"
+```powershell
+# Skip les téléchargements (si déjà fait)
+.\build-installer.ps1 -SkipDownload
+
+# Mode verbose pour debugging
+.\build-installer.ps1 -Verbose
 ```
 
-Votre collègue dézippe et lance `make setup` !
+### Distribuer l'installateur
 
-## 🎯 Pourquoi DuckDB pour apprendre dbt ?
+**L'exécutable `sfeir-dbt-installer.exe` peut être distribué par :**
 
-1. **Zéro friction** - Installation en 2 min vs 30 min avec Docker
-2. **Fonctionne partout** - Même sur machines verrouillées
-3. **Vraie base de données** - Pas un simulateur, c'est la vraie chose
-4. **Utilisé en prod** - MotherDuck, Evidence, etc. utilisent DuckDB
-5. **Portable** - Emmenez votre environnement partout
+1. **Email** (si < 25 MB après compression)
+2. **Google Drive / OneDrive / Dropbox**
+3. **Clé USB** (idéal pour formations en présentiel)
+4. **Serveur intranet** entreprise
+5. **GitHub Releases** (si le repo est public/privé avec accès)
 
-## 📚 Aller plus loin
+**Instructions à donner aux étudiants :**
+> "Téléchargez le fichier `sfeir-dbt-installer.exe` et double-cliquez dessus. L'installation est automatique et ne nécessite aucun droit administrateur."
 
-- [Documentation DuckDB](https://duckdb.org/docs/)
-- [Documentation dbt-duckdb](https://github.com/duckdb/dbt-duckdb)
-- [Fonctions SQL DuckDB](https://duckdb.org/docs/sql/functions/overview)
+### Customisation
 
-## ✅ Checklist avant chaque session
+#### Changer les labs inclus
 
-- [ ] `make test` → Dbt fonctionne
-- [ ] Base existe : `ls ../../shared/dbt-projects/starter/sfeir_dbt.duckdb`
-- [ ] `make dbt-seed` si base vide
-- [ ] Projet ouvert dans votre éditeur
+Éditez `build-installer.ps1` :
 
-Vous êtes prêt ! 🚀
+```powershell
+$labs = @(
+    "lab-01-models",
+    "lab-02-sources",
+    # Ajoutez ou enlevez des labs ici
+)
+```
+
+#### Changer la version de Python
+
+Éditez `build-installer.ps1` :
+
+```powershell
+$PYTHON_VERSION = "3.12.0"  # Ou autre version
+```
+
+#### Ajouter des packages Python
+
+Éditez `build-installer.ps1` :
+
+```powershell
+& "$tempVenv\Scripts\pip.exe" download `
+    dbt-core dbt-duckdb tabulate `
+    votre-package-supplementaire `
+    --dest $WHEELS_DIR
+```
+
+## 🔍 Architecture technique
+
+### Ce qui est installé
+
+**Sur la machine de l'étudiant :**
+```
+C:\Users\[Nom]\Documents\sfeir-school-dbt\
+├── python_portable\        # Python 3.11 embeddable (~16 MB)
+├── venv\                   # Environnement virtuel Python
+│   └── Scripts\
+│       ├── dbt.exe        # Commande dbt
+│       └── python.exe     # Python du venv
+├── workspace\              # Zone de travail de l'étudiant
+│   ├── labs\              # 5 labs pré-configurés
+│   │   ├── lab-01-models\
+│   │   │   ├── models\    # Modèles SQL
+│   │   │   ├── seeds\     # Données CSV
+│   │   │   └── sfeir_dbt.duckdb  # Base DuckDB
+│   │   └── ...
+│   ├── my-work\           # Espace personnel
+│   └── backups\           # Sauvegardes auto
+└── scripts\               # Utilitaires
+```
+
+**Configuration dbt :**
+```
+C:\Users\[Nom]\.dbt\profiles.yml
+```
+
+### Fonctionnement
+
+1. **Python portable** : Version embeddable qui n'installe rien dans le système
+2. **DuckDB** : Base de données fichier (pas de serveur)
+3. **Venv** : Environnement Python isolé
+4. **Profiles.yml** : Configure dbt pour utiliser DuckDB
+
+### Pas de droits admin nécessaires car :
+
+- ✅ Installation dans `Documents/` (espace utilisateur)
+- ✅ Python embeddable (pas d'installation système)
+- ✅ Pas de service Windows
+- ✅ Pas de modification du registre système (sauf user)
+- ✅ Pas de fichiers dans `Program Files/`
+
+## ✅ Validation de la solution
+
+### ✅ Persistance du travail
+
+**Question :** Les étudiants peuvent-ils fermer et reprendre le lendemain ?
+
+**Réponse :** **OUI**
+- Les bases DuckDB sont des fichiers (`.duckdb`)
+- Les modèles SQL sont des fichiers (`.sql`)
+- Tout persiste entre les sessions
+- Chaque lab a sa propre base indépendante
+
+### ✅ Purge de l'installation
+
+**Question :** Peut-on facilement tout supprimer ?
+
+**Réponse :** **OUI**
+- Désinstallateur intégré (via Panneau de configuration)
+- Script `uninstall.bat` manuel
+- Ou simple suppression du dossier
+- Option de garder ou supprimer les données
+
+### ✅ Utilisation en terminal
+
+**Question :** Les commandes dbt sont-elles disponibles ?
+
+**Réponse :** **OUI**
+- Terminal interactif `dbt-shell.bat`
+- Toutes les commandes dbt : `run`, `test`, `build`, `seed`, etc.
+- Aliases pratiques : `dbt-lab1`, `dbt-backup`, etc.
+- Environnement activé automatiquement
+
+### ✅ Visualisation de la base
+
+**Question :** Peut-on connecter un outil de visualisation ?
+
+**Réponse :** **OUI**
+- Explorateur intégré (`explore-db.py`)
+- DBeaver supporté (config fournie)
+- Scripts Python pour analyses
+- DuckDB CLI compatible
+
+## 🆘 Support et dépannage
+
+### Pour les étudiants
+
+Consultez la documentation :
+- [docs/INSTALLATION.md](docs/INSTALLATION.md)
+- [docs/USAGE.md](docs/USAGE.md)
+- [docs/VISUALIZATION.md](docs/VISUALIZATION.md)
+
+### Pour les formateurs
+
+**Problèmes de build :**
+- Vérifiez que NSIS est installé
+- Vérifiez la connexion internet
+- Consultez les logs de build
+
+**L'installateur ne fonctionne pas :**
+- Testez sur une VM Windows propre
+- Vérifiez les chemins dans installer.nsi
+- Vérifiez que tous les fichiers sont inclus
+
+## 📞 Contact
+
+**Support SFEIR :**
+- Documentation : https://www.sfeir.com
+- Formation : contact-formation@sfeir.com
+
+## 📄 Licence
+
+Voir fichier LICENSE à la racine du projet.

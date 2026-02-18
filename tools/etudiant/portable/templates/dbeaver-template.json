@@ -1,0 +1,87 @@
+{
+  "title": "Connexions DBeaver SFEIR School DBT",
+  "version": "1.0",
+  "description": "Template de connexions DBeaver pour les bases DuckDB des labs SFEIR",
+  "instructions": "Importez ce fichier dans DBeaver : Fichier > Importer > Connexions > Sélectionner ce fichier JSON",
+  "connections": [
+    {
+      "name": "SFEIR DBT - Lab 01 Models",
+      "driver": "duckdb",
+      "type": "dev",
+      "properties": {
+        "url": "jdbc:duckdb:${INSTALL_DIR}/workspace/labs/lab-01-models/sfeir_dbt.duckdb",
+        "database": "sfeir_dbt",
+        "read-only": false
+      },
+      "description": "Base de données du Lab 01 - Introduction aux modèles dbt"
+    },
+    {
+      "name": "SFEIR DBT - Lab 02 Sources",
+      "driver": "duckdb",
+      "type": "dev",
+      "properties": {
+        "url": "jdbc:duckdb:${INSTALL_DIR}/workspace/labs/lab-02-sources/sfeir_dbt.duckdb",
+        "database": "sfeir_dbt",
+        "read-only": false
+      },
+      "description": "Base de données du Lab 02 - Sources et références"
+    },
+    {
+      "name": "SFEIR DBT - Lab 03 Tests",
+      "driver": "duckdb",
+      "type": "dev",
+      "properties": {
+        "url": "jdbc:duckdb:${INSTALL_DIR}/workspace/labs/lab-03-tests/sfeir_dbt.duckdb",
+        "database": "sfeir_dbt",
+        "read-only": false
+      },
+      "description": "Base de données du Lab 03 - Tests et qualité des données"
+    },
+    {
+      "name": "SFEIR DBT - Lab 04 Documentation",
+      "driver": "duckdb",
+      "type": "dev",
+      "properties": {
+        "url": "jdbc:duckdb:${INSTALL_DIR}/workspace/labs/lab-04-documentation/sfeir_dbt.duckdb",
+        "database": "sfeir_dbt",
+        "read-only": false
+      },
+      "description": "Base de données du Lab 04 - Documentation"
+    },
+    {
+      "name": "SFEIR DBT - Lab 05 Advanced",
+      "driver": "duckdb",
+      "type": "dev",
+      "properties": {
+        "url": "jdbc:duckdb:${INSTALL_DIR}/workspace/labs/lab-05-advanced/sfeir_dbt.duckdb",
+        "database": "sfeir_dbt",
+        "read-only": false
+      },
+      "description": "Base de données du Lab 05 - Techniques avancées"
+    },
+    {
+      "name": "SFEIR DBT - My Work",
+      "driver": "duckdb",
+      "type": "dev",
+      "properties": {
+        "url": "jdbc:duckdb:${INSTALL_DIR}/workspace/my-work/my_work.duckdb",
+        "database": "my_work",
+        "read-only": false
+      },
+      "description": "Base de données de votre espace personnel my-work"
+    }
+  ],
+  "notes": [
+    "Remplacez ${INSTALL_DIR} par le chemin complet de votre installation",
+    "Exemple: C:\\Users\\VotreNom\\Documents\\sfeir-school-dbt",
+    "Pour DBeaver, vous devrez peut-être télécharger le driver DuckDB",
+    "Alternative: Utilisez l'explorateur DB intégré (explore-db.bat)"
+  ],
+  "dbeaver_driver_info": {
+    "name": "DuckDB",
+    "class": "org.duckdb.DuckDBDriver",
+    "url_template": "jdbc:duckdb:{database}",
+    "default_port": null,
+    "description": "Driver JDBC pour DuckDB"
+  }
+}
