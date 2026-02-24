@@ -1,3 +1,11 @@
+param(
+    [switch]$SkipDownload,
+    [switch]$Verbose
+)
+
+# Force UTF-8 encoding for proper character display
+$OutputEncoding = [System.Text.Encoding]::UTF8
+
 <#
 .SYNOPSIS
     Script de build de l'installateur SFEIR School DBT
@@ -14,12 +22,12 @@
     Pour installer NSIS : choco install nsis (avec Chocolatey)
 #>
 
-param(
-    [switch]$SkipDownload = $false,
-    [switch]$Verbose = $false
-)
-
 $ErrorActionPreference = "Stop"
+
+# IMPORTANT: Se placer dans le répertoire du script pour que les chemins relatifs fonctionnent
+$ScriptDir = $PSScriptRoot
+Push-Location $ScriptDir
+Write-Host "[INFO] Répertoire de travail: $ScriptDir" -ForegroundColor Gray
 
 # Configuration
 $PYTHON_VERSION = "3.11.9"
@@ -29,9 +37,9 @@ $WHEELS_DIR = "$BUILD_DIR\wheels"
 $PYTHON_DIR = "$BUILD_DIR\python_portable"
 $WORKSPACE_DIR = "$BUILD_DIR\workspace"
 
-Write-Host "╔═══════════════════════════════════════════════════╗" -ForegroundColor Green
-Write-Host "║  Build Installateur SFEIR School DBT             ║" -ForegroundColor Green
-Write-Host "╚═══════════════════════════════════════════════════╝" -ForegroundColor Green
+Write-Host "═════════════════════════════════════════════════════" -ForegroundColor Green
+Write-Host "  Build Installateur SFEIR School DBT" -ForegroundColor Green
+Write-Host "═════════════════════════════════════════════════════" -ForegroundColor Green
 Write-Host ""
 
 # Fonction pour télécharger un fichier
@@ -41,20 +49,20 @@ function Download-File {
         [string]$Output
     )
     
-    Write-Host "⬇️  Téléchargement : $Output" -ForegroundColor Yellow
+    Write-Host "[DOWNLOAD] Téléchargement : $Output" -ForegroundColor Yellow
     
     if (Test-Path $Output) {
-        Write-Host "   ✓ Déjà présent" -ForegroundColor Gray
+        Write-Host "   [OK] Déjà présent" -ForegroundColor Gray
         return
     }
     
     try {
         $ProgressPreference = 'SilentlyContinue'
         Invoke-WebRequest -Uri $Url -OutFile $Output -UseBasicParsing
-        Write-Host "   ✓ Téléchargé" -ForegroundColor Green
+        Write-Host "   [OK] Téléchargé" -ForegroundColor Green
     }
     catch {
-        Write-Host "   ❌ Erreur : $_" -ForegroundColor Red
+        Write-Host "   [ERROR] Erreur : $_" -ForegroundColor Red
         throw
     }
 }
@@ -70,7 +78,7 @@ New-Item -ItemType Directory -Path $BUILD_DIR -Force | Out-Null
 New-Item -ItemType Directory -Path $WHEELS_DIR -Force | Out-Null
 New-Item -ItemType Directory -Path $PYTHON_DIR -Force | Out-Null
 New-Item -ItemType Directory -Path $WORKSPACE_DIR -Force | Out-Null
-Write-Host "   ✓ Structure créée" -ForegroundColor Green
+Write-Host "   [OK] Structure créée" -ForegroundColor Green
 
 # Étape 2 : Télécharger Python portable
 if (-not $SkipDownload) {
@@ -88,14 +96,14 @@ if (-not $SkipDownload) {
         $content = Get-Content $pthFile.FullName
         $content = $content -replace '#import site', 'import site'
         Set-Content -Path $pthFile.FullName -Value $content
-        Write-Host "   ✓ Python configuré pour pip" -ForegroundColor Green
+        Write-Host "   [OK] Python configuré pour pip" -ForegroundColor Green
     }
     
     # Télécharger et installer get-pip
     Write-Host "   Installation de pip..." -ForegroundColor Yellow
     Download-File -Url "https://bootstrap.pypa.io/get-pip.py" -Output "$PYTHON_DIR\get-pip.py"
     & "$PYTHON_DIR\python.exe" "$PYTHON_DIR\get-pip.py" --no-warn-script-location
-    Write-Host "   ✓ Python portable prêt" -ForegroundColor Green
+    Write-Host "   [OK] Python portable prêt" -ForegroundColor Green
 }
 else {
     Write-Host "[2/7] Téléchargement de Python ignoré (--SkipDownload)" -ForegroundColor Gray
@@ -105,25 +113,21 @@ else {
 if (-not $SkipDownload) {
     Write-Host "[3/7] Téléchargement des dépendances Python..." -ForegroundColor Cyan
     
-    # Créer un venv temporaire pour télécharger les wheels
-    $tempVenv = "$BUILD_DIR\temp_venv"
-    & "$PYTHON_DIR\python.exe" -m venv $tempVenv
-    
     Write-Host "   Téléchargement des wheels..." -ForegroundColor Yellow
-    & "$tempVenv\Scripts\pip.exe" download `
+    
+    # Utiliser pip directement depuis Python portable (venv n'est pas disponible en portable)
+    & "$PYTHON_DIR\python.exe" -m pip download `
         dbt-core dbt-duckdb tabulate `
         --dest $WHEELS_DIR `
         --no-deps
     
     # Télécharger aussi toutes les dépendances
-    & "$tempVenv\Scripts\pip.exe" download `
+    & "$PYTHON_DIR\python.exe" -m pip download `
         dbt-core dbt-duckdb tabulate `
         --dest $WHEELS_DIR
     
-    Remove-Item -Path $tempVenv -Recurse -Force
-    
     $wheelCount = (Get-ChildItem -Path $WHEELS_DIR -Filter "*.whl").Count
-    Write-Host "   ✓ $wheelCount wheels téléchargés" -ForegroundColor Green
+    Write-Host "   [OK] $wheelCount wheels téléchargés" -ForegroundColor Green
 }
 else {
     Write-Host "[3/7] Téléchargement des wheels ignoré (--SkipDownload)" -ForegroundColor Gray
@@ -131,6 +135,11 @@ else {
 
 # Étape 4 : Préparer le workspace
 Write-Host "[4/7] Préparation du workspace..." -ForegroundColor Cyan
+
+# Calculer les chemins depuis la racine du script
+# Le script est dans: tools/etudiant/portable/installer/
+# On remonte 3 niveaux pour arriver à tools/
+$toolsDir = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $PSScriptRoot))
 
 # Copier le projet starter pour chaque lab
 $labs = @(
@@ -141,8 +150,17 @@ $labs = @(
     "lab-05-advanced"
 )
 
-$starterPath = "..\..\..\..\shared\dbt-projects\starter"
-$seedsPath = "..\..\..\..\shared\data\seeds"
+$starterPath = Join-Path $toolsDir "shared\dbt-projects\starter"
+$seedsPath = Join-Path $toolsDir "shared\data\seeds"
+
+Write-Host "   [DEBUG] Tools directory: $toolsDir" -ForegroundColor Gray
+Write-Host "   [DEBUG] Starter path: $starterPath" -ForegroundColor Gray
+
+# Vérifier si le dossier starter existe
+if (-not (Test-Path $starterPath)) {
+    Write-Host "   [WARNING] Dossier starter non trouvé: $starterPath" -ForegroundColor Yellow
+    Write-Host "   [WARNING] Création d'une structure vide..." -ForegroundColor Yellow
+}
 
 # Créer la structure du workspace
 New-Item -ItemType Directory -Path "$WORKSPACE_DIR\labs" -Force | Out-Null
@@ -153,11 +171,37 @@ foreach ($lab in $labs) {
     $labPath = "$WORKSPACE_DIR\labs\$lab"
     Write-Host "   Création de $lab..." -ForegroundColor Gray
     
-    # Copier le projet starter
-    Copy-Item -Path "$starterPath\*" -Destination $labPath -Recurse -Force
+    # Créer le dossier destination
+    New-Item -ItemType Directory -Path $labPath -Force | Out-Null
     
-    # Copier les seeds
-    if (Test-Path "$labPath\seeds") {
+    # Copier le projet starter si disponible
+    if (Test-Path $starterPath) {
+        Copy-Item -Path "$starterPath\*" -Destination $labPath -Recurse -Force
+    }
+    else {
+        # Créer une structure minimale
+        New-Item -ItemType Directory -Path "$labPath\models" -Force | Out-Null
+        New-Item -ItemType Directory -Path "$labPath\tests" -Force | Out-Null
+        New-Item -ItemType Directory -Path "$labPath\seeds" -Force | Out-Null
+        New-Item -ItemType Directory -Path "$labPath\macros" -Force | Out-Null
+        
+        # Créer un fichier dbt_project.yml minimal
+        $dbtProjectContent = @"
+name: '$lab'
+version: '1.0.0'
+config-version: 2
+profile: 'sfeir_student_portable'
+
+model-paths: ['models']
+test-paths: ['tests']
+macro-paths: ['macros']
+seed-paths: ['seeds']
+"@
+        Set-Content -Path "$labPath\dbt_project.yml" -Value $dbtProjectContent
+    }
+    
+    # Copier les seeds si disponible
+    if ((Test-Path "$labPath\seeds") -and (Test-Path $seedsPath)) {
         Copy-Item -Path "$seedsPath\*.csv" -Destination "$labPath\seeds\" -Force
     }
     
@@ -220,7 +264,10 @@ dbt run
 "@
 Set-Content -Path "$WORKSPACE_DIR\my-work\README.md" -Value $myWorkReadme
 
-Write-Host "   ✓ Workspace créé avec $($labs.Count) labs" -ForegroundColor Green
+Write-Host "   [OK] Workspace créé avec $($labs.Count) labs" -ForegroundColor Green
+
+# Note: Les scripts et profiles.yml sont générés directement par le fichier NSIS
+# Plus besoin de les copier dans build/
 
 # Étape 5 : Vérifier NSIS
 Write-Host "[5/7] Vérification de NSIS..." -ForegroundColor Cyan
@@ -231,55 +278,72 @@ if (-not (Test-Path $nsisPath)) {
 }
 
 if (-not (Test-Path $nsisPath)) {
-    Write-Host "   ❌ NSIS n'est pas installé" -ForegroundColor Red
+    Write-Host "   [ERROR] NSIS n'est pas installé" -ForegroundColor Red
     Write-Host "   Installez NSIS depuis : https://nsis.sourceforge.io/Download" -ForegroundColor Yellow
     Write-Host "   Ou avec Chocolatey : choco install nsis" -ForegroundColor Yellow
     exit 1
 }
-Write-Host "   ✓ NSIS trouvé : $nsisPath" -ForegroundColor Green
+Write-Host "   [OK] NSIS trouvé : $nsisPath" -ForegroundColor Green
 
 # Étape 6 : Compiler l'installateur
 Write-Host "[6/7] Compilation de l'installateur..." -ForegroundColor Cyan
 $nsisScript = "installer.nsi"
 
+# Vérification des assets
+Write-Host "   Vérification des assets..." -ForegroundColor Yellow
+if (-not (Test-Path "assets")) {
+    New-Item -ItemType Directory -Path "assets" -Force | Out-Null
+}
+
+# Utiliser le script NSIS existant (déjà corrigé pour installation sans admin)
+Write-Host "   Utilisation du script NSIS existant..." -ForegroundColor Yellow
+
+# Vérifier que le script NSIS existe
 if (-not (Test-Path $nsisScript)) {
-    Write-Host "   ❌ Script NSIS non trouvé : $nsisScript" -ForegroundColor Red
+    Write-Host "   [ERROR] Script NSIS non trouvé : $nsisScript" -ForegroundColor Red
+    Write-Host "   [INFO] Assurez-vous que installer.nsi existe dans le dossier installer/" -ForegroundColor Yellow
     exit 1
 }
+Write-Host "   [OK] Script NSIS trouvé" -ForegroundColor Green
 
 Write-Host "   Lancement de makensis..." -ForegroundColor Yellow
 & $nsisPath $nsisScript
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Host "   ❌ Erreur lors de la compilation" -ForegroundColor Red
+    Write-Host "   [ERROR] Erreur lors de la compilation NSIS" -ForegroundColor Red
+    Write-Host "   [INFO] Cela peut être dû à des chemins manquants dans build/" -ForegroundColor Yellow
+    Write-Host "   [INFO] Relancez sans --SkipDownload pour télécharger tous les fichiers" -ForegroundColor Yellow
     exit 1
 }
 
 $installerFile = "sfeir-dbt-installer.exe"
 if (Test-Path $installerFile) {
     $size = [math]::Round((Get-Item $installerFile).Length / 1MB, 2)
-    Write-Host "   ✓ Installateur créé : $installerFile ($size MB)" -ForegroundColor Green
+    Write-Host "   [OK] Installateur créé : $installerFile ($size MB)" -ForegroundColor Green
 }
 else {
-    Write-Host "   ❌ Installateur non trouvé après compilation" -ForegroundColor Red
+    Write-Host "   [ERROR] Installateur non trouvé après compilation" -ForegroundColor Red
     exit 1
 }
 
 # Étape 7 : Résumé
 Write-Host ""
-Write-Host "╔═══════════════════════════════════════════════════╗" -ForegroundColor Green
-Write-Host "║          ✅ Build terminé avec succès !            ║" -ForegroundColor Green
-Write-Host "╚═══════════════════════════════════════════════════╝" -ForegroundColor Green
+Write-Host "═════════════════════════════════════════════════════" -ForegroundColor Green
+Write-Host "  [SUCCESS] Build terminé avec succès !" -ForegroundColor Green
+Write-Host "═════════════════════════════════════════════════════" -ForegroundColor Green
 Write-Host ""
-Write-Host "📦 Installateur : $installerFile" -ForegroundColor Cyan
-Write-Host "📊 Taille : $size MB" -ForegroundColor Cyan
+Write-Host "[PACKAGE] Installateur : $installerFile" -ForegroundColor Cyan
+Write-Host "[STATS] Taille : $size MB" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "🚀 Distribution :" -ForegroundColor Yellow
-Write-Host "   • Par email (si < 25 MB)" -ForegroundColor Gray
-Write-Host "   • Google Drive / OneDrive" -ForegroundColor Gray
-Write-Host "   • Clé USB" -ForegroundColor Gray
-Write-Host "   • Serveur intranet" -ForegroundColor Gray
+Write-Host "[DEPLOY] Distribution :" -ForegroundColor Yellow
+Write-Host "   * Par email (si < 25 MB)" -ForegroundColor Gray
+Write-Host "   * Google Drive / OneDrive" -ForegroundColor Gray
+Write-Host "   * Clé USB" -ForegroundColor Gray
+Write-Host "   * Serveur intranet" -ForegroundColor Gray
 Write-Host ""
 Write-Host "Pour tester l'installation :" -ForegroundColor Yellow
 Write-Host "   .\$installerFile" -ForegroundColor Cyan
 Write-Host ""
+
+# Restaurer le répertoire de travail original
+Pop-Location
