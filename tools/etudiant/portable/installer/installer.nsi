@@ -1,239 +1,135 @@
-; SFEIR School DBT - Installateur Portable Windows
-; Aucun droit administrateur requis - Installation utilisateur uniquement
-;
-; Pour compiler : makensis installer.nsi
-; Produit : sfeir-dbt-installer.exe
+; NSIS Installer Script for SFEIR School DBT
+; Installation SANS droits admin dans le dossier Documents
 
-!define PRODUCT_NAME "SFEIR School DBT"
-!define PRODUCT_VERSION "1.0.0"
-!define PRODUCT_PUBLISHER "SFEIR"
-!define PRODUCT_WEB_SITE "https://www.sfeir.com"
+!include "MUI2.nsh"
+!include "FileFunc.nsh"
 
-; Configuration
-Name "${PRODUCT_NAME} ${PRODUCT_VERSION}"
+; --- Project Information ---
+Name "SFEIR School DBT Portable"
 OutFile "sfeir-dbt-installer.exe"
 InstallDir "$DOCUMENTS\sfeir-school-dbt"
-InstallDirRegKey HKCU "Software\${PRODUCT_NAME}" "InstallDir"
-
-; Pas de droits admin requis
 RequestExecutionLevel user
 
-; Interface moderne
-!include "MUI2.nsh"
-
-; Pages de l'installateur
-!define MUI_ABORTWARNING
-!define MUI_ICON "assets\icon.ico"
-!define MUI_WELCOMEPAGE_TITLE "Bienvenue dans l'installation de ${PRODUCT_NAME}"
-!define MUI_WELCOMEPAGE_TEXT "Cet assistant va installer ${PRODUCT_NAME} sur votre ordinateur.$\r$\n$\r$\n✅ Aucun droit administrateur requis$\r$\n✅ Installation rapide (2-3 minutes)$\r$\n✅ Environnement portable complet$\r$\n$\r$\nCliquez sur Suivant pour continuer."
-
+; --- MUI Settings (no icon file needed) ---
 !insertmacro MUI_PAGE_WELCOME
-!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
-
-!define MUI_FINISHPAGE_TITLE "Installation terminée !"
-!define MUI_FINISHPAGE_TEXT "${PRODUCT_NAME} a été installé avec succès.$\r$\n$\r$\nDouble-cliquez sur 'SFEIR DBT Terminal' sur votre bureau pour commencer."
-!define MUI_FINISHPAGE_RUN "$INSTDIR\scripts\dbt-shell.bat"
-!define MUI_FINISHPAGE_RUN_TEXT "Ouvrir le terminal DBT maintenant"
 !insertmacro MUI_PAGE_FINISH
 
-; Page de désinstallation
-!insertmacro MUI_UNPAGE_CONFIRM
-!insertmacro MUI_UNPAGE_INSTFILES
-
-; Langues
 !insertmacro MUI_LANGUAGE "French"
 
-; Section principale
-Section "Installation" SEC01
+; --- Install Section ---
+Section "Install"
     SetOutPath "$INSTDIR"
-    SetOverwrite ifnewer
     
-    ; Message de progression
-    DetailPrint "Installation de Python portable..."
-    
-    ; Extraire Python portable (pré-packagé)
-    File /r "build\python_portable"
-    
-    ; Extraire le projet DBT
-    DetailPrint "Installation du projet DBT..."
-    File /r "build\workspace"
-    
-    ; Extraire les scripts
-    DetailPrint "Installation des scripts..."
-    CreateDirectory "$INSTDIR\scripts"
-    SetOutPath "$INSTDIR\scripts"
-    File "..\scripts\dbt-shell.bat"
-    File "..\scripts\explore-db.py"
-    File "..\scripts\explore-db.bat"
-    File "..\scripts\backup-work.bat"
-    File "..\scripts\uninstall.bat"
-    File "..\scripts\setup.bat"
-    
-    ; Extraire les templates et configs
-    DetailPrint "Configuration de l'environnement..."
-    CreateDirectory "$INSTDIR\templates"
-    SetOutPath "$INSTDIR\templates"
-    File "..\templates\profiles.yml"
-    File "..\templates\dbeaver-template.json"
-    
-    ; Extraire la documentation
-    CreateDirectory "$INSTDIR\docs"
-    SetOutPath "$INSTDIR\docs"
-    File "..\docs\INSTALLATION.md"
-    File "..\docs\USAGE.md"
-    File "..\docs\VISUALIZATION.md"
-    
-    ; Extraire les wheels Python (pré-téléchargés)
-    DetailPrint "Installation des dépendances Python..."
+    ; Create base directories
+    CreateDirectory "$INSTDIR\python"
     CreateDirectory "$INSTDIR\wheels"
+    CreateDirectory "$INSTDIR\scripts"
+    CreateDirectory "$INSTDIR\workspace"
+    CreateDirectory "$INSTDIR\workspace\labs"
+    CreateDirectory "$INSTDIR\workspace\my-work"
+    CreateDirectory "$INSTDIR\workspace\backups"
+    
+    ; Copy Python portable
+    SetOutPath "$INSTDIR\python"
+    File /r "build\python_portable\*.*"
+    
+    ; Copy wheels
     SetOutPath "$INSTDIR\wheels"
     File /r "build\wheels\*.*"
     
-    ; Créer l'environnement virtuel
-    DetailPrint "Création de l'environnement virtuel Python..."
-    SetOutPath "$INSTDIR"
-    nsExec::ExecToLog '"$INSTDIR\python_portable\python.exe" -m venv venv'
+    ; Copy workspace (labs, templates, etc.)
+    SetOutPath "$INSTDIR\workspace"
+    File /r "build\workspace\*.*"
     
-    ; Configurer pip pour permettre import site
-    DetailPrint "Configuration de Python..."
-    FileOpen $0 "$INSTDIR\python_portable\python311._pth" a
-    FileSeek $0 0 END
-    FileWrite $0 "$\r$\nimport site$\r$\n"
+    ; Copy scripts
+    SetOutPath "$INSTDIR\scripts"
+    File "build\scripts\dbt-shell.bat"
+    File "build\scripts\explore-db.bat"
+    File "build\scripts\explore-db.py"
+    File "build\scripts\backup-work.bat"
+    File "build\scripts\uninstall.bat"
+    
+    ; Copy profiles.yml template
+    SetOutPath "$INSTDIR"
+    File "build\templates\profiles.yml"
+    
+    ; Create setup script that will run on first launch
+    SetOutPath "$INSTDIR"
+    FileOpen $0 "$INSTDIR\setup-env.bat" w
+    FileWrite $0 "@echo off$\r$\n"
+    FileWrite $0 "echo ================================================================$\r$\n"
+    FileWrite $0 "echo   SFEIR School DBT - Configuration de l'environnement$\r$\n"
+    FileWrite $0 "echo ================================================================$\r$\n"
+    FileWrite $0 "echo.$\r$\n"
+    FileWrite $0 "if exist \"%~dp0venv\" ($\r$\n"
+    FileWrite $0 "    echo [OK] Environnement deja configure.$\r$\n"
+    FileWrite $0 "    goto :end$\r$\n"
+    FileWrite $0 ")$\r$\n"
+    FileWrite $0 "echo [1/3] Creation de l'environnement virtuel...$\r$\n"
+    FileWrite $0 "\"%~dp0python\\python.exe\" -m venv \"%~dp0venv\"$\r$\n"
+    FileWrite $0 "echo [2/3] Installation des packages dbt...$\r$\n"
+    FileWrite $0 "call \"%~dp0venv\\Scripts\\activate.bat\"$\r$\n"
+    FileWrite $0 "pip install --no-index --find-links=\"%~dp0wheels\" dbt-core dbt-duckdb tabulate$\r$\n"
+    FileWrite $0 "echo [3/3] Configuration du profil dbt...$\r$\n"
+    FileWrite $0 "if not exist \"%USERPROFILE%\\.dbt\" mkdir \"%USERPROFILE%\\.dbt\"$\r$\n"
+    FileWrite $0 "copy /Y \"%~dp0profiles.yml\" \"%USERPROFILE%\\.dbt\\profiles.yml\"$\r$\n"
+    FileWrite $0 "echo.$\r$\n"
+    FileWrite $0 "echo [OK] Installation terminee !$\r$\n"
+    FileWrite $0 ":end$\r$\n"
+    FileWrite $0 "echo.$\r$\n"
+    FileWrite $0 "pause$\r$\n"
     FileClose $0
     
-    ; Installer get-pip si nécessaire
-    nsExec::ExecToLog '"$INSTDIR\python_portable\python.exe" -m ensurepip'
+    ; Create launcher script
+    FileOpen $0 "$INSTDIR\dbt-shell.bat" w
+    FileWrite $0 "@echo off$\r$\n"
+    FileWrite $0 "cd /d \"%~dp0\"$\r$\n"
+    FileWrite $0 "if not exist venv ($\r$\n"
+    FileWrite $0 "    echo Premier lancement - Configuration en cours...$\r$\n"
+    FileWrite $0 "    call setup-env.bat$\r$\n"
+    FileWrite $0 ")$\r$\n"
+    FileWrite $0 "call venv\\Scripts\\activate.bat$\r$\n"
+    FileWrite $0 "cd workspace$\r$\n"
+    FileWrite $0 "echo.$\r$\n"
+    FileWrite $0 "echo ================================================================$\r$\n"
+    FileWrite $0 "echo   SFEIR School DBT - Terminal Interactif$\r$\n"
+    FileWrite $0 "echo ================================================================$\r$\n"
+    FileWrite $0 "echo.$\r$\n"
+    FileWrite $0 "echo Commandes: dbt run, dbt test, dbt build, dbt seed$\r$\n"
+    FileWrite $0 "echo Labs: cd labs\\lab-01-models$\r$\n"
+    FileWrite $0 "echo.$\r$\n"
+    FileWrite $0 "cmd /k$\r$\n"
+    FileClose $0
     
-    ; Installer les packages depuis les wheels (pas besoin d'internet)
-    DetailPrint "Installation de dbt et DuckDB..."
-    nsExec::ExecToLog '"$INSTDIR\venv\Scripts\pip.exe" install --upgrade pip'
-    nsExec::ExecToLog '"$INSTDIR\venv\Scripts\pip.exe" install --no-index --find-links=wheels dbt-core dbt-duckdb tabulate'
+    ; Create desktop shortcut
+    CreateShortCut "$DESKTOP\SFEIR DBT Shell.lnk" "$INSTDIR\dbt-shell.bat" "" "" "" SW_SHOWNORMAL "" "Terminal dbt pour SFEIR School"
     
-    ; Créer le profil dbt dans le répertoire utilisateur
-    DetailPrint "Configuration du profil dbt..."
-    CreateDirectory "$PROFILE\.dbt"
-    CopyFiles /SILENT "$INSTDIR\templates\profiles.yml" "$PROFILE\.dbt\profiles.yml"
-    
-    ; Initialiser les bases de données pour chaque lab
-    DetailPrint "Initialisation des bases de données..."
-    SetOutPath "$INSTDIR\workspace\labs\lab-01-models"
-    nsExec::ExecToLog '"$INSTDIR\venv\Scripts\dbt.exe" seed --profiles-dir "$PROFILE\.dbt" --profile sfeir_student_portable'
-    
-    ; Créer les raccourcis
-    DetailPrint "Création des raccourcis..."
-    
-    ; Raccourci Bureau - Terminal DBT
-    CreateShortcut "$DESKTOP\SFEIR DBT Terminal.lnk" \
-        "$INSTDIR\scripts\dbt-shell.bat" \
-        "" \
-        "$INSTDIR\python_portable\python.exe" \
-        0 \
-        SW_SHOWNORMAL \
-        "" \
-        "Terminal DBT interactif avec toutes les commandes"
-    
-    ; Raccourci Bureau - Workspace
-    CreateShortcut "$DESKTOP\SFEIR DBT Workspace.lnk" \
-        "$INSTDIR\workspace" \
-        "" \
-        "" \
-        0
-    
-    ; Raccourci Bureau - Explorateur DB
-    CreateShortcut "$DESKTOP\SFEIR DB Explorer.lnk" \
-        "$INSTDIR\scripts\explore-db.bat" \
-        "" \
-        "$INSTDIR\python_portable\python.exe" \
-        0
-    
-    ; Menu Démarrer
+    ; Create Start Menu shortcuts
     CreateDirectory "$SMPROGRAMS\SFEIR School DBT"
-    CreateShortcut "$SMPROGRAMS\SFEIR School DBT\DBT Terminal.lnk" \
-        "$INSTDIR\scripts\dbt-shell.bat"
-    CreateShortcut "$SMPROGRAMS\SFEIR School DBT\Workspace.lnk" \
-        "$INSTDIR\workspace"
-    CreateShortcut "$SMPROGRAMS\SFEIR School DBT\Explorateur DB.lnk" \
-        "$INSTDIR\scripts\explore-db.bat"
-    CreateShortcut "$SMPROGRAMS\SFEIR School DBT\Sauvegarder mon travail.lnk" \
-        "$INSTDIR\scripts\backup-work.bat"
-    CreateShortcut "$SMPROGRAMS\SFEIR School DBT\Documentation.lnk" \
-        "$INSTDIR\docs\USAGE.md"
-    CreateShortcut "$SMPROGRAMS\SFEIR School DBT\Désinstaller.lnk" \
-        "$INSTDIR\uninstall.exe"
+    CreateShortCut "$SMPROGRAMS\SFEIR School DBT\DBT Shell.lnk" "$INSTDIR\dbt-shell.bat"
+    CreateShortCut "$SMPROGRAMS\SFEIR School DBT\Workspace.lnk" "$INSTDIR\workspace"
+    CreateShortCut "$SMPROGRAMS\SFEIR School DBT\Desinstaller.lnk" "$INSTDIR\scripts\uninstall.bat"
     
-    ; Écrire les informations de désinstallation
-    WriteRegStr HKCU "Software\${PRODUCT_NAME}" "InstallDir" "$INSTDIR"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "DisplayName" "${PRODUCT_NAME}"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "UninstallString" "$INSTDIR\uninstall.exe"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "DisplayVersion" "${PRODUCT_VERSION}"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "Publisher" "${PRODUCT_PUBLISHER}"
-    WriteRegStr HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "URLInfoAbout" "${PRODUCT_WEB_SITE}"
-    WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "NoModify" 1
-    WriteRegDWORD HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}" "NoRepair" 1
-    
-    ; Créer le désinstallateur
+    ; Write uninstaller
     WriteUninstaller "$INSTDIR\uninstall.exe"
     
-    ; Message final
-    DetailPrint "Installation terminée avec succès !"
-    
+    ; Success message
+    MessageBox MB_YESNO "Installation terminee !$\r$\n$\r$\nVoulez-vous lancer le terminal dbt maintenant ?" IDNO skip_launch
+        Exec '"$INSTDIR\dbt-shell.bat"'
+    skip_launch:
 SectionEnd
 
-; Description des sections
-!insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-    !insertmacro MUI_DESCRIPTION_TEXT ${SEC01} "Installation complète de ${PRODUCT_NAME} avec Python portable, dbt et DuckDB."
-!insertmacro MUI_FUNCTION_DESCRIPTION_END
-
-; Section de désinstallation
 Section "Uninstall"
-    ; Demander confirmation pour supprimer les données
-    MessageBox MB_YESNO|MB_ICONQUESTION "Voulez-vous également supprimer vos projets et bases de données ?$\r$\n(Choisir Non gardera vos travaux)" IDYES RemoveData IDNO KeepData
+    ; Remove desktop shortcut
+    Delete "$DESKTOP\SFEIR DBT Shell.lnk"
     
-    RemoveData:
-        RMDir /r "$INSTDIR\workspace"
-        Goto Continue
+    ; Remove Start Menu shortcuts
+    Delete "$SMPROGRAMS\SFEIR School DBT\DBT Shell.lnk"
+    Delete "$SMPROGRAMS\SFEIR School DBT\Workspace.lnk"
+    Delete "$SMPROGRAMS\SFEIR School DBT\Desinstaller.lnk"
+    RMDir "$SMPROGRAMS\SFEIR School DBT"
     
-    KeepData:
-        ; Créer une sauvegarde avant de désinstaller
-        CreateDirectory "$DOCUMENTS\sfeir-dbt-backup"
-        CopyFiles /SILENT "$INSTDIR\workspace\*.*" "$DOCUMENTS\sfeir-dbt-backup\"
-        MessageBox MB_OK "Vos travaux ont été sauvegardés dans :$\r$\n$DOCUMENTS\sfeir-dbt-backup"
-    
-    Continue:
-    ; Supprimer les fichiers de l'application
-    Delete "$INSTDIR\uninstall.exe"
-    RMDir /r "$INSTDIR\python_portable"
-    RMDir /r "$INSTDIR\venv"
-    RMDir /r "$INSTDIR\wheels"
-    RMDir /r "$INSTDIR\scripts"
-    RMDir /r "$INSTDIR\templates"
-    RMDir /r "$INSTDIR\docs"
-    
-    ; Supprimer les raccourcis
-    Delete "$DESKTOP\SFEIR DBT Terminal.lnk"
-    Delete "$DESKTOP\SFEIR DBT Workspace.lnk"
-    Delete "$DESKTOP\SFEIR DB Explorer.lnk"
-    RMDir /r "$SMPROGRAMS\SFEIR School DBT"
-    
-    ; Supprimer le répertoire d'installation s'il est vide
-    RMDir "$INSTDIR"
-    
-    ; Demander si on supprime la config dbt
-    MessageBox MB_YESNO|MB_ICONQUESTION "Supprimer également la configuration dbt (~\.dbt\profiles.yml) ?" IDYES RemoveConfig IDNO KeepConfig
-    
-    RemoveConfig:
-        Delete "$PROFILE\.dbt\profiles.yml"
-        Goto EndConfig
-    
-    KeepConfig:
-        ; Ne rien faire
-    
-    EndConfig:
-    ; Supprimer les clés de registre
-    DeleteRegKey HKCU "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRODUCT_NAME}"
-    DeleteRegKey HKCU "Software\${PRODUCT_NAME}"
-    
-    MessageBox MB_OK "Désinstallation terminée !"
-    
+    ; Remove installation directory
+    RMDir /r "$INSTDIR"
 SectionEnd
