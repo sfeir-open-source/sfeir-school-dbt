@@ -24,6 +24,11 @@ $OutputEncoding = [System.Text.Encoding]::UTF8
 
 $ErrorActionPreference = "Stop"
 
+# IMPORTANT: Se placer dans le répertoire du script pour que les chemins relatifs fonctionnent
+$ScriptDir = $PSScriptRoot
+Push-Location $ScriptDir
+Write-Host "[INFO] Répertoire de travail: $ScriptDir" -ForegroundColor Gray
+
 # Configuration
 $PYTHON_VERSION = "3.11.9"
 $PYTHON_URL = "https://www.python.org/ftp/python/$PYTHON_VERSION/python-$PYTHON_VERSION-embed-amd64.zip"
@@ -363,3 +368,6 @@ Write-Host ""
 Write-Host "Pour tester l'installation :" -ForegroundColor Yellow
 Write-Host "   .\$installerFile" -ForegroundColor Cyan
 Write-Host ""
+
+# Restaurer le répertoire de travail original
+Pop-Location
