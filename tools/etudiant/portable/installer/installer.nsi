@@ -53,6 +53,15 @@ Section "Install"
     ; Copy profiles.yml template
     SetOutPath "$INSTDIR"
     File "build\templates\profiles.yml"
+    File "build\templates\init-env.bat"
+    File "build\templates\start-vscode.bat"
+    File "build\templates\sfeir-dbt.code-workspace"
+    
+    ; Copy VSCode configuration to workspace
+    SetOutPath "$INSTDIR\workspace\.vscode"
+    File "build\templates\vscode\settings.json"
+    File "build\templates\vscode\extensions.json"
+    File "build\templates\vscode\tasks.json"
     
     ; Create setup script that will run on first launch
     SetOutPath "$INSTDIR"
@@ -116,30 +125,34 @@ Section "Install"
     FileWrite $0 "cmd /k$\r$\n"
     FileClose $0
     
-    ; Create desktop shortcut
+    ; Create desktop shortcuts
     CreateShortCut "$DESKTOP\SFEIR DBT Shell.lnk" "$INSTDIR\dbt-shell.bat" "" "" "" SW_SHOWNORMAL "" "Terminal dbt pour SFEIR School"
+    CreateShortCut "$DESKTOP\SFEIR DBT - VSCode.lnk" "$INSTDIR\start-vscode.bat" "" "" "" SW_SHOWNORMAL "" "Ouvrir SFEIR DBT dans VSCode"
     
     ; Create Start Menu shortcuts
     CreateDirectory "$SMPROGRAMS\SFEIR School DBT"
     CreateShortCut "$SMPROGRAMS\SFEIR School DBT\DBT Shell.lnk" "$INSTDIR\dbt-shell.bat"
+    CreateShortCut "$SMPROGRAMS\SFEIR School DBT\Ouvrir dans VSCode.lnk" "$INSTDIR\start-vscode.bat"
     CreateShortCut "$SMPROGRAMS\SFEIR School DBT\Workspace.lnk" "$INSTDIR\workspace"
     CreateShortCut "$SMPROGRAMS\SFEIR School DBT\Desinstaller.lnk" "$INSTDIR\scripts\uninstall.bat"
     
     ; Write uninstaller
     WriteUninstaller "$INSTDIR\uninstall.exe"
     
-    ; Success message
-    MessageBox MB_YESNO "Installation terminee !$\r$\n$\r$\nVoulez-vous lancer le terminal dbt maintenant ?" IDNO skip_launch
-        Exec '"$INSTDIR\dbt-shell.bat"'
+    ; Success message - propose VSCode
+    MessageBox MB_YESNO "Installation terminee !$\r$\n$\r$\nVoulez-vous ouvrir l'environnement dans VSCode ?$\r$\n(Si VSCode n'est pas installe, il sera telecharge automatiquement)" IDNO skip_launch
+        Exec '"$INSTDIR\start-vscode.bat"'
     skip_launch:
 SectionEnd
 
 Section "Uninstall"
-    ; Remove desktop shortcut
+    ; Remove desktop shortcuts
     Delete "$DESKTOP\SFEIR DBT Shell.lnk"
+    Delete "$DESKTOP\SFEIR DBT - VSCode.lnk"
     
     ; Remove Start Menu shortcuts
     Delete "$SMPROGRAMS\SFEIR School DBT\DBT Shell.lnk"
+    Delete "$SMPROGRAMS\SFEIR School DBT\Ouvrir dans VSCode.lnk"
     Delete "$SMPROGRAMS\SFEIR School DBT\Workspace.lnk"
     Delete "$SMPROGRAMS\SFEIR School DBT\Desinstaller.lnk"
     RMDir "$SMPROGRAMS\SFEIR School DBT"

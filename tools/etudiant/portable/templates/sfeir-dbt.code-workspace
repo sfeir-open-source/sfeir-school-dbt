@@ -1,0 +1,45 @@
+{
+    "folders": [
+        {
+            "name": "Labs",
+            "path": "workspace/labs"
+        },
+        {
+            "name": "Mon Travail",
+            "path": "workspace/my-work"
+        }
+    ],
+    "settings": {
+        "terminal.integrated.defaultProfile.windows": "SFEIR DBT",
+        "terminal.integrated.profiles.windows": {
+            "SFEIR DBT": {
+                "path": "cmd.exe",
+                "args": ["/k", "${workspaceFolder}/../../../init-env.bat"],
+                "icon": "terminal"
+            }
+        },
+        "files.associations": {
+            "*.sql": "sql"
+        },
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "files.exclude": {
+            "**/__pycache__": true,
+            "**/*.pyc": true,
+            "**/target": true,
+            "**/dbt_packages": true,
+            "**/logs": true,
+            "**/*.duckdb.wal": true
+        },
+        "telemetry.telemetryLevel": "off"
+    },
+    "extensions": {
+        "recommendations": [
+            "innoverio.vscode-dbt-power-user",
+            "bastienboutonnet.vscode-dbt",
+            "mtxr.sqltools",
+            "redhat.vscode-yaml",
+            "mechatroner.rainbow-csv"
+        ]
+    }
+}

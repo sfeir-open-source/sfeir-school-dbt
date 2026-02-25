@@ -1,0 +1,40 @@
+{
+    // Terminal intégré configuré pour dbt
+    "terminal.integrated.defaultProfile.windows": "SFEIR DBT",
+    "terminal.integrated.profiles.windows": {
+        "SFEIR DBT": {
+            "path": "cmd.exe",
+            "args": ["/k", "${workspaceFolder}\\..\\init-env.bat"],
+            "icon": "terminal"
+        }
+    },
+    
+    // Editeur SQL
+    "files.associations": {
+        "*.sql": "sql"
+    },
+    
+    // Formatage
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": false,
+    
+    // Fichiers à ignorer
+    "files.exclude": {
+        "**/__pycache__": true,
+        "**/*.pyc": true,
+        "**/target": true,
+        "**/dbt_packages": true,
+        "**/logs": true,
+        "**/*.duckdb.wal": true
+    },
+    
+    // YAML pour dbt
+    "yaml.schemas": {
+        "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/dbt_project.json": "dbt_project.yml",
+        "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/sources.json": ["models/**/*.yml", "sources/**/*.yml"]
+    },
+    
+    // Désactiver la télémétrie
+    "telemetry.telemetryLevel": "off"
+}

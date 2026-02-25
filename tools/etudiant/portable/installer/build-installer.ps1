@@ -287,7 +287,7 @@ if (Test-Path $scriptsSource) {
 # Copier les templates
 $templatesSource = Join-Path $PSScriptRoot "..\templates"
 if (Test-Path $templatesSource) {
-    Copy-Item -Path "$templatesSource\*" -Destination $TEMPLATES_BUILD_DIR -Force
+    Copy-Item -Path "$templatesSource\*" -Destination $TEMPLATES_BUILD_DIR -Recurse -Force
     Write-Host "   [OK] Templates copiés" -ForegroundColor Green
 } else {
     Write-Host "   [WARNING] Dossier templates non trouvé: $templatesSource" -ForegroundColor Yellow
