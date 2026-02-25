@@ -2,7 +2,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "dbt run",
+            "label": "dbt run (lab courant)",
             "type": "shell",
             "command": "dbt run",
             "group": {
@@ -13,7 +13,8 @@
                 "reveal": "always",
                 "panel": "shared"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "detail": "Exécute dbt run dans le dossier courant"
         },
         {
             "label": "dbt test",
@@ -35,7 +36,8 @@
                 "reveal": "always",
                 "panel": "shared"
             },
-            "problemMatcher": []
+            "problemMatcher": [],
+            "detail": "seed + run + test en une commande"
         },
         {
             "label": "dbt seed",
@@ -46,13 +48,33 @@
                 "reveal": "always",
                 "panel": "shared"
             },
+            "problemMatcher": [],
+            "detail": "Charge les données CSV"
+        },
+        {
+            "label": "Aller au Lab 01",
+            "type": "shell",
+            "command": "cd workspace\\labs\\lab-01-models",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
             "problemMatcher": []
         },
         {
-            "label": "dbt compile",
+            "label": "Aller au Lab 02",
             "type": "shell",
-            "command": "dbt compile",
-            "group": "build",
+            "command": "cd workspace\\labs\\lab-02-sources",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Aller au Lab 03",
+            "type": "shell",
+            "command": "cd workspace\\labs\\lab-03-tests",
             "presentation": {
                 "reveal": "always",
                 "panel": "shared"

@@ -35,9 +35,23 @@ doskey clear=cls
 
 echo.
 echo ================================================================
-echo   SFEIR School DBT - Terminal pret !
+echo   SFEIR School DBT - Environnement pret !
 echo ================================================================
 echo.
-echo Commandes dbt: dbt run, dbt test, dbt build, dbt seed
-echo Raccourcis:    Ctrl+Shift+B pour les taches VSCode
+echo   Structure des dossiers:
+echo     workspace/labs/       - Exercices de la formation
+echo     workspace/my-work/    - Votre espace personnel
+echo.
+echo   Pour commencer un exercice:
+echo     cd workspace\labs\lab-01-models
+echo     dbt seed       (charger les donnees)
+echo     dbt run        (executer les modeles)
+echo     dbt test       (lancer les tests)
+echo.
+echo   Commandes disponibles: dbt run, test, build, seed, compile
+echo   Alias Linux: ls, pwd, cat, clear
+echo.
+echo   Base de donnees DuckDB:
+echo     Fichier: workspace\labs\[lab]\sfeir_dbt.duckdb
+echo     Connexion DBeaver: voir README.md
 echo.

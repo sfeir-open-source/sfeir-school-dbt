@@ -4,7 +4,7 @@
     "terminal.integrated.profiles.windows": {
         "SFEIR DBT": {
             "path": "cmd.exe",
-            "args": ["/k", "${workspaceFolder}\\..\\init-env.bat"],
+            "args": ["/k", "${workspaceFolder}\\init-env.bat"],
             "icon": "terminal"
         }
     },
@@ -26,7 +26,10 @@
         "**/target": true,
         "**/dbt_packages": true,
         "**/logs": true,
-        "**/*.duckdb.wal": true
+        "**/*.duckdb.wal": true,
+        "python": true,
+        "wheels": true,
+        ".installed": true
     },
     
     // YAML pour dbt
@@ -34,6 +37,40 @@
         "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/dbt_project.json": "dbt_project.yml",
         "https://raw.githubusercontent.com/dbt-labs/dbt-jsonschema/main/schemas/sources.json": ["models/**/*.yml", "sources/**/*.yml"]
     },
+    
+    // SQLTools - Connexions DuckDB pour chaque lab
+    "sqltools.connections": [
+        {
+            "name": "Lab 01 - Models",
+            "driver": "DuckDB",
+            "database": "${workspaceFolder}/workspace/labs/lab-01-models/sfeir_dbt.duckdb",
+            "previewLimit": 100
+        },
+        {
+            "name": "Lab 02 - Sources", 
+            "driver": "DuckDB",
+            "database": "${workspaceFolder}/workspace/labs/lab-02-sources/sfeir_dbt.duckdb",
+            "previewLimit": 100
+        },
+        {
+            "name": "Lab 03 - Tests",
+            "driver": "DuckDB", 
+            "database": "${workspaceFolder}/workspace/labs/lab-03-tests/sfeir_dbt.duckdb",
+            "previewLimit": 100
+        },
+        {
+            "name": "Lab 04 - Documentation",
+            "driver": "DuckDB",
+            "database": "${workspaceFolder}/workspace/labs/lab-04-documentation/sfeir_dbt.duckdb",
+            "previewLimit": 100
+        },
+        {
+            "name": "Lab 05 - Advanced",
+            "driver": "DuckDB",
+            "database": "${workspaceFolder}/workspace/labs/lab-05-advanced/sfeir_dbt.duckdb",
+            "previewLimit": 100
+        }
+    ],
     
     // Désactiver la télémétrie
     "telemetry.telemetryLevel": "off"

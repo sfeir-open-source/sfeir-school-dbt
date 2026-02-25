@@ -56,9 +56,11 @@ Section "Install"
     File "build\templates\init-env.bat"
     File "build\templates\start-vscode.bat"
     File "build\templates\sfeir-dbt.code-workspace"
+    File "build\templates\README.md"
+    File "build\templates\dbeaver-template.json"
     
-    ; Copy VSCode configuration to workspace
-    SetOutPath "$INSTDIR\workspace\.vscode"
+    ; Copy VSCode configuration to root (workspace points to root now)
+    SetOutPath "$INSTDIR\.vscode"
     File "build\templates\vscode\settings.json"
     File "build\templates\vscode\extensions.json"
     File "build\templates\vscode\tasks.json"

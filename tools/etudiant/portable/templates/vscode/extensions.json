@@ -3,6 +3,7 @@
         "innoverio.vscode-dbt-power-user",
         "bastienboutonnet.vscode-dbt",
         "mtxr.sqltools",
+        "evidence.sqltools-duckdb-driver",
         "redhat.vscode-yaml",
         "mechatroner.rainbow-csv"
     ],
