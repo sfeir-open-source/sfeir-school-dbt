@@ -106,6 +106,7 @@ function packageDependanciesSlides() {
     `${directory}/20-hub.md`,
     `${directory}/30-installing.md`,
     `${directory}/40-build.md`,
+    `${directory}/50-dependencies.md`,
     `${directory}/90-lab.md`,
   ];
 }
