@@ -93,6 +93,8 @@ function historicalDataSlides() {
     `${directory}/20-snapshots-definition.md`,
     `${directory}/30-snapshots-exec-and-manage.md`,
     `${directory}/90-lab.md`,
+    `${directory}/40-incremental.md`,
+    `${directory}/95-lab.md`,
   ];
 }
 

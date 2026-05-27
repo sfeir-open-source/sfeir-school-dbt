@@ -12,29 +12,21 @@
 
 # Timestamp strategy
 
-Detect data changes with update_at field, that map a timestamp column
+Detect data changes with `update_at` field, that map a timestamp column
 
-_snapshots/institute.sql_
+_snapshots/snapshots.yml_
 
-<!-- {% raw %} -->
-
-```sql
-{% snapshot institute_snapshot %}
-{{
-  config(
-    target_schema='snapshots',
-    unique_key='id',
-
-    strategy='timestamp',
-    updated_at='__timestamp'
-  )
-
-}}
-SELECT * FROM {{ source(‘sfeir’, ‘institute’) }}
-{% endsnapshot %}
+```yaml
+snapshots:
+  - name: 'timestamp_strategy'
+    description: 'A snapshot of orders table using snapshot strategy'
+    relation: ref('orders')
+    config:
+      schema: 'snapshots'
+      strategy: timestamp
+      updated_at: update_at
+      unique_key: 'order_id'
 ```
-
-<!-- {% endraw %} -->
 
 
 ##==##
@@ -81,28 +73,21 @@ for new record
 
 # Check strategy
 
-Detect data changes with the check_cols field, that list columns required to identify changes
+Detect data changes with the `check_cols` field, that list columns required to identify changes
 
-_snapshots/institute.sql_
+_snapshots/snapshots.yml_
 
-<!-- {% raw %} -->
-
-```sql[|3-9]
-{% snapshot institute_snapshot %}
-{{
-  config(
-      target_schema=’snapshots’,
-      unique_key=’id’,
-
-      strategy=’check’,
-      check_cols=[‘name’, ‘status’]
-    )
-}}
-SELECT * FROM {{ source(‘sfeir’, ‘institute’) }}
-{% endsnapshot %}
+```yaml
+snapshots:
+  - name: 'check_strategy'
+    description: 'A snapshot of orders table using snapshot strategy'
+    relation: ref('orders')
+    config:
+      schema: 'snapshots'
+      strategy: check
+      check_cols: ['order_status', 'order_step']
+      unique_key: 'order_id'
 ```
-
-<!-- {% endraw %} -->
 
 Notes:
 The SQL request must include the check_cols and unique key if any
@@ -115,7 +100,7 @@ To check changes on all column, use the string “all” instead of an array
 
 ##++##
 
-# TODO - Check strategy execution workflow
+# Check strategy execution workflow
 
 ![](./assets/images/docs/markdown/50-historical-data/snapshots-timestamp-strategy.svg)
 ##++##
