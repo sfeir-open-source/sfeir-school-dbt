@@ -6,7 +6,7 @@ Profiles are a centralized way to store configuration that defines connection de
 
 Profiles tell _dbt_ **HOW** to run.
 
-_dbt_ searches for a `profile.yml` file in this order:
+_dbt_ searches for a `profiles.yml` file in this order:
 
 - path passed as argument of the dbt commands
 - then at the root of your dbt project directory
@@ -32,9 +32,34 @@ Notes:
 
 # Profiles
 
-## Sample profile.yml (1/2)
+## Simple profiles.yml
 
-You can use anchors in YAML to avoid repeating configuration blocks.
+```yaml
+sfeir_institute: # This is the name of your profile
+  target: dev # This is the name of the default target / outputs below
+  outputs:
+    dev:
+      type: postgres
+      threads: 4
+      host: localhost
+      port: 5432
+      user: dbt
+      pass: dibiti
+      dbname: dbt_03
+      schema: sales
+```
+
+
+##==##
+
+
+<!-- .slide: class="with-code"-->
+
+# Profiles
+
+## Advanced profiles.yml (1/2)
+
+You can use anchors and environment variables in YAML to avoid repeating blocks.
 
 ```yaml
 # Configuration for all authentication methods
@@ -62,7 +87,7 @@ config_service_account: &config_service_account
 
 # Profiles
 
-## Sample profile.yml (2/2)
+## Advanced profiles.yml (2/2)
 
 Then use anchors reference in the actual profiles.
 
@@ -94,7 +119,7 @@ Default profile name must be set in `dbt_project.yml` file.
 `dbt_project.yml`
 
 ```yaml
-name: 'sfeir_institute_dbt'
+name: 'sfeir_institute'
 profile: 'local' # dbt will look for this profile if not overridden in command args
 ```
 
@@ -107,8 +132,8 @@ $ dbt run
 # Specify profile to use
 $ dbt run --profile gitlab
 
-# Specify profile to use and in which directory
-$ dbt run --profile gitlab --profiles-dir ~/.dbt/profiles/institute.yml
+# Specify profile to use and in which directory is located the profiles.yml
+$ dbt run --profile gitlab --profiles-dir ~/.dbt/profiles
 ```
 
 Notes:

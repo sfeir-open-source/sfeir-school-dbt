@@ -4,13 +4,13 @@
 
 # Constraints
 
-![](alert-triangle 'tc-icons feather tc-big') **dbt** is mono-adapter
+![](alert-triangle 'tc-icons feather tc-big') **dbt** is mono-adapter (by project)
 
-![](alert-triangle 'tc-icons feather tc-big') **dbt** is SQL-only (or almost)
+![](alert-triangle 'tc-icons feather tc-big') **dbt** models are SQL-only
 
 ![](alert-triangle 'tc-icons feather tc-big') Model and seed names are unique
 
-![](alert-triangle 'tc-icons feather tc-big') **dbt** will destroy and recreate models at each run
+![](alert-triangle 'tc-icons feather tc-big') **dbt** will destroy and recreate models at each run (default behavior)
 ##++##
 ##++## data-background="var(--black)" class="contrast-opposite"
 
@@ -39,7 +39,7 @@ There is a **_CLI_** to initialize your project skeleton:
 
 - it will create your project folder and subfolders
 - generate your `dbt_project.yml` file
-- generate or update `profile.yml` file
+- generate or update `profiles.yml` file
 
 <br/>
 
