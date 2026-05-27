@@ -36,22 +36,22 @@ _models/\_\_models.yml_
 
 ```yaml
 models:
-- name: contract_test
-  description: "Model to test contract enforcement"
-  config:
-    contract:
-      enforced: true
-  constraints: # Model level constraints
-  - type: primary_key
-    columns: ['id']
+  - name: contract_test
+    description: 'Model to test contract enforcement'
+    config:
+      contract:
+        enforced: true
+    constraints: # Model level constraints
+      - type: primary_key
+        columns: ['id']
     columns:
-  - name: id
-    data_type: int
-    constraints: # Column level constraints
-    - type: check
-      expression: 'id > 1000000'
-  - name: name
-    data_type: string
-    constraints:
-    - type: not_null
+      - name: id
+        data_type: int
+        constraints: # Column level constraints
+          - type: check
+            expression: 'id > 1000000'
+      - name: name
+        data_type: string
+        constraints:
+          - type: not_null
 ```
