@@ -43,7 +43,7 @@
 
 ## ephemeral
 
-![](plus-circle 'tc-icons feather tc-big') Creates a CTE that is replaced in the models querying this table.
+![](plus-circle 'tc-icons feather tc-big') Creates temporary tables in the data warehouse for the duration of a single dbt run or query.
 
 ![](cpu 'tc-icons feather tc-big') Used for intermediate calculations or as intermediate areas in complex data transformations.
 
