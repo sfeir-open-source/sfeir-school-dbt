@@ -21,12 +21,12 @@ _/models/\_\_sources.yml_
 ```yaml
 sources:
   - name: 'SAP'
-    database: "ssd-{{ env_var('ENV', 'dev') }}"
+    database: "acme-sap-{{ env_var('ENV', 'dev') }}"
     schema: 'sap'
     freshness: # default freshness for all tables in this source
       warn_after: { count: 12, period: hour }
       error_after: { count: 24, period: hour }
-      loaded_at_field: __timestamp
+    loaded_at_field: __timestamp
     tables:
       - name: 'companies'
         freshness: # Override freshness for this specific table
