@@ -176,7 +176,6 @@ function artifactsSlides() {
     `${directory}/30-sources.md`,
     `${directory}/40-manifest.md`,
     `${directory}/50-run_result.md`,
-    `${directory}/90-lab.md`,
   ];
 }
 
