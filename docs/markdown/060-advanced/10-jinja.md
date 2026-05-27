@@ -34,27 +34,6 @@ In _dbt, Jinja_ is used for:
 ##==##
 
 
-# Variables in dbt
-
-Variables provide a powerful way to make your dbt projects more:
-
-- Flexible
-- Maintainable
-- Reusable
-
-dbt includes several predefined and system variables, for instance:
-
-- project_name
-- model
-- target
-- this
-
-
-##==##
-
-
-
-
 # Key benefits of variables in dbt
 
 - Flexibility
@@ -78,6 +57,23 @@ dbt includes several predefined and system variables, for instance:
 
 Notes:
 dbt can read env variables using the env() macro
+
+
+##==##
+
+
+
+
+# Variables in dbt
+
+dbt includes several predefined and system variables, for instance:
+
+- `project_name`
+- `model`
+- `target`
+- `this`
+- `run_started_at`
+- `invocation_id`
 
 
 ##==##
@@ -114,7 +110,7 @@ vars:
 
 To use a variable anywhere in your models or macros, use the {{ var(‘...’) }} function.
 
-_models/dimensions/countries.sql_
+_models/staging/countries.sql_
 
 ```sql[3]
 SELECT countryCode, countryName
@@ -124,7 +120,7 @@ SELECT countryCode, countryName
 
 You can also use environment variables with use the {{ env_var(‘...’) }} jinja function.
 
-_models/dimensions/countries_env.sql_
+_models/staging/countries_env.sql_
 
 ```sql[3]
 SELECT countryCode, countryName
@@ -157,7 +153,7 @@ vars:
       asia: 'AP'
 ```
 
-_models/dimensions/countries2.sql_
+_models/staging/countries-2.sql_
 
 ```sql[3]
 SELECT countryCode, countryName
@@ -178,7 +174,7 @@ Beware of default values handling when using nested variables.
 
 You can override values using the --vars argument of dbt commands.
 
-Variables at runtime use a yaml dictionary.
+Variables at runtime use a yaml dictionary, NOT json.
 
 ```bash
 $ dbt run --vars '{"firstname": "Sophie", "lastname": "Fonfec", "date": 20180101}'

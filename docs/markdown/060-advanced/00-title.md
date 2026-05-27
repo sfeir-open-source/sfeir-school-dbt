@@ -2,4 +2,4 @@
 
 # Advanced data transformation and control
 
-## Module 7
+## Module 6

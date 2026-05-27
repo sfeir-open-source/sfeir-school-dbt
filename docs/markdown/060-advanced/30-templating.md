@@ -19,17 +19,17 @@ In dbt, you can use code if / else / endif blocks to define conditional statemen
 <!-- {% raw %} -->
 
 ```sql
-{% if var('new_customers_only') %} -- SQL code to execute when 'new*customers_only' is true
-  SELECT *
-  FROM {{ ref("customers") }}
-  WHERE date*in >= CURRENT_DATE - INTERVAL '7 days'
+SELECT *
+FROM {{ ref("customers") }}
+WHERE 1 = 1
+{% if var('new_customers_only') %} -- SQL code to execute when 'new_customers_only' is true
+    AND date_in >= CURRENT_DATE - INTERVAL '7 days'
 {% else %}
-  SELECT *
-  FROM {{ ref("customers") }}
+    AND date_in >= CURRENT_DATE - INTERVAL '1 years'
 {% endif %}
 ```
 
-<!-- {% raw %} -->
+<!-- {% endraw %} -->
 
 
 ##==##

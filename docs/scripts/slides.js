@@ -190,8 +190,8 @@ function formation() {
     ...modelsSlides(), //
     ...sourceAndRefSlides(), //
     ...seedsSlides(), //
-    ...historicalDataSlides(), //
     ...advancedSlides(), //
+    ...historicalDataSlides(), //
     ...packageDependanciesSlides(), //
     ...testingSlides(), //
     ...contractAndVersionsSlides(), //
