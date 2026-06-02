@@ -65,7 +65,7 @@ Using macros in your models is as simple as using variables.
 
 The macro placeholders will be replaced by the generated SQL code at compilation time.
 
-_models/sales.sql_
+_models/staging/sales.sql_
 
 ```sql
 SELECT
@@ -105,7 +105,7 @@ _/macros/formulas/turnover.sql_
 
 <!-- {% endraw %} -->
 
-_models/sales.sql_
+_models/staging/sales.sql_
 
 ```sql
 SELECT
@@ -122,7 +122,7 @@ SELECT
 
 # Documenting macros
 
-Documenting macros is done using a YAML file:
+Documenting macros is done using a YAML file (`__macros.yml` for instance):
 
 - include a global description of the macro
 - add a description of each argument of the macro

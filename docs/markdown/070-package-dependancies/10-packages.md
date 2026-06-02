@@ -31,7 +31,7 @@ Generic packages
 Testing packages
 
 - dbt_expectations
-- dbt_unit_testing
+- dbt_utils
 
 Adapter specific packages
 

@@ -16,7 +16,7 @@ $ pip install dbt-core dbt-postgres
 $ dbt --version
 ```
 
-MacOS user can easily do it with [brew](https://brew.sh/) :
+You can also use [brew](https://brew.sh/) (not only on MacOS) :
 
 ```shell
 $ brew update
@@ -38,8 +38,6 @@ If you can’t run python or install new packages, use a VM with python and inst
 - Light and ephemeral
 - Does not need a lot of resources
 - Your database actually does the work
-
-**… or use dbt cloud**
 
 
 ##==##

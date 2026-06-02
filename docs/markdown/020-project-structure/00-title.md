@@ -2,4 +2,4 @@
 
 # Introduction to dbt
 
-## Project structure and best practices
+## Project structure & best practices

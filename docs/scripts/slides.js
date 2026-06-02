@@ -62,9 +62,9 @@ function modelsSlides() {
     `${directory}/00-title.md`,
     `${directory}/10-what-is-a-model.md`,
     `${directory}/20-materializations.md`,
-    `${directory}/90-lab.md`,
     `${directory}/30-advanced-materializations.md`,
     `${directory}/40-tags.md`,
+    `${directory}/90-lab.md`,
   ];
 }
 
@@ -93,6 +93,8 @@ function historicalDataSlides() {
     `${directory}/20-snapshots-definition.md`,
     `${directory}/30-snapshots-exec-and-manage.md`,
     `${directory}/90-lab.md`,
+    `${directory}/40-incremental.md`,
+    `${directory}/95-lab.md`,
   ];
 }
 
@@ -104,6 +106,7 @@ function packageDependanciesSlides() {
     `${directory}/20-hub.md`,
     `${directory}/30-installing.md`,
     `${directory}/40-build.md`,
+    `${directory}/50-dependencies.md`,
     `${directory}/90-lab.md`,
   ];
 }
@@ -173,7 +176,6 @@ function artifactsSlides() {
     `${directory}/30-sources.md`,
     `${directory}/40-manifest.md`,
     `${directory}/50-run_result.md`,
-    `${directory}/90-lab.md`,
   ];
 }
 
@@ -190,8 +192,8 @@ function formation() {
     ...modelsSlides(), //
     ...sourceAndRefSlides(), //
     ...seedsSlides(), //
-    ...historicalDataSlides(), //
     ...advancedSlides(), //
+    ...historicalDataSlides(), //
     ...packageDependanciesSlides(), //
     ...testingSlides(), //
     ...contractAndVersionsSlides(), //

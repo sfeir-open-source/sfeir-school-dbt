@@ -14,7 +14,7 @@ Starting in version 1.5, dbt lets your add **constraints** to your models by usi
 
 With enforced contracts, dbt make sure that generated models will match data types defined in the property files.
 
-If the model does not match the requirements specified in the yaml file, it will not be created or replaced.
+If the model does not match the requirements specified in the yaml file, it will not be created or replaced, and dbt will produce an error.
 
 On the opposite of tests, contracts are checked **before the model is built**, allowing dbt to stop before bad data is materialized in the data warehouse.
 

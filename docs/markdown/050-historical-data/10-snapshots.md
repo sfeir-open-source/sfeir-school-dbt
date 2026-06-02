@@ -19,6 +19,14 @@ Snapshots are important for:
 - compliance requirements
 - data analysis at specific points in time
 
+<br/>
+
+Snapshots API has completely changed between _dbt_ 1.8 and 1.9.
+
+Update your snapshots as soon as possible before the legacy method of doing snapshots becomes deprecated, and do not mix the two methods !
+
+<!-- .element: class="admonition warning" -->
+
 Notes:
 Snapshots create SCD Type 2
 
@@ -74,6 +82,6 @@ dbt creates Type 2 SCD (Slowly Changing Dimensions) to store snapshots.
 - Compares a list of columns between current and historical values.
 - Records changes if any columns differ; otherwise, no action is taken by dbt.
 
-By default, dbt does not invalidate rows deleted from the source query. Using the configuration option `invalidate_hard_deletes` , dbt can monitor and manage rows that have been removed from the source data.
+By default, dbt does not invalidate rows deleted from the source query. Using the configuration option `hard_deletes`, dbt can monitor and manage rows that have been removed from the source data.
 
 <!-- .element: class="admonition important" -->
