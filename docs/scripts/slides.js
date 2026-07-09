@@ -179,6 +179,17 @@ function artifactsSlides() {
   ];
 }
 
+function semanticLayerSlides() {
+  const directory = '130-semantic-layer';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-understanding.md`,
+    `${directory}/20-declaring.md`,
+    `${directory}/30-querying.md`,
+    `${directory}/40-cicd.md`,
+  ];
+}
+
 function formation() {
   return [
     //
@@ -200,6 +211,7 @@ function formation() {
     ...documentationSlides(), //
     ...analysesExposuresHooksSlides(), //
     ...artifactsSlides(), //
+    ...semanticLayerSlides(), //
     ...outroSlides(), //
   ].map((slidePath) => {
     return { path: slidePath };
