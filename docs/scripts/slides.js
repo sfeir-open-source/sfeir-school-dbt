@@ -9,16 +9,16 @@ function introSlides() {
   const directory = '000-intro';
   return [
     `${directory}/00-title.md`,
-    `${directory}/01-logistic.md`,
-    `${directory}/10-intro-institute.md`,
-    `${directory}/11-intro-school.md`,
-    `${directory}/15-agenda-day1-institute.md`,
-    `${directory}/16-agenda-day2-institute.md`,
-    `${directory}/17-agenda-school.md`,
     `${directory}/21-speaker-aal.md`,
     `${directory}/22-speaker-hmd.md`,
     `${directory}/24-speaker-tfr.md`,
     `${directory}/30-who-are-you.md`,
+    `${directory}/40-logistic.md`,
+    `${directory}/41-intro-institute.md`,
+    `${directory}/42-intro-school.md`,
+    `${directory}/43-agenda-day1-institute.md`,
+    `${directory}/44-agenda-day2-institute.md`,
+    `${directory}/45-agenda-school.md`,
   ];
 }
 function outroSlides() {
