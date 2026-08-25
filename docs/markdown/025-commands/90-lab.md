@@ -3,6 +3,10 @@
 Download the labs sources here: https://storage.googleapis.com/sfeir-institute-dbt/labs.zip
 Download the slides as PDF here: https://storage.googleapis.com/sfeir-institute-dbt/slides.zip
 
+```bash
+$ dbt init --profiles-dir ./ sfeir_institute
+```
+
 **Settings to connect to the Cloud SQL Database for the labs:**
 
 |                 |                                              |
