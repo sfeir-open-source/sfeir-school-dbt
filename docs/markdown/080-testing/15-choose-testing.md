@@ -126,15 +126,16 @@ Like any other generic tests, simply use your custom generic test name:
 
 _models/\_\_models.yml_
 
-```yaml[5,7-8]
+```yaml[5,7-9]
 models:
 - name: int__sales
   columns:
   - name: order_id
     data_tests:
       - unique
-      - valid_id
-        name: "VALID_ORDER_ID"
+      - valid_id:
+          arguments:
+            name: "VALID_ORDER_ID"
 ```
 
 ##==##
