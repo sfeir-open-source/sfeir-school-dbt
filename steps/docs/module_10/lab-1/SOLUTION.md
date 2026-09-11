@@ -78,11 +78,13 @@ In the model property file, at the column level, add the following constraints:
 ```yaml
 models:
   - name: int__orders
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
-          column_list: [ "turnover" ]
+          arguments:
+            column_list: [ "turnover" ]
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
     versions:
       - v: 1
 ```
@@ -95,11 +97,13 @@ If you include tests in a specific version, they will only run for this version 
 models:
   - name: int__orders
     latest_version: 1
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
-          column_list: [ "turnover" ]
+          argumernts:
+            column_list: [ "turnover" ]
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
     versions:
       - v: 1
         
@@ -133,11 +137,13 @@ SELECT * FROM {{ ref('int__orders', version=2) }}
 models:
   - name: int__orders
     latest_version: 1
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
-          column_list: [ "turnover" ]
+          arguments:
+            column_list: [ "turnover" ]
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
     versions:
       - v: 1
         deprecation_date: 2023-12-31 00:00:00.00+00:00

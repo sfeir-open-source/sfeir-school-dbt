@@ -12,7 +12,7 @@ sources:
       - name: customers
         columns:
           - name: customer_id
-            tests:
+            data_tests:
               - unique
 ```
 
@@ -28,10 +28,11 @@ sources:
       - name: orders
         columns:
           - name: order_status
-            tests:
+            data_tests:
               - accepted_values:
-                  values: ['COMPLETED', 'CANCELLED', 'PROCESSING', 'WAITING_PAYMENT', 'SHIPPED']
-                  name: test_order_status_values
+                  arguments:
+                    values: ['COMPLETED', 'CANCELLED', 'PROCESSING', 'WAITING_PAYMENT', 'SHIPPED']
+                    name: test_order_status_values
 ```
 
 ## Create a singular test to make sure there are always at least 100 rows in the int__orders model
@@ -64,12 +65,13 @@ $ dbt deps
 ```yaml
 models:
   - name: int__orders
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
-          column_list: ["turnover"]
+          arguments:
+            column_list: ["turnover"]
     columns:
       - name: customer_name
-        tests:
+        data_tests:
           - dbt_utils.not_empty_string
 ```
 
@@ -79,9 +81,10 @@ models:
 ```yaml
 models:
   - name: int__orders
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
 ```
 
 Don't forget to remove (or disable) your singular test to avoid redundancy.

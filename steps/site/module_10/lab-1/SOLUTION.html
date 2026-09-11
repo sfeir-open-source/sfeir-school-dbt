@@ -129,11 +129,13 @@ constraints:
 <p><code>models/intermediate/__models.yml</code></p>
 <pre><code class="language-yaml">models:
   - name: int__orders
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
-          column_list: [ &quot;turnover&quot; ]
+          arguments:
+            column_list: [ &quot;turnover&quot; ]
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
     versions:
       - v: 1
 </code></pre>
@@ -143,11 +145,13 @@ constraints:
 <pre><code class="language-yaml">models:
   - name: int__orders
     latest_version: 1
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
-          column_list: [ &quot;turnover&quot; ]
+          arguments:
+            column_list: [ &quot;turnover&quot; ]
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
     versions:
       - v: 1
 
@@ -171,11 +175,13 @@ constraints:
 <pre><code class="language-yaml">models:
   - name: int__orders
     latest_version: 1
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
-          column_list: [ &quot;turnover&quot; ]
+          arguments:
+            column_list: [ &quot;turnover&quot; ]
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
     versions:
       - v: 1
         deprecation_date: 2023-12-31 00:00:00.00+00:00

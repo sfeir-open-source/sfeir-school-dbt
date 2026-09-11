@@ -59,6 +59,13 @@ seeds
 1 directory, 4 files
 ```
 
+Then you can import or update seeds
+
+```bash
+# Run seed models
+$ dbt seed
+```
+
 
 ##==##
 

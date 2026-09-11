@@ -77,7 +77,7 @@
       - name: customers
         columns:
           - name: customer_id
-            tests:
+            data_tests:
               - unique
 </code></pre>
 <h2 id="add-another-test-to-make-sure-that-order_status-is-in-the-list-of-accepted-values">Add another test to make sure that order_status is in the list of accepted values:</h2>
@@ -90,10 +90,11 @@
       - name: orders
         columns:
           - name: order_status
-            tests:
+            data_tests:
               - accepted_values:
-                  values: ['COMPLETED', 'CANCELLED', 'PROCESSING', 'WAITING_PAYMENT', 'SHIPPED']
-                  name: test_order_status_values
+                  arguments:
+                    values: ['COMPLETED', 'CANCELLED', 'PROCESSING', 'WAITING_PAYMENT', 'SHIPPED']
+                    name: test_order_status_values
 </code></pre>
 <h2 id="create-a-singular-test-to-make-sure-there-are-always-at-least-2-rows-in-the-int__orders-model">Create a singular test to make sure there are always at least 2 rows in the int__orders model</h2>
 <p><code>tests/assert_row_count_orders.sql</code></p>
@@ -115,21 +116,22 @@
 <p><code>models/intermediate/__models.yml</code></p>
 <pre><code class="language-yaml">models:
   - name: int__orders
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
           column_list: [&quot;turnover&quot;]
     columns:
       - name: customer_name
-        tests:
+        data_tests:
           - dbt_utils.not_empty_string
 </code></pre>
 <h2 id="replace-your-singular-test-with-a-generic-test-from-one-of-the-installed-packages">Replace your singular test with a generic test from one of the installed packages</h2>
 <p><code>models/intermediate/__models.yml</code></p>
 <pre><code class="language-yaml">models:
   - name: int__orders
-    tests:
+    data_tests:
       - dbt_expectations.expect_table_row_count_to_be_between:
-          min_value: 2
+          arguments:
+            min_value: 2
 </code></pre>
 <p>Don't forget to remove (or disable) your singular test to avoid redundancy.</p>
               
