@@ -12,6 +12,7 @@ Project files tell dbt **WHAT** to run.
 - _models_, _seeds_ or _macros_ directories,
 - Global configuration for _models_, _seeds_, _tests_, etc.
 - Variables to use in your _models_ and _macros_
+- Flags to enable or disable warnings / features
 
 Notes:
 
@@ -24,18 +25,20 @@ Notes:
 
 # Directories
 
-_dbt_ will look for entities in configured paths:
+_dbt_ will look for entities in default paths, but you can set or add custom paths:
 
 - models
 - macros
 - seeds
 - tests
+- snapshots
+- analysis
 
 You can also change default directories for:
 
 - logs
 - target (compiled) files
-- packages
+- dbt_packages
 
 Notes:
 
@@ -66,7 +69,7 @@ The _"+"_ sign is used, in dbt YAML files, for ambiguous situations:
 ```yaml
 ---
 models:
-  sfeir_institute_dbt:
+  sfeir_institute:
     staging:
       +tags: 'contains_pii' # Actual tags
       tags: # A folder name / path within "staging" path
@@ -94,7 +97,7 @@ Notes:
 ```yaml
 ---
 models:
-  sfeir_institute_dbt:
+  sfeir_institute:
     staging: # Directives below apply to all models in "staging" subdirectory of "models"
       +materialized: 'table' # ALL models in the staging directory will be tables
       +enabled: false
@@ -118,9 +121,9 @@ models:
 ```yaml
 ---
 seeds:
-  +schema: seeds # Default schema for all seeds including ones in packages
-  sfeir_institute_dbt:
-    +schema: school_seeds # Default schema for all seeds in project except ones from packages
+  +schema: seeds # Default schema for ALL seeds including ones in packages
+  sfeir_institute:
+    +schema: institute_seeds # Default schema for all seeds in project except from packages
     country_codes: # This configures seeds/country_codes.csv
       # Override column types
       schema: dimension_seeds
@@ -143,7 +146,7 @@ At the top of your `dbt_project.yml` file, you can set global configuration dire
 
 ```yaml
 flags:
-  partial_parse: true
+  partial_parse: false
   use_colors: true
   printer_width: 120
   send_anonymous_usage_stats: false
@@ -152,6 +155,6 @@ flags:
 <br>
 <br>
 
-Before _dbt_ 1.8, this was set in the _“config”_ block of the profiles.yml files.
+Before _dbt_ 1.8, this was set in the _“config”_ block of the profile file.
 
 <!-- .element: class="admonition note" -->

@@ -33,7 +33,7 @@ En ce sens, elle va pouvoir servir de base au raisonnement, à la recherche
 ##==##
 
 
-# What are test good for in dbt?
+# What are tests good for in dbt?
 
 Tests in dbt help you:
 

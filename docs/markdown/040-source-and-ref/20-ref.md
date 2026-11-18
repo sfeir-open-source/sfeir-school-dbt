@@ -12,9 +12,9 @@
 
 References are how dbt handle dependencies between models and build the DAG at runtime.
 
-It's handled by dbt with the `ref()` function, and it should be the only way for you to reference other models in a `.sql` file.
+It's handled by dbt with the `ref()` function, and it must be the only way to reference other models in a `.sql` file.
 
-Never, ever, reference a model without using the ref() macro
+Never, ever, reference a model without using the `ref()` macro
 
 <!-- .element: class="admonition warning" -->
 
@@ -30,23 +30,24 @@ Notes:
 
 # Using the `ref()` macro
 
-`/models/companies.sql`
+`/models/staging/sap/stg__companies.sql`
 
 ```sql
-SELECT company_id
-     , company_name
-     , is_customer
-FROM companies
+SELECT
+      company_id
+      , company_name
+      , is_customer
+FROM {{ source('SAP', 'MCMPY') }}
 WHERE enabled = 1
 ```
 
 <br/>
 
-`/models/customers.sql`
+`/models/intermediate/int__customers.sql`
 
 ```sql[2]
 SELECT *
-FROM {{ ref('companies') }}
+FROM {{ ref('stg__companies') }}
 WHERE is_customer = 1
 ```
 

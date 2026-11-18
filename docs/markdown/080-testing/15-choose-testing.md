@@ -40,7 +40,7 @@ Tests are declared in models configuration files, at the column or model level.
 
 **models/\_\_models.yml**
 
-```yaml[5-6,8-13]
+```yaml[5-6,8-14]
 models:
   - name: int__sales
     columns:
@@ -50,10 +50,11 @@ models:
       - name: order_status
         data_tests:
           - not_null:
-            tags: ['fail_on_error']
+              tags: ['fail_on_error']
           - accepted_values:
-            tags: ['warn_on_error']
-            values: ['COMPLETED', 'CANCELLED', 'PROCESSING', 'WAITING_PAYMENT', 'SHIPPED']
+              tags: ['warn_on_error']
+              arguments:
+                values: ['COMPLETED', 'CANCELLED', 'PROCESSING', 'WAITING_PAYMENT', 'SHIPPED']
 ```
 
 ##==##
@@ -125,15 +126,16 @@ Like any other generic tests, simply use your custom generic test name:
 
 _models/\_\_models.yml_
 
-```yaml[5,7-8]
+```yaml[5,7-9]
 models:
 - name: int__sales
   columns:
   - name: order_id
     data_tests:
       - unique
-      - valid_id
-        name: "VALID_ORDER_ID"
+      - valid_id:
+          arguments:
+            name: "VALID_ORDER_ID"
 ```
 
 ##==##
@@ -201,7 +203,6 @@ Rather than rebuilding your own tests, you should use ones provided in packages:
 
 - dbt-labs/dbt_utils (official !)
 - calogica/dbt_expectations (community)
-- EqualExperts/dbt_unit_testing (community)
 
 _models/\_\_models.yml_
 

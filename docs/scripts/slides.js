@@ -9,16 +9,19 @@ function introSlides() {
   const directory = '000-intro';
   return [
     `${directory}/00-title.md`,
-    `${directory}/01-logistic.md`,
-    `${directory}/10-intro-institute.md`,
-    `${directory}/11-intro-school.md`,
-    `${directory}/15-agenda-day1-institute.md`,
-    `${directory}/16-agenda-day2-institute.md`,
-    `${directory}/17-agenda-school.md`,
     `${directory}/21-speaker-aal.md`,
     `${directory}/22-speaker-hmd.md`,
     `${directory}/24-speaker-tfr.md`,
     `${directory}/30-who-are-you.md`,
+    `${directory}/31-sfeir.md`,
+    `${directory}/32-institute.md`,
+    `${directory}/33-catalogue.md`,
+    `${directory}/40-logistic.md`,
+    `${directory}/41-intro-institute.md`,
+    `${directory}/42-intro-school.md`,
+    `${directory}/43-agenda-day1-institute.md`,
+    `${directory}/44-agenda-day2-institute.md`,
+    `${directory}/45-agenda-school.md`,
   ];
 }
 function outroSlides() {
@@ -62,9 +65,9 @@ function modelsSlides() {
     `${directory}/00-title.md`,
     `${directory}/10-what-is-a-model.md`,
     `${directory}/20-materializations.md`,
-    `${directory}/90-lab.md`,
     `${directory}/30-advanced-materializations.md`,
     `${directory}/40-tags.md`,
+    `${directory}/90-lab.md`,
   ];
 }
 
@@ -93,6 +96,8 @@ function historicalDataSlides() {
     `${directory}/20-snapshots-definition.md`,
     `${directory}/30-snapshots-exec-and-manage.md`,
     `${directory}/90-lab.md`,
+    `${directory}/40-incremental.md`,
+    `${directory}/95-lab.md`,
   ];
 }
 
@@ -104,6 +109,7 @@ function packageDependanciesSlides() {
     `${directory}/20-hub.md`,
     `${directory}/30-installing.md`,
     `${directory}/40-build.md`,
+    `${directory}/50-dependencies.md`,
     `${directory}/90-lab.md`,
   ];
 }
@@ -173,7 +179,17 @@ function artifactsSlides() {
     `${directory}/30-sources.md`,
     `${directory}/40-manifest.md`,
     `${directory}/50-run_result.md`,
-    `${directory}/90-lab.md`,
+  ];
+}
+
+function semanticLayerSlides() {
+  const directory = '130-semantic-layer';
+  return [
+    `${directory}/00-title.md`,
+    `${directory}/10-understanding.md`,
+    `${directory}/20-declaring.md`,
+    `${directory}/30-querying.md`,
+    `${directory}/40-cicd.md`,
   ];
 }
 
@@ -190,14 +206,15 @@ function formation() {
     ...modelsSlides(), //
     ...sourceAndRefSlides(), //
     ...seedsSlides(), //
-    ...historicalDataSlides(), //
     ...advancedSlides(), //
+    ...historicalDataSlides(), //
     ...packageDependanciesSlides(), //
     ...testingSlides(), //
     ...contractAndVersionsSlides(), //
     ...documentationSlides(), //
     ...analysesExposuresHooksSlides(), //
     ...artifactsSlides(), //
+    ...semanticLayerSlides(), //
     ...outroSlides(), //
   ].map((slidePath) => {
     return { path: slidePath };

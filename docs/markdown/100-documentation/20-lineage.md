@@ -35,15 +35,3 @@ And the connections between all them.
 
 ![](./assets/images/docs/markdown/100-documentation/graphical-lineage.png 'h-800') 
 <!-- .element: class="full-center" -->
-
-
-##==##
-
-
-
-
-# Documentation
-
-Add documentation to your project
-Generate and serve doc locally
-Navigate and filter quickly in the lineage

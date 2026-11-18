@@ -15,11 +15,13 @@ Seeds are useful for small data that doesn't change frequently, such as:
 - reference tables
   - country codes
   - static categorization
+  - data that wouldn't fit in a variable
 - static configuration
-  <br/>
-  <br/>
+- data you don't have anywhere as source
 
-Seeds are not considered as sources in the scope of dbt. You use them with the ref() macro
+<br/>
+
+Seeds are not considered as sources in the scope of dbt → you point to them with the `ref()` macro
 
 <!-- .element: class="admonition important" -->
 
@@ -57,30 +59,11 @@ seeds
 1 directory, 4 files
 ```
 
+Then you can import or update seeds
 
-##==##
-
-
-<!-- .slide: class="with-code max-height"-->
-
-# Sample CSV seed file
-
-## /seeds/seed_countries.csv
-
-```csv
-country_code,country_name
-AW,Aruba
-AF,Afghanistan
-AO,Angola
-AI,Anguilla
-AX,"Åland Islands"
-AL,Albania
-AD,Andorra
-AE,United Arab Emirates
-AR,Argentina
-AM,Armenia
-AS,American Samoa
-AQ,Antarctica
+```bash
+# Run seed models
+$ dbt seed
 ```
 
 
@@ -132,7 +115,7 @@ AQ,Antarctica
 Using options, you can:
 
 - Ask dbt to generate seed tables in a specific schema
-- Define aliases to handle naming conflicts
+- Define aliases to handle naming conflicts with models
 - Override default CSV reader options
 - Override the `full_refresh` option
 

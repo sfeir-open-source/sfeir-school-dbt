@@ -15,8 +15,10 @@
 A _dbt_ model is a `SELECT` statement, written in a `.sql` file.
 
 - Each SQL file contains only one model
-- File name determine the model name
-- Models must be defined in directory `models` and its subdirectories
+- SQL file name determines the model name
+  - `customers.sql` → Model name is "customers"
+- Models must be defined in directory `models` and its subdirectories only
+  - You can have more than one `models` directory
 
 <br/><br/>
 During the execution of `dbt run`, `SELECT` requests are wrapped in `CREATE VIEW` or `CREATE TABLE` statements.
@@ -41,8 +43,8 @@ It is actually a way to run PySpark code via dbt and requires additional setup.
 Models exist at differents stages of your dbt projects, and a common pattern is to organize them in folders:
 
 - staging
-- with one folder per source
-- with base subfolders if you need to create base models
+  - with one folder per source
+  - with base subfolders if you need to create base models
 - intermediate
 - marts (or output)
 
@@ -68,7 +70,7 @@ Example 2 of base models : you have your customers and deleted customers in 2 di
 
 
 
-# Use folder to run part of your project
+# Use folders to run part of your project
 
 When organized in folders, you can specify which part of your project your want to run using selectors:
 
@@ -76,13 +78,13 @@ When organized in folders, you can specify which part of your project your want 
 # Run models in the staging folder only
 $ dbt run --select "staging"
 
-# Run models in the staging and intermediate folder only
+# Run models in the staging and intermediate folders only
 $ dbt run --select "staging intermediate"
 
-# Include full relative path if using slash separator
+# Include full relative path if using slash syntax
 $ dbt run --select "models/staging/customers"
 
-# Do not include root models path if using dot separator
+# Do not include root models path if using dot syntax
 $ dbt run --select "staging.customers"
 ```
 
@@ -104,29 +106,29 @@ $ dbt run --select "staging.customers"
 
 # Sample model
 
-The model `models/staging/customers.sql`
+`/models/staging/sap/customers.sql`
 
 ```sql
 SELECT
   id
   , area
   , CONCAT(firstname, ' ', UPPER(lastname)) AS `name`
-FROM customers
+FROM erp.customers
 ```
 
 <br/>
 
-will produce the following query:
+Will actually be compiled and run as :
 
 <!-- .element: class="fragment" data-fragment-index="1" -->
 
 ```sql
-CREATE VIEW dbt_school.customers AS (
+CREATE VIEW sfeir_institute.customers AS (
   SELECT
     id
     , area
     , CONCAT(firstname, ' ', UPPER(lastname)) AS `name`
-  FROM customers
+  FROM erp.customers
 )
 ```
 
@@ -144,7 +146,7 @@ Notes:
 
 # Sample model with CTEs
 
-/models/staging/customers.sql
+`/models/staging/sap/customers.sql`
 
 ```sql
 WITH _customers AS (
@@ -185,20 +187,21 @@ CTE = Common Table Expression
 
 # Model configuration
 
-By default, _dbt_ will create models:
+By default, _dbt_ will materialize models:
 
 - Using views and not tables
-- In the default schema defined in the `dbt_project.yml` file
+- In the default schema defined in the `profiles.yml` file
 - Using the `.sql` file name
 
 <br/>
 
 <div>
-But it's possible to change this default behavior: <br/>
+It's possible to change this behavior: <br/>
 
 - In the `dbt_project.yml` configuration file
 - In the models definition files
 - Directly in models using `config` blocks
+- Using macros
 
 </div>
 <!-- .element: class="fragment" -->
@@ -220,6 +223,7 @@ models:
     +materialized: view # Default configuration for all models
     staging:
       +materialized: table # applies to all models in the `staging` directory
+      +schema: stg # Target schema for all models in the `staging` directory
 ```
 
 
@@ -262,7 +266,7 @@ Beware of what goes in config and what does not
 ```sql[6-11|1-4]
 {{ config(
     materialized="table",
-    schema="school"
+    schema="dimensions"
 ) }}
 
 SELECT
@@ -270,7 +274,7 @@ SELECT
     , area
     , CONCAT(firstname, ' ', UPPER(lastname)) AS `name`
 FROM
-    customers
+    erp.customers
 ```
 
 Notes:

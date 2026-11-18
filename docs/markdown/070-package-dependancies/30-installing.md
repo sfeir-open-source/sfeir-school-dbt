@@ -12,13 +12,13 @@
 
 # Add packages to a project
 
-dependencies.yml (or packages.yml)
+_packages.yml_
 
 ```yaml
 packages:
   # Hub packages (recommended)
-  - package: calogica/dbt_expectations
-    version: 0.10.0
+  - package: metaplane/dbt_expectations
+    version: ['>=0.8.0', '<0.9.0']
 
   # Git packages
   - git: 'https://github.com/dbt-labs/dbt-utils.git'

@@ -48,14 +48,6 @@ SELECT * FROM {{ ref("customers", version=2) }}
 
 ##==##
 
-# Versioning models
-
-dbt does not create automatically a view pointing to the latest version of your models, and the tables or views are always suffixed with the **"\_vX"** syntax in your warehouse.
-
-You can trigger this behavior using a [macro in the post-hook](https://docs.getdbt.com/docs/collaborate/govern/model-versions#configuring-database-location-with-alias) of a model, that will create a view without suffix once the model is created.
-
-##==##
-
 <!-- .slide: class="with-code max-height"-->
 
 # Versioning models
@@ -139,3 +131,21 @@ models:
 
 Notes:
 Be careful with the way to “exclude” columns → no dash before the keyword “exclude”
+
+##==##
+
+# Versioning models
+
+Each subsequent version is based on the top-level configuration of your model.
+
+v3 does not inherit of v2, which does not inherent from v1: they all inherit from top-level configuration in your yaml file.
+
+Versions are update of your models, not completely different data items which would render difficult to maintain incremental versions using yaml files.
+
+##==##
+
+# Versioning models
+
+dbt does not create automatically a view pointing to the latest version of your models, and the tables or views are always suffixed with the **"\_vX"** syntax in your warehouse.
+
+You can trigger this behavior using a [macro in the post-hook](https://docs.getdbt.com/docs/collaborate/govern/model-versions#configuring-database-location-with-alias) of a model, that will create a view without suffix once the model is created.

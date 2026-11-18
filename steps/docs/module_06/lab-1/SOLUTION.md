@@ -1,108 +1,87 @@
 # Solution
 
-### Create a snapshot on your stg__orders model
+## Create and use 2 variables to replace COMPLETED and CANCELLED filter in your stg__orders model
 
-```sql
-{% snapshot orders_1 %}
-{{
-    config(
-        target_schema='snapshots',
-        unique_key='order_id',
-
-        strategy='check',
-        check_cols='all'
-    )
-}}
-SELECT * FROM {{ ref('stg__orders') }}
-{% endsnapshot %}
+`dbt_project.yml`
+```yaml
+...
+vars:
+  sfeir_institute:
+    status_completed: 'COMPLETED'
+    status_cancelled: 'CANCELLED'
 ```
 
-### Create a second snapshot on your stg__orders model
-
+`models/institute/stg__orders.sql`
 ```sql
-{% snapshot orders_2 %}
-{{
-    config(
-        target_schema='snapshots',
-        unique_key='order_id',
-
-        strategy='timestamp',
-        updated_at='order_datetime'
-    )
-}}
-SELECT order_id, order_status, order_datetime FROM {{ ref('stg__orders') }}
-{% endsnapshot %}
-
+SELECT
+  *
+FROM {{ source("sales", "orders") }}
+WHERE order_status IN ('{{ var("status_completed") }}', '{{ var("status_cancelled")}}')
 ```
 
-### Run dbt and compare the snapshot tables created
+## Change the values at run time using "--vars" to alter models output
 
-dbt adds 4 fields to support the snapshot stragegy and comparison mechanism.
-
-You can use dbt_valid_from and dbt_valid_to to query the snapshots for historical data.
-
-### Update your orders sources using the provided query and run snapshots again
-
-Use this query to update your source.
-
-```sql
-UPDATE "sales"."orders"
-SET order_datetime = NOW(), order_status = 'COMPLETED'
-WHERE random() < 0.1 AND order_status != 'COMPLETED';
+```shell
+# Don't forget the space after :
+$ dbt run --vars 'status_completed: FOOBAR'
+# or
+$ dbt run --vars '{"status_completed": "NONE"}'
 ```
 
-Update your stg__orders model to reflect changes in the source (dbt run -s stg__orders).
+## Create another variable to filter orders in int__orders
 
-Run the snapshots and look for rows with not null dbt_valid_to fields.
-
-### Looking at the numbers, there seems to be a problem with the change detection
-
-The orders model has a compound unique key (order_id and order_line_id) and you can't define an array of keys in snapshots.
-
-However, you can put valid SQL in the unique_key parameter.
-
-```sql
-{% snapshot orders_1 %}
-{{
-    config(
-        target_schema='snapshots',
-        unique_key='CONCAT(order_id, order_line_id)',
-
-        strategy='check',
-        check_cols='all'
-    )
-}}
-SELECT * FROM {{ ref('stg__orders') }}
-{% endsnapshot %}
+`dbt_project.yml`
+```yaml
+...
+vars:
+  sfeir_institute:
+    status_completed: 'COMPLETED'
+    status_cancelled: 'CANCELLED'
+    order_filter: 
 ```
 
-### Add support for hard deletes in your snapshots
-
-Use this SQL to delete lines from your source and refresh your dbt model afterwards.
-
+`models/institute/int__orders.sql`
 ```sql
-DELETE FROM "sales"."orders"
-WHERE random() < 0.05;
+SELECT
+  orders.*
+  , customers.customer_name
+  , countries.country_name
+FROM {{ ref("stg__orders") }} AS orders
+    INNER JOIN {{ ref("stg__customers") }} AS customers ON customers.customer_id = orders.customer_id
+    INNER JOIN {{ ref("stg__countries") }} AS countries ON customers.customer_country = countries.country_code
+WHERE TRUE
+{% if var("order_filter") %}
+    AND order_datetime > '{{ var("order_filter") }}'
+{% endif %}
 ```
 
-Add the `invalidate_hard_deletes` option to your snapshots.
+## Create and use a macro to compute the turnover of orders in the int__orders model
 
+`macros/macro_turnover.sql`
 ```sql
-{% snapshot orders_1 %}
-{{
-    config(
-        target_schema='snapshots',
-        unique_key='CONCAT(order_id, order_line_id)',
-
-        strategy='check',
-        check_cols='all',
-
-        invalidate_hard_deletes=True
-    )
-}}
-SELECT * FROM {{ ref('stg__orders') }}
-{% endsnapshot %}
+{% macro turnover() %}
+  (
+  (base_price * quantity - rebate)
+  * CASE currency
+        WHEN 'EUR' THEN 1
+        WHEN 'USD' THEN 1.1
+    END
+  )
+{% endmacro %}
 ```
 
-Run the snapshot again and look for rows with dbt_valid_to set to your snapshot execution date, and no other row with the same unique keys and dbt_valid_to set to null.
-
+`models/institute/int__sales.sql`
+```sql
+SELECT
+  orders.*
+  , customers.customer_name
+  , countries.country_name
+  , {{ turnover() }} AS turnover
+FROM {{ ref("stg__orders") }} AS orders
+    INNER JOIN {{ ref("stg__customers") }} AS customers ON customers.customer_id = orders.customer_id
+    INNER JOIN {{ ref("stg__countries") }} AS countries ON customers.customer_country = countries.country_code
+WHERE TRUE
+{% if var("order_filter") %}
+    AND order_datetime > '{{ var("order_filter") }}'
+{% endif %}
+```

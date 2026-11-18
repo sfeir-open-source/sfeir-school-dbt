@@ -23,9 +23,6 @@ nav:
       - 'Lab 4.1':
         - 'Tasks' : 'module_04/lab-1/README.md'
         - 'Solution' : 'module_04/lab-1/SOLUTION.md'
-      - 'Lab 4.2':
-        - 'Tasks' : 'module_04/lab-2/README.md'
-        - 'Solution' : 'module_04/lab-2/SOLUTION.md'
 
   - 'Module 5':
       - 'Lab 5.1':
@@ -41,6 +38,9 @@ nav:
       - 'Lab 7.1':
         - 'Tasks': 'module_07/lab-1/README.md'
         - 'Solution': 'module_07/lab-1/SOLUTION.md'
+      - 'Lab 7.2':
+        - 'Tasks': 'module_07/lab-2/README.md'
+        - 'Solution': 'module_07/lab-2/SOLUTION.md'
 
   - 'Module 8':
       - 'Lab 8.1':
@@ -66,3 +66,8 @@ nav:
       - 'Lab 12.1':
         - 'Tasks': 'module_12/lab-1/README.md'
         - 'Solution': 'module_12/lab-1/SOLUTION.md'
+
+  - 'Module 13':
+      - 'Lab 13.1':
+        - 'Tasks': 'module_13/lab-1/README.md'
+        - 'Solution': 'module_13/lab-1/SOLUTION.md'

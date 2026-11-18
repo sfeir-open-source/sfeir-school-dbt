@@ -191,7 +191,7 @@ Depending on the adapter, documentation can be persisted in the database.
 
 When dbt creates the tables or view, it replicates the documentation from the yaml files in the `create table` or `create view` statement.
 
-In the `dbt_project.yml` file, simply add the `persist_doc` directive in the models section.
+In the `dbt_project.yml` file, simply add the `persist_docs` directive in the models section.
 
 ```yaml
 models:

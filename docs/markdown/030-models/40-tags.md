@@ -10,7 +10,7 @@
 
 <!-- .slide -->
 
-# Tagging your resources
+# Tagging your ressources
 
 _dbt_ includes the option to tag your models to regroup/filter them.
 
@@ -79,14 +79,11 @@ You can use dbt command line arguments to run specific models with tags:
 
 ```bash
 # Run models with tag “dimension” only
-$ dbt test --select tag:dimension
+$ dbt run --select tag:dimension
 
-# Run models with tag “dimension” and the underlying models too
-$ dbt test --select +tag:dimension
-
-# Run models with tag “dimension” and the underlying models too
+# Run models with tag “dimension”
 # Except models with tag “int”
-$ dbt test --select +tag:dimension --exclude tag:int
+$ dbt run --select tag:dimension --exclude tag:int
 
 # Run seeds with tag “reference” only
 $ dbt seed -s tag:reference

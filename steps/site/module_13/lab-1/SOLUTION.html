@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Solution - SFEIR Institute - dbt</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Solution";
+        var mkdocs_page_input_path = "module_13/lab-1/SOLUTION.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/sql.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../index.html" class="icon icon-home"> SFEIR Institute - dbt
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu"></div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SFEIR Institute - dbt</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Module 13</li>
+          <li class="breadcrumb-item">Lab 13.1</li>
+      <li class="breadcrumb-item active">Solution</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+<h1 id="solution">Solution</h1>
+
+<h2 id="time-spine">0. Time Spine (prerequisite)</h2>
+
+<p><code>models/marts/time_spine_daily.sql</code></p>
+<pre><code class="language-sql">{{ config(materialized='table') }}
+
+with base_dates as (
+    {{
+        dbt.date_spine(
+            'day',
+            "cast('2020-01-01' as date)",
+            "cast('2030-01-01' as date)"
+        )
+    }}
+),
+
+final as (
+    select
+        cast(date_day as date) as date_day
+    from base_dates
+)
+
+select * from final
+</code></pre>
+
+<p><code>models/semantic_models/time_spine_daily.yml</code></p>
+<pre><code class="language-yaml">models:
+  - name: time_spine_daily
+    description: "A time spine with one row per day, from 2020 to 2030."
+    time_spine:
+      standard_granularity_column: date_day
+    columns:
+      - name: date_day
+        description: "The base date column for daily granularity."
+        granularity: day
+</code></pre>
+
+<p>Materialize the time spine before proceeding:</p>
+<pre><code class="language-bash">dbt run --select time_spine_daily
+</code></pre>
+
+<h2 id="preparation">1. Model Preparation (Marts)</h2>
+
+<p><code>models/marts/fct_order_items.sql</code></p>
+<pre><code class="language-sql">SELECT
+    order_id,
+    order_line_id        AS order_item_id,
+    product_id,
+    customer_id,
+    CAST(order_datetime AS DATE) AS order_date,
+    order_status         AS status,
+    base_price,
+    quantity,
+    rebate,
+    currency,
+    (base_price * quantity)          AS line_revenue,
+    (base_price * quantity) - rebate AS net_revenue
+FROM {{ ref('stg__orders') }}
+</code></pre>
+
+<p><code>models/marts/dim_customers.sql</code></p>
+<pre><code class="language-sql">SELECT
+    customer_id,
+    customer_name,
+    customer_gender,
+    customer_country
+FROM {{ ref('stg__customers') }}
+</code></pre>
+
+<h2 id="semantic-models">2. Semantic Models</h2>
+
+<p><code>models/semantic_models/order_items.yml</code></p>
+<pre><code class="language-yaml">semantic_models:
+  - name: semantic_order_items
+    model: ref('fct_order_items')
+    defaults:
+      agg_time_dimension: order_date
+    entities:
+      - name: order_item
+        type: primary
+        expr: order_item_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+    dimensions:
+      - name: order_date
+        type: time
+        type_params:
+          time_granularity: day
+      - name: status
+        type: categorical
+    measures:
+      - name: revenue
+        agg: sum
+        expr: line_revenue
+      - name: net_revenue
+        agg: sum
+        expr: net_revenue
+      - name: order_count
+        agg: count_distinct
+        expr: order_id
+</code></pre>
+
+<p><code>models/semantic_models/customers.yml</code></p>
+<pre><code class="language-yaml">semantic_models:
+  - name: semantic_customers
+    model: ref('dim_customers')
+    entities:
+      - name: customer
+        type: primary
+        expr: customer_id
+    dimensions:
+      - name: customer_gender
+        type: categorical
+      - name: customer_country
+        type: categorical
+</code></pre>
+
+<h2 id="metrics">3. Metrics</h2>
+
+<p><code>models/metrics/revenue_metrics.yml</code></p>
+<pre><code class="language-yaml">metrics:
+  - name: total_revenue
+    label: "Total Revenue"
+    type: simple
+    type_params:
+      measure: revenue
+
+  - name: order_count
+    label: "Number of Orders"
+    type: simple
+    type_params:
+      measure: order_count
+
+  - name: average_order_value
+    label: "Average Order Value"
+    type: derived
+    type_params:
+      expr: total_revenue / order_count
+      metrics:
+        - name: total_revenue
+        - name: order_count
+</code></pre>
+
+<h2 id="exploration">4. Validation</h2>
+
+<h3 id="validate">Validate the Graph</h3>
+<pre><code class="language-bash">mf validate-configs
+</code></pre>
+
+<h3 id="query-metricflow">Query MetricFlow</h3>
+<p>Revenue by customer gender — MetricFlow automatically joins <code>fct_order_items</code> to <code>dim_customers</code> via <code>customer_id</code>:</p>
+<pre><code class="language-bash">mf query --metrics total_revenue --group-by customer__customer_gender
+</code></pre>
+
+<p>Revenue by country:</p>
+<pre><code class="language-bash">mf query --metrics total_revenue --group-by customer__customer_country
+</code></pre>
+
+<p>Revenue over time (monthly):</p>
+<pre><code class="language-bash">mf query --metrics total_revenue --group-by metric_time__month --order metric_time__month
+</code></pre>
+
+<h3 id="explain">Explain the Query</h3>
+<p>To see how MetricFlow generated the SQL for the derived metric:</p>
+<pre><code class="language-bash">mf query --metrics average_order_value --explain
+</code></pre>
+
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="index.html" class="btn btn-neutral float-left" title="Tasks"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+    <script src="../../js/nav.js"></script>
+</body>
+</html>

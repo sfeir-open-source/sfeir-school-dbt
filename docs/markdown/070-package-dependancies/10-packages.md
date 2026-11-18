@@ -27,11 +27,12 @@ Generic packages
 - dbt_utils
 - dbt_codegen
 - dbt_artifacts
+- dbt_assertions
 
 Testing packages
 
 - dbt_expectations
-- dbt_unit_testing
+- dbt_utils
 
 Adapter specific packages
 

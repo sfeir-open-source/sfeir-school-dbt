@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../img/favicon.ico" />
+    <title>Tasks - SFEIR Institute - dbt</title>
+    <link rel="stylesheet" href="../../css/theme.css" />
+    <link rel="stylesheet" href="../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Tasks";
+        var mkdocs_page_input_path = "module_13/lab-1/README.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/yaml.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/sql.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../index.html" class="icon icon-home"> SFEIR Institute - dbt
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu"></div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">SFEIR Institute - dbt</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html" class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Module 13</li>
+          <li class="breadcrumb-item">Lab 13.1</li>
+      <li class="breadcrumb-item active">Tasks</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+<h1 id="task">Task</h1>
+<p>Implement the dbt Semantic Layer (MetricFlow) to centralize business logic and interact with it using the MetricFlow CLI to answer complex business questions across multiple models.</p>
+
+<h1 id="todo">Todo</h1>
+
+<h2 id="time-spine">0. Time Spine (prerequisite)</h2>
+<p>MetricFlow requires a physical <strong>time spine</strong> table — a model that generates one contiguous row per day, declared in YAML so MetricFlow can use it as the foundation for all time-based joins and aggregations.</p>
+<ul>
+<li>Create <code>models/marts/time_spine_daily.sql</code> using the <code>dbt.date_spine()</code> cross-adapter macro:
+  <ul>
+  <li>Generate daily dates from <code>2020-01-01</code> to <code>2030-01-01</code>.</li>
+  <li>The output column must be named <code>date_day</code>, cast to <code>DATE</code>.</li>
+  <li>Materialize as a <code>table</code>.</li>
+  </ul>
+</li>
+<li>Declare it in <code>models/semantic_models/time_spine_daily.yml</code> using the <code>time_spine</code> key:
+  <ul>
+  <li>Set <code>standard_granularity_column</code> to <code>date_day</code>.</li>
+  <li>Set the column granularity to <code>day</code>.</li>
+  </ul>
+</li>
+<li>Materialize it before proceeding: <code>dbt run --select time_spine_daily</code></li>
+</ul>
+
+<h2 id="preparation">1. Model Preparation (Marts)</h2>
+<ul>
+<li>To provide a clean and robust semantic layer, create two new models in a <code>models/marts/</code> folder:
+  <ul>
+  <li><code>fct_order_items</code>: A model at the <strong>order line</strong> grain (from <code>stg__orders</code>).
+    <ul>
+    <li>Retain the following fields: <code>order_id</code>, <code>order_line_id</code> (aliased as <code>order_item_id</code>), <code>product_id</code>, <code>customer_id</code>, <code>base_price</code>, <code>quantity</code>, <code>rebate</code>, <code>currency</code>.</li>
+    <li>Cast <code>order_datetime</code> to a DATE column named <code>order_date</code>.</li>
+    <li>Rename <code>order_status</code> as <code>status</code>.</li>
+    <li>Calculate <code>line_revenue</code> as <code>base_price * quantity</code> and <code>net_revenue</code> as <code>(base_price * quantity) - rebate</code>.</li>
+    </ul>
+  </li>
+  <li><code>dim_customers</code>: A dimension model built on <code>stg__customers</code>.
+    <ul>
+    <li>Expose all analytics-relevant fields: <code>customer_id</code>, <code>customer_name</code>, <code>customer_gender</code>, <code>customer_country</code>.</li>
+    </ul>
+  </li>
+  </ul>
+</li>
+</ul>
+
+<h2 id="semantic-model">2. Semantic Models</h2>
+<ul>
+<li>Create your semantic models inside a new folder <code>models/semantic_models/</code>.
+  <ul>
+  <li><strong>order_items</strong>: Built on <code>fct_order_items</code>.
+    <ul>
+    <li>Define <code>order_item</code> as primary entity and <code>customer_id</code> as foreign entity.</li>
+    <li>Define <code>order_date</code> as a time dimension (granularity: day).</li>
+    <li>Define <code>status</code> as a categorical dimension.</li>
+    <li>Create measures: <code>revenue</code> (sum of <code>line_revenue</code>) and <code>order_count</code> (count distinct of <code>order_id</code>).</li>
+    </ul>
+  </li>
+  <li><strong>customers</strong>: Built on <code>dim_customers</code>.
+    <ul>
+    <li>Define <code>customer</code> as primary entity.</li>
+    <li>Define <code>customer_gender</code> and <code>customer_country</code> as categorical dimensions.</li>
+    </ul>
+  </li>
+  </ul>
+</li>
+</ul>
+
+<h2 id="metrics">3. Metrics</h2>
+<ul>
+<li>Define the final business metrics in <code>models/metrics/</code> or within your semantic YAML files.
+  <ul>
+  <li><code>total_revenue</code>: A simple metric based on the <code>revenue</code> measure.</li>
+  <li><code>average_order_value</code>: A derived metric calculating <code>total_revenue / order_count</code>.</li>
+  </ul>
+</li>
+</ul>
+
+<h2 id="exploration">4. Validation</h2>
+<ul>
+<li>Validate your semantic graph using <code>mf validate-configs</code>.</li>
+<li>Use the MetricFlow CLI to query <code>total_revenue</code> grouped by <code>customer__customer_gender</code>.
+  <br><em>Note: Observe how MetricFlow automatically resolves the join between <code>fct_order_items</code> and <code>dim_customers</code> via the <code>customer_id</code> foreign key — no manual JOIN needed!</em></li>
+<li>Run a second query grouping by <code>customer__customer_country</code> to see revenue by country.</li>
+<li>Check the generated SQL for the <code>average_order_value</code> metric using the <code>--explain</code> flag.</li>
+</ul>
+
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../../module_12/lab-1/SOLUTION.html" class="btn btn-neutral float-left" title="Previous"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="SOLUTION.html" class="btn btn-neutral float-right" title="Solution">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../../module_12/lab-1/SOLUTION.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="SOLUTION.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../..";</script>
+    <script src="../../js/theme_extra.js"></script>
+    <script src="../../js/theme.js"></script>
+      <script src="../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+    <script src="../../js/nav.js"></script>
+</body>
+</html>

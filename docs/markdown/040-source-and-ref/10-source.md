@@ -12,9 +12,11 @@
 
 **Sources** are how you declare tables and views from outside your project to use as your starting point.
 
-It's handled by dbt with the `source()` macro, and via a source declaration yaml file.
+It's handled by dbt with the `source()` macro, and via a source declaration file, in YAML.
 
-Sources are already in your data lake or in data products of your organization, and you point to them in your dbt project.
+Sources must already be in your data lake or in data products of your organization, and you point to them in your dbt project.
+
+Sources are readonly, and you should not be allowed to alter them anyway.
 
 
 ##==##
@@ -36,18 +38,24 @@ Sources are already in your data lake or in data products of your organization, 
 
 ## Simple declaration
 
-`/staging/__sources.yaml`
+`/models/__sources.yml`
 
 ```yaml
 sources:
-  - name: 'SAP'
-    project: "ssd-{{ env_var('ENV', 'dev') }}"
-    description: 'SAP source'
-    dataset: 'sap'
-    tables:
+  - name: 'SAP' # A source has a name
+    description: 'SAP source for all sales'
+    database: "acme-sap-{{ env_var('ENV', 'dev') }}"
+    schema: 'sap'
+    tables: # A source has one or many tables
       - name: 'MCMPY'
       - name: 'KMEAN'
       - name: 'ZORGZ'
+  - name: 'SALESFORCE'
+    description: 'Replication of Salesforce tables'
+    database: "acme-sfcc-{{ env_var('ENV', 'dev') }}"
+    schema: 'sfcc'
+    tables:
+      - name: 'accounts'
 ```
 
 
@@ -60,14 +68,14 @@ sources:
 
 ## Enriching sources
 
-`/staging/__sources.yaml`
+`/models/__sources.yml`
 
 ```yaml
 sources:
   - name: 'SAP'
-    project: "ssd-{{ env_var('ENV', 'dev') }}"
-    description: 'SAP source'
-    dataset: 'sap'
+    description: 'SAP source for all sales'
+    database: "acme-sap-{{ env_var('ENV', 'dev') }}"
+    schema: 'sap'
     tables:
       - name: 'MCMPY'
         columns:
@@ -75,7 +83,7 @@ sources:
             description: 'Company ID - Primary key'
           - name: 'FLDSR'
             description: 'Company name'
-          - name: 'FLDSR'
+          - name: 'FLDXR'
             description: 'Enabled yes/no'
           - name: 'FFDSE'
             description: 'Is customer yes/no'
@@ -93,13 +101,13 @@ Notes:
 
 # Source properties
 
-Sources support additionnal properties like:
+Sources support additional properties like:
 
-- **tests** on columns
+- **tests**
   - generic, singular and custom tests
-- **freshness** configuration
+- **freshness**
   - to trigger warnings and/or errors
-  - with filters and loaded_at column
+  - based on a `loaded_at` column or tables metadata
 - **tags**
 
 
@@ -110,16 +118,16 @@ Sources support additionnal properties like:
 
 # Source identifier
 
-Use the `identifier` property to rename your source table in something more explicit if needed.
+Use the `identifier` property to rename your source table in something more explicit.
 
-`/staging/__sources.yaml`
+`/models/__sources.yml`
 
 ```yaml[8]
 sources:
   - name: "SAP"
-    project: "ssd-{{ env_var('ENV', 'dev') }}"
+    database: "acme-sap-{{ env_var('ENV', 'dev') }}"
     description: "SAP source"
-    dataset: "sap"
+    schema: "sap"
     tables:
       - name: "companies"
         identifier: "MCMPY"
@@ -139,26 +147,26 @@ Notes:
 
 # Using the `source()` macro
 
-`/models/companies.sql`
+`/models/staging/sap/companies.sql`
 
 ```sql[5]
 SELECT
   URZEJ AS company_id,
   FLDSR AS company_name,
-  FLDSR AS is_customer
+  FLDXR AS is_customer
 FROM {{ source('SAP', ’MCMPY’) }}
 WHERE FFDSE = 1
 ```
 
 <br/>
 
-`/models/companies-with-identifier.sql`
+`/models/staging/sap/companies-with-identifier.sql`
 
 ```sql[5]
 SELECT
   URZEJ AS company_id,
   FLDSR AS company_name,
-  FLDSR AS is_customer
+  FLDXR AS is_customer
 FROM {{ source('SAP', ‘companies’) }}
 WHERE FFDSE = 1
 ```
